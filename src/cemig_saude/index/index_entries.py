@@ -37,8 +37,7 @@ def index_all_physicians():
                        'neighborhood': phy.get_neighborhood(),
                        'city': phy.get_city(),
                        'state': phy.get_state(),
-                       'specialty': phy.get_specialty(),
-                       'id': phy.get_id()})        
+                       'specialty': phy.get_specialty()})        
         
 
 if __name__ == "__main__":

@@ -29,6 +29,17 @@ def get_physicians():
         
     return physicians
 
+def get_one_physician():
+    db = __get_db()
+    collection = db['physicians']
+    
+    physician = collection.find_one()
+    if physician:
+        physician['id'] = physician['_id']
+        del physician['_id']
+    
+    return physician
+
 def get_physician_by_id(id):
     """
     Loads a specific physician

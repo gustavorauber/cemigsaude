@@ -51,11 +51,6 @@ physician_entry_mapping = {
                 'analyzer': 'standard',                                    
                 'store': 'no',
                 'type': 'string'
-            },
-            'id': {
-                'index': 'no',
-                'store': 'yes',
-                'type': 'string'
             }
         }
     }

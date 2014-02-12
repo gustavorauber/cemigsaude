@@ -10,6 +10,7 @@ class Physician():
         self.neighborhood = None
         self.lat = None
         self.lon = None
+        self.street_address = None
     
     def get_id(self):        
         return str(self.json['id'])
@@ -18,13 +19,13 @@ class Physician():
         if self.name is None:
             self.name = self.json['name']
         
-        return self.name
+        return self.name.encode('utf-8')
     
     def get_specialty(self):
         if self.specialty is None:
             self.specialty = self.json['specialty']
         
-        return self.specialty
+        return self.specialty.encode('utf-8')
     
     def get_city(self):
         if self.city is None:
@@ -37,6 +38,12 @@ class Physician():
             self.__parse_address()
         
         return self.state
+    
+    def get_street_address(self):
+        if self.street_address is None:
+            self.__parse_address()
+            
+        return self.street_address.encode('utf-8')
     
     def get_neighborhood(self):
         if self.neighborhood is None:
@@ -60,6 +67,7 @@ class Physician():
                     self.state = ""
                     
                 self.neighborhood = address['neighborhood']                
+                self.street_address = address['street']
                 
                 if 'geocode' in address and address['geocode']['status'] == "OK":
                     results = address['geocode']['results']
