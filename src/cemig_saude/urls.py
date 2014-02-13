@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     
     url(r'^show/', 'cemig_saude.mobile.views.view_physician'),
+    url(r'^search', 'cemig_saude.mobile.views.search'),
 )

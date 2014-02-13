@@ -18,11 +18,22 @@ def __get_db(new_connection=False):
     
     return db
 
-def get_physicians():
+def get_physicians(filter_by={}, n=None):
     db = __get_db()
     physicians = []
+    filters = {}
     
-    for p in db['physicians'].find():
+    if filter_by != {}:
+        filters = filter_by
+        
+    print filters
+    cursor = db['physicians'].find(filters)
+        
+    if n:
+        cursor = cursor.limit(n)
+    
+    for p in cursor:
+        print p
         p['id'] = p['_id']
         del p['_id'] # not allowed on django templates
         physicians.append(p)

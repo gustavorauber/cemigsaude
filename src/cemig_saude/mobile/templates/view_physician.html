@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
     <meta charset="utf-8">
     <title>Info windows</title>
+    
+    <link rel="stylesheet" href="/static/css/jquery.mobile-1.4.1.min.css" />
     <style>
       html, body, #map-canvas {
         height: 100%;
@@ -12,7 +14,27 @@
       }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script>
+    
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="/static/js/jquery.mobile-1.4.1.min.js"></script>
+  </head>
+  <body>
+    <div data-role="page">
+        <div data-role="header">...</div>
+        <div role="main" class="ui-content">
+            <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em; padding-top: 0.1em;">
+                <p>
+                    <label for="search">Busca</label>
+                    <input id="search" class="ui-bar-c" type="text" value="Ortopedista" />
+                </p>
+                <a id="submit" href="#" data-role="button" data-icon="search">Buscar conveniados</a>
+                <div id="map-canvas" style="height:350px;"></div>
+            </div>
+        </div>
+        <div data-role="footer">...</div>
+    </div>
+    
+        <script>
 
 function initialize() {
   var myLatlng = new google.maps.LatLng({{physician.get_lat}}, {{physician.get_lon}});
@@ -52,8 +74,17 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-  </head>
-  <body>
-    <div id="map-canvas"></div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    	$('#submit').click(function(e) {
+    		$.post( "/search", { q: $('#search').val() }, function( data ) {
+    			   $.each(data, function ( index, val ) {
+    				    console.log(val); 
+    			   });
+    		});
+    	});
+    });
+    </script>
+    }
   </body>
 </html>
