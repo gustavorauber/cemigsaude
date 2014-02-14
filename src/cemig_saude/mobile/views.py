@@ -19,12 +19,14 @@ def view_physician(request, *args, **kwargs):
 @render_to_json
 def search(request, *args, **kwargs):
     query = request.POST.get('q', '')
-    results = search_physicians(specialty=query)
+    results = search_physicians(specialty=query, n=150)
     physician_ids = list(x['_id'] for x in results)
+    
+    print len(results)
     
     filter_by = {}
     filter_by['hash'] = {'$in': physician_ids}
-    physicians = get_physicians(filter_by=filter_by)
+    physicians = get_physicians(filter_by=filter_by)     
     physicians_objs = list(Physician(p).to_json() for p in physicians) 
     
     return physicians_objs

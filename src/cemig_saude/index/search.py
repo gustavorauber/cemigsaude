@@ -8,13 +8,18 @@ Created on Feb 13, 2014
 
 from elasticsearch import Elasticsearch
 
-def search_physicians(specialty=""):
+def search_physicians(specialty="", n=10):
     es = Elasticsearch()
     res = es.search(index='physicians', doc_type="physician", 
-                    body={"query": { 
-                        "match": {
-                            "specialty": specialty
-                        }
-                    }})
+            body={"query": {
+                      "multi_match": { 
+                            "query": specialty,
+                            #"type": "cross_fields", # waiting v.1.1
+                            "fields": ["specialty", "name", "neighborhood"],
+                            #"operator": "and"                
+                      }                  
+                  },
+                  "size": n
+            })
     
     return res['hits']['hits']

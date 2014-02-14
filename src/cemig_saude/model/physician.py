@@ -25,13 +25,13 @@ class Physician():
         if self.name is None:
             self.name = self.json['name']
         
-        return self.name.encode('utf-8')
+        return self.name
     
     def get_specialty(self):
         if self.specialty is None:
             self.specialty = self.json['specialty']
         
-        return self.specialty.encode('utf-8')
+        return self.specialty
     
     def get_city(self):
         if self.city is None:
@@ -49,7 +49,7 @@ class Physician():
         if self.street_address is None:
             self.__parse_address()
             
-        return self.street_address.encode('utf-8')
+        return self.street_address
     
     def get_neighborhood(self):
         if self.neighborhood is None:
