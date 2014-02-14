@@ -9,9 +9,6 @@ from cemig_saude.model.physician import Physician
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from bson.objectid import ObjectId
-from bson.json_util import dumps
-
 def view_physician(request, *args, **kwargs):
     ctx = {}
     ctx['physician'] = Physician(get_one_physician())
@@ -23,13 +20,11 @@ def view_physician(request, *args, **kwargs):
 def search(request, *args, **kwargs):
     query = request.POST.get('q', '')
     results = search_physicians(specialty=query)
-    physician_ids = list(ObjectId(x['_id']).__repr__() for x in results)
-    print     physician_ids
+    physician_ids = list(x['_id'] for x in results)
     
     filter_by = {}
-    filter_by['_id'] = {'$in': physician_ids}
-    physicians = get_physicians(filter_by)
+    filter_by['hash'] = {'$in': physician_ids}
+    physicians = get_physicians(filter_by=filter_by)
+    physicians_objs = list(Physician(p).to_json() for p in physicians) 
     
-    print len(physicians)
-    
-    return physicians
+    return physicians_objs

@@ -26,15 +26,13 @@ def get_physicians(filter_by={}, n=None):
     if filter_by != {}:
         filters = filter_by
         
-    print filters
     cursor = db['physicians'].find(filters)
         
     if n:
         cursor = cursor.limit(n)
     
     for p in cursor:
-        print p
-        p['id'] = p['_id']
+        p['id'] = str(p['_id'])
         del p['_id'] # not allowed on django templates
         physicians.append(p)
         
@@ -46,7 +44,7 @@ def get_one_physician():
     
     physician = collection.find_one()
     if physician:
-        physician['id'] = physician['_id']
+        physician['id'] = str(physician['_id'])
         del physician['_id']
     
     return physician
@@ -62,7 +60,14 @@ def get_physician_by_id(id):
     
     physician = collection.find_one({'_id': str(id)})
     if physician:
-        physician['id'] = physician['_id']
+        physician['id'] = str(physician['_id'])
         del physician['_id']
     
     return physician
+
+def update_physicians_missing_hash():
+    db = __get_db()
+    collection = db['physicians']
+    physicians = get_physicians(filter_by={'hash': {'$exists': False}})
+    for p in physicians:
+        collection.update({'_id': p['id']}, {'$set': {'hash': str(p['id'])}})

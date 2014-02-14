@@ -1,8 +1,11 @@
 
+from copy import deepcopy
+
 class Physician():
     
     def __init__(self, json):
         self.json = json
+        self.id = None
         self.name = None
         self.specialty = None
         self.city = None
@@ -12,8 +15,11 @@ class Physician():
         self.lon = None
         self.street_address = None
     
-    def get_id(self):        
-        return str(self.json['id'])
+    def get_id(self):
+        if self.id is None:
+            self.id = str(self.json['id'])        
+        
+        return self.id
         
     def get_name(self):
         if self.name is None:
@@ -95,3 +101,6 @@ class Physician():
             
         return self.lat, self.lon        
     
+    def to_json(self):
+        return self.json
+        
