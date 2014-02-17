@@ -89,18 +89,56 @@ def update_physicians_missing_hash():
     for p in physicians:
         collection.update({'_id': p['id']}, {'$set': {'hash': str(p['id'])}})
         
+def sync_cities():
+    db = __get_db()
+    collection = db['physicians']
+    cities = collection.distinct("addresses.city")
+    
+    for c in cities:
+        hash = hashlib.sha256(unidecode(c).lower().strip()).hexdigest()
+        idx = c.rfind('-')
+        
+        if idx != -1:
+            city = c[:idx].strip()
+            uf = c[idx + 1:].strip()
+        else:
+            city = c
+            uf = ""
+            
+        db['cities'].update({'_id': hash}, {"$set": { "city": city,
+                                                      "uf": uf}}, 
+                                 upsert=True) 
+
+        print db['physicians'].update({'addresses.city': c}, 
+                                {'$set': {'city_hash': hash}}, 
+                                multi=True)
+        
 def sync_specialties():
     db = __get_db()
     collection = db['physicians']
+    cities = db['cities'].find()
+    
     specialties = collection.distinct("specialty")
     specialties.sort()
 
-    for s in specialties:
-        hash = hashlib.sha256(unidecode(s).lower().strip()).hexdigest()
-        db['specialties'].update({'_id': hash}, {"$set": { "specialty": s}}, 
-                                 upsert=True)
-
-        db['physicians'].update({'specialty': s}, 
-                                {'$set': {'specialty_hash': hash}}, 
-                                multi=True)
+    for c in cities:
+        city_hash = c['_id']
+        
+        for s in specialties:
+            count = collection.find({'specialty': s,
+                                     'city_hash': city_hash}).count()
+            
+            if count == 0:
+                continue
+            
+            hash = hashlib.sha256(unidecode(s).lower().strip()).hexdigest()
+            
+            db['specialties'].update({'_id': hash}, {"$set": { "specialty": s,
+                                        "city_hash": city_hash, 
+                                        "count": count}}, 
+                                     upsert=True)
+    
+            db['physicians'].update({'specialty': s}, 
+                                    {'$set': {'specialty_hash': hash}}, 
+                                    multi=True)
         

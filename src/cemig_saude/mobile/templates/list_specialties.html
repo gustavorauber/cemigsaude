@@ -12,7 +12,26 @@
 <br />
 <ul data-role="listview" data-autodividers="true" data-filter="true" data-input="#specialty-input">
     {% for s in specialties %}
-        <li><a href="/list/{{s.id}}/">{{s.specialty|title}}</a></li>
+        <li>
+            <a href="/list/{{s.id}}/">
+                {% if s.specialty %}
+                    {{s.specialty|title}}
+                {% else %}
+                    Múltiplas Especialidades
+                {% endif %}
+                <span class="ui-li-count">{{s.count}}</span>
+            </a>
+        </li>
     {% endfor %}
 </ul>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(document).bind("pageshow", function() {
+    $('FORM').on('submit', function(e) {
+        e.preventDefault();
+    });
+});
+</script>
 {% endblock %}

@@ -12,7 +12,17 @@
 <br />
 <ul data-role="listview" data-autodividers="true" data-filter="true" data-input="#physician-input">
     {% for p in physicians %}
-        <li><a href="/show/{{p.id}}/">{{p.name|title}}</a></li>
+        <li><a href="/show/{{p.id}}/" title="Ver Detalhes">{{p.name|title}}</a></li>
     {% endfor %}
 </ul>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(document).bind("pageshow", function() {
+	$('FORM').on('submit', function(e) {
+        e.preventDefault();
+	});
+});
+</script>
 {% endblock %}

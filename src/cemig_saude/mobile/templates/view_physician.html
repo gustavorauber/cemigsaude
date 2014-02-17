@@ -2,16 +2,12 @@
 
 {% block header %}
 <a href="/" data-icon="home">Início</a>
-<h1>Busca</h1>
+<h1>{{physician.get_name|title}}</h1>
 {% endblock %}          
 
 {% block content %}
 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
-	<form id="form" action="#">
-	    <input id="search" class="ui-bar-c" type="text" placeholder="{{physician.get_specialty|title}}" />                
-	    <a id="submit" href="#" data-role="button" data-icon="search" data-corners="true" data-iconpos="right" data-inline="false">Buscar conveniados</a>
-	    <div id="map-canvas" style="height:400px;"></div>
-	</form>
+    <div id="map-canvas" style="height:400px;"></div>	
 </div>
 {% endblock %}    
 
@@ -47,7 +43,7 @@ $(document).bind("pageshow", function() {
     var marker = new google.maps.Marker({
         position: myLatlng,
         map: map,
-        title: 'Teste'
+        title: '{{physician.get_name|title}}'
     });
 
     window.markers.push(marker);
@@ -56,76 +52,6 @@ $(document).bind("pageshow", function() {
     });    
     
     infowindow.open(map, marker);
-});
-$(document).ready(function() {
-	console.log('ready');
-	//$("div:jqmData(role='page'):last").bind('pageinit', function() {
-    //    if(navigator.geolocation) {
-    //        navigator.geolocation.getCurrentPosition(function(position){
-    //            initialize(position.coords.latitude,position.coords.longitude);
-    //        });
-    //    }
-    //});
-	
-	window.infoWindow = new google.maps.InfoWindow;
-	
-	var onMarkerClick = function() {
-		window.infoWindow.setContent(
-			"<div>" + 
-            "<h3>"+ this.val.name +"</h3>" +
-            "<h4>"+ this.val.specialty +"</h4>" +
-            "<p>" + 
-                "<br /><b>Registro</b>: " + this.val.register +
-	            "<br /><b>Tel</b>: " + this.address.phones +
-	            "<br /><b>Endereço</b>: " + this.address.street +
-	            "<br />" + this.address.neighborhood +
-            "</p>" +
-            "</div>"
-        );
-		window.infoWindow.open(window.map, this);
-		window.map.setCenter(this.getPosition());
-	};
-	
-	var performSearch = function(e) {
-		e.preventDefault();
-        $.post( "/search", { q: $('#search').val() }, function( data ) {
-            for (var i = 0; i < window.markers.length; i++) {
-                markers[i].setMap(null);
-            }
-            window.markers = [];
-            $.each(data, function ( index, val ) {                
-                for (i=0; i < val.addresses.length; i++) {                      
-                    address = val.addresses[i];                     
-                    if ( address.geocode != undefined ) {
-                        results = address.geocode.results;
-                        if (results.length > 0) {                               
-                            result = results[0];
-                            l = result.geometry.location;
-                            marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(l.lat, l.lng),
-                                map: window.map
-                            });
-                            marker.val = val;
-                            marker.address = address;
-                            google.maps.event.addListener(marker, 'click', 
-                                onMarkerClick
-                            );
-                            window.markers.push(marker);
-                        }
-                        console.log(address);
-                    }
-                }
-            });
-        });
-	};
-	
-	$('#submit').on({
-	    click: performSearch		
-	});
-	
-	$('#form').on({        
-	    submit: performSearch
-    });
 });
 </script>    
 {% endblock %}

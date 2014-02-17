@@ -4,7 +4,7 @@ from cemig_saude.index.search import search_physicians
 from cemig_saude.mobile.decorators import render_to_json
 
 from cemig_saude.model.mongo import get_one_physician, get_physicians, \
-    get_specialties, sync_specialties
+    get_specialties, sync_specialties, sync_cities
 from cemig_saude.model.physician import Physician
 
 from django.shortcuts import render_to_response
@@ -27,6 +27,9 @@ def view_specialties(request, *args, **kwargs):
     ctx = {}
     ctx['specialties'] = get_specialties()
     
+#     sync_cities()
+#     sync_specialties()
+    
     return render_to_response('list_specialties.html', ctx,
                               context_instance=RequestContext(request))
     
@@ -38,6 +41,11 @@ def list_physicians(request, *args, **kwargs):
                                        sort_by='name', sort_order=1)    
     
     return render_to_response('list_physicians.html', ctx,
+                              context_instance=RequestContext(request))
+    
+def map_search(request, *args, **kwargs):    
+    ctx = {}
+    return render_to_response('map_search.html', ctx,
                               context_instance=RequestContext(request))
     
 @render_to_json
