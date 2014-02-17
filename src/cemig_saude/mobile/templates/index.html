@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">        
+  <meta charset="utf-8">
+  <title>Cemig Saúde</title>    
+  <link rel="stylesheet" href="/static/css/jquery.mobile-1.4.1.min.css" />
+  <style>
+    html, body, #map-canvas {
+      height: 100%;
+      margin: 0px;
+      padding: 0px
+    }
+  </style>
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="/static/js/jquery.mobile-1.4.1.min.js"></script>  
+</head>
+<body>
+  <div data-role="page">
+      <div data-role="header">
+      {% block header %}
+          <h1>Cemig Saúde - Rede Conveniada</h1>
+      {% endblock %}
+      </div>
+      <div role="main" class="ui-content">
+      {% block content %}
+          <ul data-role="listview">
+              <li><a href="/show/">Busca</a></li>
+              <li><a href="/list/">Listagem por Especialidade</a></li>
+          </ul>
+      {% endblock %}
+      </div>
+      <div data-role="footer">
+      {% block footer %}
+      {% endblock %}
+      </div>
+  </div>
+  
+  {% block javascript %}{% endblock %}
+</body>
+</html>  

@@ -1,6 +1,8 @@
 
 from django.conf import settings
+import hashlib
 from pymongo import MongoClient, DESCENDING
+from unidecode import unidecode
 
 __client = None
 
@@ -18,7 +20,7 @@ def __get_db(new_connection=False):
     
     return db
 
-def get_physicians(filter_by={}, n=None):
+def get_physicians(filter_by={}, n=None, sort_by=None, sort_order=DESCENDING):
     db = __get_db()
     physicians = []
     filters = {}
@@ -28,6 +30,9 @@ def get_physicians(filter_by={}, n=None):
         
     cursor = db['physicians'].find(filters)
         
+    if sort_by is not None:
+        cursor = cursor.sort(sort_by, sort_order)
+    
     if n:
         cursor = cursor.limit(n)
     
@@ -37,6 +42,18 @@ def get_physicians(filter_by={}, n=None):
         physicians.append(p)
         
     return physicians
+
+def get_specialties():
+    db = __get_db()
+    specialties = []
+    
+    cursor = db['specialties'].find().sort('specialty')
+    for p in cursor:
+        p['id'] = str(p['_id'])
+        del p['_id'] # not allowed on django templates
+        specialties.append(p)
+    
+    return specialties
 
 def get_one_physician():
     db = __get_db()
@@ -71,3 +88,19 @@ def update_physicians_missing_hash():
     physicians = get_physicians(filter_by={'hash': {'$exists': False}})
     for p in physicians:
         collection.update({'_id': p['id']}, {'$set': {'hash': str(p['id'])}})
+        
+def sync_specialties():
+    db = __get_db()
+    collection = db['physicians']
+    specialties = collection.distinct("specialty")
+    specialties.sort()
+
+    for s in specialties:
+        hash = hashlib.sha256(unidecode(s).lower().strip()).hexdigest()
+        db['specialties'].update({'_id': hash}, {"$set": { "specialty": s}}, 
+                                 upsert=True)
+
+        db['physicians'].update({'specialty': s}, 
+                                {'$set': {'specialty_hash': hash}}, 
+                                multi=True)
+        

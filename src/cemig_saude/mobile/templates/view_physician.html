@@ -1,36 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">        
-  <meta charset="utf-8">
-  <title>Cemig Saúde</title>    
-  <link rel="stylesheet" href="/static/css/jquery.mobile-1.4.1.min.css" />
-  <style>
-    html, body, #map-canvas {
-      height: 100%;
-      margin: 0px;
-      padding: 0px
-    }
-  </style>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>    
-  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-  <script src="/static/js/jquery.mobile-1.4.1.min.js"></script>
-</head>
-<body>
-  <div data-role="page">
-      <div data-role="header">...</div>
-      <div role="main" class="ui-content">
-          <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
-          <form id="form" action="#">
-              <input id="search" class="ui-bar-c" type="text" placeholder="Dermatologia" />                
-              <a id="submit" href="#" data-role="button" data-icon="search">Buscar conveniados</a>
-              <div id="map-canvas" style="height:400px;"></div>
-          </form>
-          </div>
-      </div>
-      <div data-role="footer">...</div>
-  </div>
-    
+{% extends "index.html" %}
+
+{% block header %}
+<a href="/" data-icon="home">Início</a>
+<h1>Busca</h1>
+{% endblock %}          
+
+{% block content %}
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
+	<form id="form" action="#">
+	    <input id="search" class="ui-bar-c" type="text" placeholder="Dermatologia" />                
+	    <a id="submit" href="#" data-role="button" data-icon="search" data-corners="true" data-iconpos="right" data-inline="false">Buscar conveniados</a>
+	    <div id="map-canvas" style="height:400px;"></div>
+	</form>
+</div>
+{% endblock %}    
+
+{% block javascript %}   
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> 
 <script type="text/javascript">
 function initialize() {
   var myLatlng = new google.maps.LatLng({{physician.get_lat}}, {{physician.get_lon}});
@@ -133,7 +119,5 @@ $(document).ready(function() {
         submit: performSearch
     });
 });
-</script>
-    
-</body>
-</html>
+</script>    
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+{% block header %}
+<a href="/" data-icon="home">Início</a>
+<h1>Especialidades</h1>
+{% endblock %}
+
+{% block content %}
+<form>
+  <input type="text" data-type="search" id="specialty-input" />
+</form>
+<br />
+<ul data-role="listview" data-autodividers="true" data-filter="true" data-input="#specialty-input">
+    {% for s in specialties %}
+        <li><a href="/list/{{s.id}}/">{{s.specialty}}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
