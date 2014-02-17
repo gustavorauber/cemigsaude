@@ -17,7 +17,8 @@ def home(request, *args, **kwargs):
 
 def view_physician(request, *args, **kwargs):
     ctx = {}
-    ctx['physician'] = Physician(get_one_physician())
+    hash = kwargs.get('physician', '')
+    ctx['physician'] = Physician(get_one_physician(filter_by={'hash': hash}))
     
     return render_to_response('view_physician.html', ctx,
                               context_instance=RequestContext(request))

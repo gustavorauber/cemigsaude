@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     
-    url(r'^show/', 'cemig_saude.mobile.views.view_physician'),
+    url(r'^show/(?P<physician>\w+)/', 'cemig_saude.mobile.views.view_physician'),
     url(r'^list/(?P<specialty>\w+)/', 'cemig_saude.mobile.views.list_physicians'),
     url(r'^list/', 'cemig_saude.mobile.views.view_specialties'),
     url(r'^search', 'cemig_saude.mobile.views.search'),

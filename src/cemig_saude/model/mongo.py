@@ -55,11 +55,11 @@ def get_specialties():
     
     return specialties
 
-def get_one_physician():
+def get_one_physician(filter_by={}):
     db = __get_db()
     collection = db['physicians']
     
-    physician = collection.find_one()
+    physician = collection.find_one(filter_by)
     if physician:
         physician['id'] = str(physician['_id'])
         del physician['_id']
