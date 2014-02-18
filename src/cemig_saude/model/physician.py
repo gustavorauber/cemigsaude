@@ -14,7 +14,9 @@ class Physician():
         self.lat = None
         self.lon = None
         self.street_address = None
+        self.email = None
         self.phone = None
+        self.register = None
     
     def get_id(self):
         if self.id is None:
@@ -109,6 +111,18 @@ class Physician():
             
         return self.phone        
     
+    def get_register(self):
+        if self.register is None:
+            self.register = self.json['register']
+            
+        return self.register
+
+    def get_email(self):
+        if self.email is None:
+            self.email = self.json['email']
+            
+        return self.email
+        
     def to_json(self):
         return self.json
         

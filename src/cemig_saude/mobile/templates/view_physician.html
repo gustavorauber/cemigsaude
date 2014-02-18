@@ -7,8 +7,31 @@
 
 {% block content %}
 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
-    Telefone: <a href="tel:{{physician.get_phone}}">{{physician.get_phone}}</a>
-    <br /><br /> 
+    <table data-role="table" data-mode="reflow" id="physician-data">
+        <thead>
+	        <tr>
+	           <th>Especialidade(s)</th>
+	           <th>Registro Profissional</th>
+	           <th>Telefone</th>
+	           {% if self.get_email %}
+	               <th>E-Mail</th>
+	           {% endif %}
+	           <th>Endereço</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	           <td>{{physician.get_specialty|title}}</td>
+	           <td>{{physician.get_register}}</td>
+	           <td><a href="tel:{{physician.get_phone}}">{{physician.get_phone}}</a></td>
+	           {% if self.get_email %}
+	               <td><a href="mailto:{{physician.get_email}}">{{physician.get_email}}</a></td>
+	           {% endif %}
+	           <td><a href="geo:{{physician.get_lat}},{{physician.get_lon}};u=35">{{physician.get_street_address|title}}, {{physician.get_neighborhood}}, {{physician.get_city|title}}</a></td>
+	        </tr>
+	    </tbody>
+    </table>
+    <br />     
     <div id="map-canvas" style="height:400px;"></div>	
 </div>
 {% endblock %}    
@@ -34,7 +57,7 @@ $(document).bind("pageshow", function() {
         '<h2 class="firstHeading">{{physician.get_name|title}}</h2>'+
         '<div>'+
         '<p><b>Especialidade(s)</b>: {{physician.get_specialty|title}} ' +
-        '<p><b>Endereco</b>: {{physician.get_street_address}} ' +      
+        '<p><b>Endereço</b>: {{physician.get_street_address|title}} ' +      
         '</div>'+
         '</div>';
 
