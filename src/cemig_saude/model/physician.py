@@ -14,6 +14,7 @@ class Physician():
         self.lat = None
         self.lon = None
         self.street_address = None
+        self.phone = None
     
     def get_id(self):
         if self.id is None:
@@ -74,6 +75,7 @@ class Physician():
                     
                 self.neighborhood = address['neighborhood']                
                 self.street_address = address['street']
+                self.phone = address['phones']
                 
                 if 'geocode' in address and address['geocode']['status'] == "OK":
                     results = address['geocode']['results']
@@ -99,7 +101,13 @@ class Physician():
         if self.lat is None:
             self.__parse_address()
             
-        return self.lat, self.lon        
+        return self.lat, self.lon
+    
+    def get_phone(self):
+        if self.phone is None:
+            self.__parse_address()
+            
+        return self.phone        
     
     def to_json(self):
         return self.json
