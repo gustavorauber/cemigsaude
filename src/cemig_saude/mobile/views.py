@@ -51,7 +51,12 @@ def map_search(request, *args, **kwargs):
 @render_to_json
 def search(request, *args, **kwargs):
     query = request.POST.get('q', '')
-    results = search_physicians(specialty=query, n=150)
+    distance = request.POST.get('d', '5')
+    lat = request.POST.get('lat', '5')
+    lon = request.POST.get('lon', '5')
+    
+    results = search_physicians(specialty=query, n=150, distance=distance,
+                                lat=lat, lon=lon)
     physician_ids = list(x['_id'] for x in results)
     
     print len(results)

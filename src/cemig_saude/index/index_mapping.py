@@ -5,7 +5,7 @@ Created on Feb 11, 2014
 '''
 
 physician_entry_mapping = {
-    'entry': {
+    'physician': {
         'properties': {
             'name': {
                 'boost': 1.0,

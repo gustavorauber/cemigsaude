@@ -8,7 +8,11 @@
 {% block content %}
 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
     <form id="form" action="#">
-        <input id="search" class="ui-bar-c" type="text" placeholder="Pediatria" />                
+        <input id="search" class="ui-bar-c" type="text" placeholder="Pediatria" />
+        <div class="ui-field-contain" style="border: 0;">
+	        <label for="slider-mini">Distância máxima (Kms):</label>
+	        <input type="range" name="distance" id="distance" value="5" min="1" max="50" data-highlight="true" data-mini="true" />
+        </div>                
         <a id="submit" href="#" data-role="button" data-icon="search" data-corners="true" data-iconpos="right" data-inline="false">Buscar conveniados</a>
         <div id="map-canvas" style="height:400px;"></div>
     </form>
@@ -20,9 +24,9 @@
 $(document).bind("pageshow", function() {	
 	if (navigator.geolocation) { 
 	   navigator.geolocation.getCurrentPosition(function (position) {                                                              //This gets the
-	     var latitude = position.coords.latitude;                  
-	     var longitude = position.coords.longitude;
-	     var coords = new google.maps.LatLng(latitude, longitude); 
+		 window.latitude = position.coords.latitude;                  
+		 window.longitude = position.coords.longitude;
+	     var coords = new google.maps.LatLng(window.latitude, window.longitude); 
 	     var mapOptions = {
 	       zoom: 14,  
 	       center: coords
@@ -33,10 +37,12 @@ $(document).bind("pageshow", function() {
 	     window.map = map;
 	   });
 	} else {
-	    var myLatlng = new google.maps.LatLng(-19.932696, -43.944035);
+		window.latitude = -19.932696;
+		window.longitude = -43.944035;
+		var coords = new google.maps.LatLng(window.latitude, window.longitude);
 	    var mapOptions = {
 	      zoom: 14,
-	      center: myLatlng
+	      center: coords
 	    };
 	    var map = new google.maps.Map(document.getElementById('map-canvas'), 
                 window.mapOptions);
@@ -69,7 +75,13 @@ $(document).ready(function() {
     
     var performSearch = function(e) {
         e.preventDefault();
-        $.post( "/search", { q: $('#search').val() }, function( data ) {
+        postData = { 
+        		q: $('#search').val(), 
+        		d: $('#distance').val(),
+        		lat: window.latitude,
+        		lon: window.longitude
+        };
+        $.post( "/search", postData, function( data ) {
             for (var i = 0; i < window.markers.length; i++) {
                 markers[i].setMap(null);
             }
@@ -102,7 +114,12 @@ $(document).ready(function() {
                 }
             });
             
-            window.map.fitBounds(window.markersBounds);
+            if (!window.markersBounds.isEmpty()) {
+            	window.map.fitBounds(window.markersBounds);	
+            } else {
+            	// Alert User somehow
+            	window.map.setZoom(15);
+            }
         });
     };
     
@@ -112,6 +129,12 @@ $(document).ready(function() {
     
     $('#form').on({        
         submit: performSearch
+    });
+    
+    $('#search').keypress(function(e) {
+        if (e.which == 13) {        	
+        	performSearch(e);            
+        }
     });
 });
 </script>    
