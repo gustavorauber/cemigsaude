@@ -17,16 +17,34 @@
 
 {% block javascript %}
 <script type="text/javascript">
-$(document).bind("pageshow", function() {
-    var myLatlng = new google.maps.LatLng(-19.932696, -43.944035);
-    var mapOptions = {
-      zoom: 14,
-      center: myLatlng
-    };
+$(document).bind("pageshow", function() {	
+	if (navigator.geolocation) { 
+	   navigator.geolocation.getCurrentPosition(function (position) {                                                              //This gets the
+	     var latitude = position.coords.latitude;                  
+	     var longitude = position.coords.longitude;
+	     var coords = new google.maps.LatLng(latitude, longitude); 
+	     var mapOptions = {
+	       zoom: 14,  
+	       center: coords
+	     };
+	     
+	     var map = new google.maps.Map(document.getElementById('map-canvas'), 
+	             mapOptions);
+	     window.map = map;
+	   });
+	} else {
+	    var myLatlng = new google.maps.LatLng(-19.932696, -43.944035);
+	    var mapOptions = {
+	      zoom: 14,
+	      center: myLatlng
+	    };
+	    var map = new google.maps.Map(document.getElementById('map-canvas'), 
+                window.mapOptions);
+        window.map = map;
+	}
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    window.map = map;
     window.markers = [];
+    window.markersBounds = new google.maps.LatLngBounds();
 });
 
 $(document).ready(function() {
@@ -56,6 +74,7 @@ $(document).ready(function() {
                 markers[i].setMap(null);
             }
             window.markers = [];
+            window.markersBounds = new google.maps.LatLngBounds();
             $.each(data, function ( index, val ) {                
                 for (i=0; i < val.addresses.length; i++) {                      
                     address = val.addresses[i];                     
@@ -64,8 +83,9 @@ $(document).ready(function() {
                         if (results.length > 0) {                               
                             result = results[0];
                             l = result.geometry.location;
+                            position = new google.maps.LatLng(l.lat, l.lng);
                             marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(l.lat, l.lng),
+                                position: position,
                                 map: window.map
                             });
                             marker.val = val;
@@ -74,11 +94,15 @@ $(document).ready(function() {
                                 onMarkerClick
                             );
                             window.markers.push(marker);
+                            console.log(position);
+                            window.markersBounds.extend(position);
                         }
                         console.log(address);
                     }
                 }
             });
+            
+            window.map.fitBounds(window.markersBounds);
         });
     };
     
