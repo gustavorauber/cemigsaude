@@ -6,12 +6,15 @@
 {% endblock %}          
 
 {% block content %}
-<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;" id="map-search-page">
     <form id="form" action="#">
-        <input id="search" class="ui-bar-c" type="text" placeholder="Pediatria" />
         <div class="ui-field-contain" style="border: 0;">
-	        <label for="slider-mini">Distância máxima (Kms):</label>
-	        <input type="range" name="distance" id="distance" value="5" min="1" max="50" data-highlight="true" data-mini="true" />
+            <label for="search"><strong>Busca</strong></label>
+            <input id="search" class="ui-bar-c" type="text" placeholder="ex: Pediatria" />
+        </div>
+        <div class="ui-field-contain" style="border: 0;">
+	        <label for="distance"><strong>Distância máxima (Kms):</strong></label>
+	        <input type="range" id="distance" value="5" min="1" max="50" data-highlight="true" data-mini="true" />
         </div>                
         <a id="submit" href="#" data-role="button" data-icon="search" data-corners="true" data-iconpos="right" data-inline="false">Buscar conveniados</a>
         <div id="map-canvas" style="height:400px;"></div>
@@ -21,7 +24,14 @@
 
 {% block javascript %}
 <script type="text/javascript">
-$(document).bind("pageshow", function() {	
+$(document).on("pageinit", function() {	
+	
+	if ( $(this).find('#map-search-page').length == 0 ) {
+		return false;
+	}
+	
+	console.log('pageshow_map');
+	
 	if (navigator.geolocation) { 
 	   navigator.geolocation.getCurrentPosition(function (position) {                                                              //This gets the
 		 window.latitude = position.coords.latitude;                  
@@ -51,9 +61,6 @@ $(document).bind("pageshow", function() {
 
     window.markers = [];
     window.markersBounds = new google.maps.LatLngBounds();
-});
-
-$(document).ready(function() {
     
     window.infoWindow = new google.maps.InfoWindow;
     

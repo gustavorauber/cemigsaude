@@ -6,7 +6,7 @@
 {% endblock %}          
 
 {% block content %}
-<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;" id="view-physician-page">
     <table data-role="table" data-mode="reflow" id="physician-data">
         <thead>
 	        <tr>
@@ -38,8 +38,13 @@
 
 {% block javascript %}
 <script type="text/javascript">
-$(document).bind("pageshow", function() {
-	console.log('pageshow');
+$(document).on("pageinit", function() {
+	
+	if ( $(this).find('#view-physician-page').length == 0 ) {
+        return false;
+    }
+    
+	console.log('pageshow_view_physician');
 	
 	var myLatlng = new google.maps.LatLng({{physician.get_lat}}, {{physician.get_lon}});
     var mapOptions = {
