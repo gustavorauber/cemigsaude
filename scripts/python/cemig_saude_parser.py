@@ -61,7 +61,7 @@ def parse_entries(html):
                 elif span.get('id').endswith('CidadeRept'):
                     address['city'] = span.get_text().strip()
                 elif span.get('id').endswith('TelefoneRept'):
-                    address['phones'] = span.get_text().strip()
+                    address['phones'] = span.get_text().strip().split('/')
                 elif span.get('id').endswith('FaxRept'):
                     address['fax'] = span.get_text().strip()
                     

@@ -89,6 +89,22 @@ def update_physicians_missing_hash():
     for p in physicians:
         collection.update({'_id': p['id']}, {'$set': {'hash': str(p['id'])}})
         
+
+def update_physicians_phones():
+    db = __get_db()
+    collection = db['physicians']
+    physicians = get_physicians(filter_by={'addresses.phones': {"$regex": "/"}})
+    
+    for p in physicians:
+        for address in p['addresses']:
+            address['phones'] = address['phones'].split('/')
+            
+            for phone in address['phones']:
+                phone = phone.strip()
+            
+        collection.update({'hash': p['hash']}, 
+                          {'$set': {'addresses': p['addresses']}})        
+        
 def sync_cities():
     db = __get_db()
     collection = db['physicians']

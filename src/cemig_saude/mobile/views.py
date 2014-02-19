@@ -4,7 +4,7 @@ from cemig_saude.index.search import search_physicians
 from cemig_saude.mobile.decorators import render_to_json
 
 from cemig_saude.model.mongo import get_one_physician, get_physicians, \
-    get_specialties, sync_specialties, sync_cities
+    get_specialties, sync_specialties, sync_cities, update_physicians_phones
 from cemig_saude.model.physician import Physician
 
 from django.shortcuts import render_to_response
@@ -27,6 +27,7 @@ def view_specialties(request, *args, **kwargs):
     ctx = {}
     ctx['specialties'] = get_specialties()
     
+    update_physicians_phones()
 #     sync_cities()
 #     sync_specialties()
     
