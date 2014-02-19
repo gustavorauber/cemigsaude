@@ -1,5 +1,7 @@
 {% extends "index.html" %}
 
+{% block page_id %}list-physicians-page{% endblock %}
+
 {% block header %}
 <a href="/" data-icon="home">Início</a>
 <h1>Especialidades</h1>
@@ -28,7 +30,7 @@
 
 {% block javascript %}
 <script type="text/javascript">
-$(document).bind("pageshow", function() {
+$(document).bind("pageshow", "#list-physicians-page", function() {
     $('FORM').on('submit', function(e) {
         e.preventDefault();
     });

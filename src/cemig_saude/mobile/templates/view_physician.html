@@ -1,5 +1,7 @@
 {% extends "index.html" %}
 
+{% block page_id %}physician-page{% endblock %}
+
 {% block header %}
 <a href="/" data-icon="home">Início</a>
 <h1>{{physician.get_name|title}}</h1>
@@ -31,20 +33,16 @@
 	        </tr>
 	    </tbody>
     </table>
-    <br />     
-    <div id="map-canvas" style="height:400px;"></div>	
+</div>
+<br />
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
+    <div id="physician-map" style="height:400px;"></div>
 </div>
 {% endblock %}    
 
 {% block javascript %}
 <script type="text/javascript">
-$(document).on("pageinit", function() {
-	
-	if ( $(this).find('#view-physician-page').length == 0 ) {
-        return false;
-    }
-    
-	console.log('pageshow_view_physician');
+$(document).on("pageshow", "#physician-page", function(event) {
 	
 	var myLatlng = new google.maps.LatLng({{physician.get_lat}}, {{physician.get_lon}});
     var mapOptions = {
@@ -52,9 +50,10 @@ $(document).on("pageinit", function() {
       center: myLatlng
     };
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    window.map = map;
-    window.markers = [];
+    $('#physician-map').empty();
+    window.map = new google.maps.Map(document.getElementById('physician-map'), mapOptions);
+    var bounds = new google.maps.LatLngBounds();
+    var infoWindow = new google.maps.InfoWindow();
 
     var contentString = '<div>'+
         '<div id="siteNotice">'+
@@ -66,22 +65,22 @@ $(document).on("pageinit", function() {
         '</div>'+
         '</div>';
 
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
+    infoWindow.setContent(contentString);
 
     var marker = new google.maps.Marker({
         position: myLatlng,
-        map: map,
+        map: window.map,
         title: '{{physician.get_name|title}}'
     });
 
-    window.markers.push(marker);
+    bounds.extend(myLatlng);
     google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map,marker);
+    	infoWindow.open(window.map, marker);
     });    
     
-    infowindow.open(map, marker);
+    google.maps.event.trigger(marker, 'click');
+    //google.maps.event.trigger(window.map, 'resize');
+    //window.map.setCenter(myLatlng);
 });
 </script>    
 {% endblock %}

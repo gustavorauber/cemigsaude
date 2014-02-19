@@ -55,6 +55,9 @@ def search(request, *args, **kwargs):
     lat = request.POST.get('lat', '5')
     lon = request.POST.get('lon', '5')
     
+    if not query:
+        return []
+    
     results = search_physicians(specialty=query, n=150, distance=distance,
                                 lat=lat, lon=lon)
     physician_ids = list(x['_id'] for x in results)

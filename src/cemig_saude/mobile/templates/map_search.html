@@ -1,5 +1,7 @@
 {% extends "index.html" %}
 
+{% block page_id %}search-page{% endblock %}
+
 {% block header %}
 <a href="/" data-icon="home">Início</a>
 <h1>Busca</h1>
@@ -17,20 +19,14 @@
 	        <input type="range" id="distance" value="5" min="1" max="50" data-highlight="true" data-mini="true" />
         </div>                
         <a id="submit" href="#" data-role="button" data-icon="search" data-corners="true" data-iconpos="right" data-inline="false">Buscar conveniados</a>
-        <div id="map-canvas" style="height:400px;"></div>
+        <div id="search-map" style="height:400px;"></div>
     </form>
 </div>
 {% endblock %}    
 
 {% block javascript %}
 <script type="text/javascript">
-$(document).on("pageinit", function() {	
-	
-	if ( $(this).find('#map-search-page').length == 0 ) {
-		return false;
-	}
-	
-	console.log('pageshow_map');
+$(document).on("pageshow", "#search-page", function(event) {	
 	
 	if (navigator.geolocation) { 
 	   navigator.geolocation.getCurrentPosition(function (position) {                                                              //This gets the
@@ -42,9 +38,8 @@ $(document).on("pageinit", function() {
 	       center: coords
 	     };
 	     
-	     var map = new google.maps.Map(document.getElementById('map-canvas'), 
-	             mapOptions);
-	     window.map = map;
+	     window.map = new google.maps.Map(document.getElementById('search-map'), 
+	             mapOptions);	      
 	   });
 	} else {
 		window.latitude = -19.932696;
@@ -54,9 +49,8 @@ $(document).on("pageinit", function() {
 	      zoom: 14,
 	      center: coords
 	    };
-	    var map = new google.maps.Map(document.getElementById('map-canvas'), 
-                window.mapOptions);
-        window.map = map;
+	    window.map = new google.maps.Map(document.getElementById('search-map'), 
+                window.mapOptions);        
 	}
 
     window.markers = [];
@@ -113,7 +107,6 @@ $(document).on("pageinit", function() {
                                 onMarkerClick
                             );
                             window.markers.push(marker);
-                            console.log(position);
                             window.markersBounds.extend(position);
                         }
                         console.log(address);
