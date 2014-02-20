@@ -21,6 +21,10 @@
         <div id="search-map" style="height:400px;"></div>
     </form>
 </div>
+<div id="no-results" class="ui-content" data-role="popup" data-overlay-theme="b" data-theme="a">
+    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fechar</a> 
+    <h3>Nenhum resultado encontrado</h3>    
+</div>
 {% endblock %}    
 
 {% block javascript %}
@@ -86,7 +90,8 @@ $(document).on("pageshow", "#search-page", function(event) {
                 markers[i].setMap(null);
             }
             window.markers = [];
-            window.markersBounds = new google.maps.LatLngBounds();
+            window.markersBounds = new google.maps.LatLngBounds();            
+            
             $.each(data, function ( index, val ) {                
                 for (i=0; i < val.addresses.length; i++) {                      
                     address = val.addresses[i];                     
@@ -116,7 +121,7 @@ $(document).on("pageshow", "#search-page", function(event) {
             if (!window.markersBounds.isEmpty()) {
             	window.map.fitBounds(window.markersBounds);	
             } else {
-            	// Alert User somehow
+            	$('#no-results').popup("open");
             	window.map.setZoom(15);
             }
         });
