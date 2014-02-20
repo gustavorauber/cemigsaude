@@ -13,9 +13,14 @@ import urllib2
 
 from bs4 import BeautifulSoup
 from time import sleep
+from pymongo import MongoClient, DESCENDING
+
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
+
 from unidecode import unidecode
 
-from pymongo import MongoClient, DESCENDING
 
 def get_db():
     client = MongoClient("127.0.0.1", 27017)
@@ -109,9 +114,44 @@ def geocode_address(address):
     sock.close()
     
     return response    
-         
+
+def fetch_all_physicians():
+    url = "http://www.cemigsaude.org.br/Paginas/Geral/Prosaude/Convenios/Convenios_Disponiveis.aspx"
+    
+    driver = webdriver.PhantomJS(service_log_path='',
+                                 executable_path="D:\Users\c057384\phantomjs\phantomjs")
+    driver.set_window_size(1024, 768)
+    
+    try:
+        
+        driver.get(url)
+        
+        sleep(5)
+        
+        page = driver.page_source
+        
+        with open('test.html', 'w') as f:
+            f.write(page.encode('utf8'))
+        
+        options = driver.find_element_by_css_selector("#cboCidade")
+        print options
+        
+        for option in options:
+            print option.text            
+        
+    except Exception, e:
+        print e
+    finally:
+        driver.quit()
+
+def get_specialties():
+    # @TODO: phantomjs parser
+    url = "http://legado.cemigsaude.org.br/portal/prosaude/Convenios/ConsultaConveniado.aspx?codigo=8090&amp;nome=Adjar%20Mendes%20da%20Silva"         
 
 if __name__ == '__main__':
+    
+    fetch_all_physicians()
+    exit(-1)
     
     page = ""
     with open(sys.argv[1], 'r') as f:
