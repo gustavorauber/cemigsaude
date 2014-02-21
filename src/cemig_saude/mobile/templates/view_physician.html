@@ -46,6 +46,8 @@
 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
     <div id="physician-map" style="height:400px;"></div>
 </div>
+<div id="directions">
+</div>
 {% endblock %}    
 
 {% block javascript %}
@@ -58,7 +60,9 @@ $(document).on("pageshow", "#physician-page", function(event) {
       center: myLatlng
     };
 
+    $('#directions').empty();
     $('#physician-map').empty();
+    
     window.map = new google.maps.Map(document.getElementById('physician-map'), mapOptions);
     var bounds = new google.maps.LatLngBounds();
     var infoWindow = new google.maps.InfoWindow();
@@ -89,6 +93,40 @@ $(document).on("pageshow", "#physician-page", function(event) {
     google.maps.event.trigger(marker, 'click');
     //google.maps.event.trigger(window.map, 'resize');
     //window.map.setCenter(myLatlng);
+    
+    if (navigator.geolocation) { 
+       navigator.geolocation.getCurrentPosition(function (position) {                                                              
+           window.latitude = position.coords.latitude;                  
+           window.longitude = position.coords.longitude;
+           var coords = new google.maps.LatLng(window.latitude, window.longitude); 
+           
+           if (window.directionsDisplay == undefined) {
+        	   window.directionsDisplay = new google.maps.DirectionsRenderer();   
+           }
+	    
+           var directionsService = new google.maps.DirectionsService();
+	    
+           window.directionsDisplay.setMap(window.map);	    
+           window.directionsDisplay.setPanel(document.getElementById("directions"));	    
+	    
+           var request = {
+		      origin: coords,
+		      destination: myLatlng,
+		      travelMode: google.maps.TravelMode.DRIVING
+		      // Note that Javascript allows us to access the constant
+		      // using square brackets and a string value as its
+		      // "property."
+		      //travelMode: google.maps.TravelMode[selectedMode]		
+           };
+		
+           directionsService.route(request, function(response, status) {		   
+        	   if (status == google.maps.DirectionsStatus.OK) {		    	
+        		   $('#directions').empty();		        
+        		   window.directionsDisplay.setDirections(response);		    
+        	   }		
+           });		
+       });
+    }    
 });
 </script>    
 {% endblock %}
