@@ -118,26 +118,50 @@ def geocode_address(address):
 def fetch_all_physicians():
     url = "http://www.cemigsaude.org.br/Paginas/Geral/Prosaude/Convenios/Convenios_Disponiveis.aspx"
     
-    driver = webdriver.PhantomJS(service_log_path='',
-                                 executable_path="D:\Users\c057384\phantomjs\phantomjs")
+    driver = webdriver.PhantomJS(service_log_path='')
+#    driver = webdriver.PhantomJS(service_log_path='',
+#                                 executable_path="D:\Users\c057384\phantomjs\phantomjs")
     driver.set_window_size(1024, 768)
     
     try:
+        i = 136
         
-        driver.get(url)
-        
-        sleep(5)
-        
-        page = driver.page_source
-        
-        with open('test.html', 'w') as f:
-            f.write(page.encode('utf8'))
-        
-        options = driver.find_element_by_css_selector("#cboCidade")
-        print options
-        
-        for option in options:
-            print option.text            
+        while True:
+            downloaded = False
+            
+            driver.get(url)
+            
+            sleep(5)
+            
+            page = driver.page_source
+            
+            with open('test.html', 'w') as f:
+                f.write(page.encode('utf8'))
+            
+            iframe = driver.find_element_by_id("MSOPageViewerWebPart_WebPartWPQ1")
+            driver.switch_to_frame(iframe)
+            options = driver.find_elements_by_css_selector("#cboCidade > option")
+            
+            for j, option in enumerate(options):
+                if i == j:
+                    downloaded = True
+                    print i, option.text
+                    city = unidecode(option.text)     
+                    option.click()       
+                
+                    submit = driver.find_element_by_id("btnConsulta")
+                    submit.click()
+                    
+                    sleep(5)
+                    
+                    page = driver.page_source
+                    with open(city + ".html", "w") as f:
+                        f.write(page.encode('utf8'))
+            
+            if not downloaded:
+                break
+                    
+            i += 1
         
     except Exception, e:
         print e
