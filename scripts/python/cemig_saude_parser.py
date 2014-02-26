@@ -39,8 +39,8 @@ def parse_entries(html):
     for div in elements:
         entry = {}
         
-        entry['name'] = div.select('table.tabelaConveniados2 > tr > td > span.arial12')[0].get_text()
-        spans = div.select('table.tabelaConveniados > tr > td > span.arial12')
+        entry['name'] = div.select('table.tabelaConveniados2 > tbody > tr > td > span.arial12')[0].get_text()
+        spans = div.select('table.tabelaConveniados > tbody > tr > td > span.arial12')
         
         speciality, email, site, register,  = "", "", "", ""
         for span in spans:
@@ -94,7 +94,7 @@ def geocode_address(address):
     params = {}    
     
     components = []
-    components.append('locality:' + treat_city(address['city']))
+    components.append('locality:' + unidecode(treat_city(address['city'])))
 #     components.append('administrative_area:MG')
     components.append('country:BR')    
     
@@ -105,10 +105,12 @@ def geocode_address(address):
     
     request_url = url + urllib.urlencode(params)
     
-    proxy = urllib2.ProxyHandler({'http': 'http://c057384:XXX@proxycemig.cemig.ad.corp:8080'})
-    auth = urllib2.HTTPBasicAuthHandler()
-    opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
-    urllib2.install_opener(opener)
+    # Proxy Handling
+#    proxy = urllib2.ProxyHandler({'http': 'http://c057384:XXX@proxycemig.cemig.ad.corp:8080'})
+#    auth = urllib2.HTTPBasicAuthHandler()
+#    opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
+#    urllib2.install_opener(opener)
+
     sock = urllib2.urlopen(request_url)
     response = sock.read()
     sock.close()
@@ -174,8 +176,11 @@ def get_specialties():
 
 if __name__ == '__main__':
     
-    fetch_all_physicians()
-    exit(-1)
+    # Fetch ALL
+#    fetch_all_physicians()
+#    exit(-1)
+    
+    print "YO", sys.argv[1]
     
     page = ""
     with open(sys.argv[1], 'r') as f:
@@ -188,7 +193,7 @@ if __name__ == '__main__':
     db = get_db()
     collection = db['physicians']
     
-    #to check: 1103
+    #to check: 1103 - BH
     for i, entry in enumerate(entries):
         for address in entry['addresses']:    
             geocode_json = geocode_address(address)
