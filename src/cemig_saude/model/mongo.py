@@ -1,10 +1,14 @@
 
 import hashlib
+import json
 
 from bson.objectid import ObjectId
 from django.conf import settings
 from pymongo import MongoClient, DESCENDING
+from time import sleep
 from unidecode import unidecode
+
+from cemig_saude.model.geocode import geocode_address
 
 __client = None
 
@@ -159,4 +163,54 @@ def sync_specialties():
             db['physicians'].update({'specialty': s}, 
                                     {'$set': {'specialty_hash': hash}}, 
                                     multi=True)
+
+def remove_duplicates():
+    db = __get_db()
+    physicians = get_physicians(filter_by={"addresses.geocode.status": "OVER_QUERY_LIMIT"})
+    count = 0
+    
+    print "Over", len(physicians)
+    
+    for p in physicians:
+        addresses = p['addresses']
+        for addr in addresses:
+            if addr.get('geocode', {}).get('status', "") == "OVER_QUERY_LIMIT":
+                del addr['geocode']
+        
+        db['physicians'].update({"_id": ObjectId(p['id'])}, 
+                                {"$set": {'addresses': addresses}})
+        
+#         similars = db['physicians'].find({'name': p['name'],
+#                                'city_hash': p['city_hash'], 
+#                                'hash': {'$ne': p['hash']}})
+#         
+#         if similars.count() > 0:
+#             count += 1            
+#             db['physicians'].remove({'hash': p['hash']})
+            
+    print "Duplicated = ", count
+            
+
+def update_geocode():    
+    db = __get_db()
+    physicians = get_physicians(filter_by={"addresses.geocode": {"$exists": False}})
+    
+    print "Total to geocode", len(physicians)
+    count = 0
+    
+    for p in physicians:
+        for addr in p['addresses']:
+            if 'geocode' not in addr:
+                geocode_json = geocode_address(addr)
+                addr['geocode'] = json.loads(geocode_json)
+            
+                sleep(1)
+                
+        db['physicians'].update({"_id": ObjectId(p['id'])}, 
+                                {"$set": {'addresses': p['addresses']}})
+        
+        count += 1
+        
+        if count % 50 == 0:
+            print count
         
