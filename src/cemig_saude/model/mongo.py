@@ -1,6 +1,8 @@
 
-from django.conf import settings
 import hashlib
+
+from bson.objectid import ObjectId
+from django.conf import settings
 from pymongo import MongoClient, DESCENDING
 from unidecode import unidecode
 
@@ -87,8 +89,8 @@ def update_physicians_missing_hash():
     collection = db['physicians']
     physicians = get_physicians(filter_by={'hash': {'$exists': False}})
     for p in physicians:
-        collection.update({'_id': p['id']}, {'$set': {'hash': str(p['id'])}})
-        
+        collection.update({"_id": ObjectId(p['id'])}, 
+                          {'$set': {'hash': str(p['id'])}})        
 
 def update_physicians_phones():
     db = __get_db()
