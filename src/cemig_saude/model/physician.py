@@ -17,6 +17,8 @@ class Physician():
         self.email = None
         self.phone = None
         self.register = None
+        self.addresses = []
+        self.num_addresses = 0
     
     def get_id(self):
         if self.id is None:
@@ -63,29 +65,30 @@ class Physician():
     def __parse_address(self):
         if 'addresses' in self.json:
             addresses = self.json['addresses']
+            self.num_addresses = len(addresses)
+            
             if len(addresses) > 0:
-                address = addresses[0]
-                
-                city = address['city']
-                idx = city.rfind('-')
-                if idx != -1:
-                    self.city = city[:idx].strip()
-                    self.state = city[idx + 1:].strip()
-                else:
-                    self.city = city
-                    self.state = ""
+                for address in addresses:                
+                    addr = {'state': '', 'city': address['city'],
+                            'neighborhood': address['neighborhood'],
+                            'street': address['street'],
+                            'phone': address['phones']}
                     
-                self.neighborhood = address['neighborhood']                
-                self.street_address = address['street']
-                self.phone = address['phones']
-                
-                if 'geocode' in address and address['geocode']['status'] == "OK":
-                    results = address['geocode']['results']
-                    if len(results) > 0:
-                        result = results[0]                
-                        location = result['geometry']['location']                 
-                        self.lat = location['lat']
-                        self.lon = location['lng']
+                    idx = address['city'].rfind('-')
+                    if idx != -1:
+                        addr['city'] = address['city'][:idx].strip()
+                        addr['state'] = address['city'][idx + 1:].strip()
+                    
+                    if 'geocode' in address and address['geocode']['status'] == "OK":
+                        results = address['geocode']['results']
+                        if len(results) > 0:
+                            result = results[0]                
+                            location = result['geometry']['location']                 
+                            addr['lat'] = location['lat']
+                            addr['lon'] = location['lng']
+                            
+                    
+                    self.addresses.append(addr)
     
     def get_lat(self):
         if self.lat is None:
@@ -122,6 +125,12 @@ class Physician():
             self.email = self.json['email']
             
         return self.email
+    
+    def get_addresses(self):
+        if len(self.addresses) == 0:
+            self.__parse_address()
+            
+        return self.addresses
         
     def to_json(self):
         return self.json

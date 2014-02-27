@@ -8,42 +8,72 @@
 {% endblock %}          
 
 {% block content %}
-<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;" id="view-physician-page">
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em;" id="view-physician-page">
     <table data-role="table" data-mode="reflow" id="physician-data">
         <thead>
 	        <tr>
 	           <th>Especialidade(s)</th>
 	           <th>Registro Profissional</th>
-	           <th>Telefone</th>
-	           {% if self.get_email %}
+	           {% if physician.get_email %}
 	               <th>E-Mail</th>
 	           {% endif %}
-	           <th>Endereço</th>
 	        </tr>
 	    </thead>
 	    <tbody>
 	        <tr>
 	           <td>{{physician.get_specialty|title}}</td>
 	           <td>{{physician.get_register}}</td>
-	           <td>
-	               {% if physician.get_phone|is_instance_of:"list" %}
-		               {% for phone in physician.get_phone %}
-		               <a href="tel:{{phone}}">{{phone}}</a>&nbsp;
-		               {% endfor %}
-		           {% else %} 
-		           <a href="tel:{{physician.get_phone}}">{{physician.get_phone}}</a>
-		           {% endif %}
-	           </td>
-	           {% if self.get_email %}
+	           {% if physician.get_email %}
 	               <td><a href="mailto:{{physician.get_email}}">{{physician.get_email}}</a></td>
 	           {% endif %}
-	           <td><a href="geo:{{physician.get_lat}},{{physician.get_lon}};u=35">{{physician.get_street_address|title}}, {{physician.get_neighborhood}}, {{physician.get_city|title}}</a></td>
 	        </tr>
 	    </tbody>
     </table>
 </div>
 <br />
-<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;">
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em;">
+	<div data-role="tabs">
+	{% if physician.get_addresses|length > 1 %}
+	    <div data-role="navbar">
+	        <ul>
+	            {% for a in physician.get_addresses %}
+	            <li><a href="#address-{{forloop.counter}}" {% if forloop.counter == 1 %}class="ui-btn-active"{% endif %}>{{a.neighborhood}} / {{a.city|title}}</a></li>
+	            {% endfor %}
+	        </ul>
+	    </div>	    
+	{% endif %}
+	{% for a in physician.get_addresses %}
+		<div id="address-{{forloop.counter}}" style="padding-top: 10px;">    
+		    <table data-role="table" data-mode="reflow" id="physician-data-{{forloop.counter}}">
+		        <thead>
+		            <tr>
+		                <th>Telefone</th>
+		                <th>Endereço</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr>
+		                <td>
+		                   {% if a.phone|is_instance_of:"list" %}
+		                       {% for phone in a.phone %}
+		                       <a href="tel:{{phone}}">{{phone}}</a>&nbsp;
+		                       {% endfor %}
+		                   {% else %} 
+		                   <a href="tel:{{a.phone}}">{{a.phone}}</a>
+		                   {% endif %}
+		                </td>
+		                <td>
+		                    <a href="geo:{{a.lat}},{{a.lon}};u=35">{{a.street|title}}, {{a.neighborhood}}, {{a.city|title}}</a>
+		                </td>
+		            </tr>            
+		        </tbody>
+		    </table>
+		</div>    
+	{% endfor %}
+	</div>
+</div>
+<br />
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em;">
     <div id="physician-map" style="height:400px;"></div>
 </div>
 <div id="directions">
@@ -54,46 +84,64 @@
 <script type="text/javascript">
 $(document).on("pageshow", "#physician-page", function(event) {
 	
-	var myLatlng = new google.maps.LatLng({{physician.get_lat}}, {{physician.get_lon}});
-    var mapOptions = {
-      zoom: 15,
-      center: myLatlng
-    };
-
-    $('#directions').empty();
-    $('#physician-map').empty();
-    
-    window.map = new google.maps.Map(document.getElementById('physician-map'), mapOptions);
-    var bounds = new google.maps.LatLngBounds();
-    var infoWindow = new google.maps.InfoWindow();
-
-    var contentString = '<div>'+
+	if (window.markers != undefined) {
+		for (i = 0; i < window.markers.length; i++) {
+			window.markers[i].setMap(null);
+		}
+	}
+	
+	window.markers = [];
+	window.markersBounds = new google.maps.LatLngBounds();
+	$('#directions').empty();
+	$('#physician-map').empty();    
+	
+    {% for addr in physician.get_addresses %}
+        {% if forloop.first %}
+        var myLatLng = new google.maps.LatLng({{addr.lat}}, {{addr.lon}}); 
+        var mapOptions = {
+          zoom: 15,
+          center: myLatLng
+        };
+        window.map = new google.maps.Map(document.getElementById('physician-map'), mapOptions);    
+        {% endif %}        
+        
+        var contentString{{forloop.counter}} = '<div>'+
         '<div id="siteNotice">'+
         '</div>'+
         '<h2 class="firstHeading">{{physician.get_name|title}}</h2>'+
         '<div>'+
         '<p><b>Especialidade(s)</b>: {{physician.get_specialty|title}} ' +
-        '<p><b>Endereço</b>: {{physician.get_street_address|title}} ' +      
+        '<p><b>Endereço</b>: {{addr.street|title}} ' +      
         '</div>'+
         '</div>';
 
-    infoWindow.setContent(contentString);
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: window.map,
-        title: '{{physician.get_name|title}}'
-    });
-
-    bounds.extend(myLatlng);
-    google.maps.event.addListener(marker, 'click', function() {
-    	infoWindow.open(window.map, marker);
-    });    
+        var infoWindow{{forloop.counter}} = new google.maps.InfoWindow();
+        infoWindow{{forloop.counter}}.setContent(contentString{{forloop.counter}});
+	    
+	    var latlng{{forloop.counter}} = new google.maps.LatLng({{addr.lat}}, {{addr.lon}});
+	    var marker{{forloop.counter}} = new google.maps.Marker({
+	        position: latlng{{forloop.counter}},
+	        map: window.map,
+	        title: '{{physician.get_name|title}}'
+	    });
+	    
+	    window.markers.push(marker{{forloop.counter}});
+	    window.markersBounds.extend(latlng{{forloop.counter}});
+	
+	    google.maps.event.addListener(marker{{forloop.counter}}, 'click', function() {
+	        infoWindow{{forloop.counter}}.open(window.map, marker{{forloop.counter}});	        	        
+	    });	    
+    {% endfor %}
     
-    google.maps.event.trigger(marker, 'click');
+    {% if physician.num_addresses > 1 %}
+    window.map.fitBounds(window.markersBounds);
+    {% endif %}
+    google.maps.event.trigger(marker1, 'click');    
+    
     //google.maps.event.trigger(window.map, 'resize');
     //window.map.setCenter(myLatlng);
     
+    /*
     if (navigator.geolocation) { 
        navigator.geolocation.getCurrentPosition(function (position) {                                                              
            window.latitude = position.coords.latitude;                  
@@ -126,7 +174,8 @@ $(document).on("pageshow", "#physician-page", function(event) {
         	   }		
            });		
        });
-    }    
+    }
+    */
 });
 </script>    
 {% endblock %}

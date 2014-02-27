@@ -203,6 +203,10 @@ def update_geocode():
             if 'geocode' not in addr:
                 geocode_json = geocode_address(addr)
                 addr['geocode'] = json.loads(geocode_json)
+                
+                if addr['geocode']['status'] == "OVER_QUERY_LIMIT":
+                    print count, "QUERY LIMIT REACHED"
+                    return
             
                 sleep(1)
                 
@@ -213,4 +217,27 @@ def update_geocode():
         
         if count % 50 == 0:
             print count
+
+def merge_addresses():
+    db = __get_db()
+    physicians = get_physicians()    
+    
+    count = 0    
+    for p in physicians:        
+        similars = db['physicians'].find({'name': p['name'],
+                                          'email': p['email'],
+                                          'register': p['register'],
+                                          'hash': {'$ne': p['hash']}})
         
+        if similars.count() > 0:            
+            for s in similars:                
+                p['addresses'].extend(s['addresses'])                
+                db['physicians'].remove({'hash': s['hash']})
+            
+            db['physicians'].update({"_id": ObjectId(p['id'])}, 
+                                {"$set": {'addresses': p['addresses']}})            
+            
+            count += 1            
+            
+    print "Merged Physicians", count
+    
