@@ -15,7 +15,7 @@ def search_physicians(specialty="", n=10, distance=None, lat=None, lon=None):
                         "multi_match": { 
                             "query": specialty,
                             #"type": "cross_fields", # waiting v.1.1
-                            "fields": ["specialty", "name", "neighborhood"],
+                            "fields": ["specialty", "name", "neighborhood", "city"],
                             #"operator": "and"         
                                
                          },                      

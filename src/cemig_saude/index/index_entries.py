@@ -31,14 +31,24 @@ def index_all_physicians():
     for physician in physicians:
         phy = Physician(physician)
         
+        locations = []
+        cities = []
+        states = []
+        neighborhoods = []
+        for addr in phy.get_addresses():
+            if 'lat' in addr:
+                locations.append({"lat": addr['lat'], "lon": addr['lon']})
+                
+            cities.append(unidecode(addr['city']))
+            states.append(unidecode(addr['state']))
+            neighborhoods.append(unidecode(addr['neighborhood']))
+        
         es.index(index='physicians', doc_type='physician', id=phy.get_id(),
                  body={'name': unidecode(phy.get_name()),
-                       'location': { "lat": phy.get_lat(),
-                                     "lon": phy.get_lon()
-                                   },
-                       'neighborhood': unidecode(phy.get_neighborhood()),
-                       'city': unidecode(phy.get_city()),
-                       'state': phy.get_state(),
+                       'location': locations,
+                       'neighborhood': neighborhoods,
+                       'city': cities,
+                       'state': states,
                        'specialty': unidecode(phy.get_specialty())})        
         
 
