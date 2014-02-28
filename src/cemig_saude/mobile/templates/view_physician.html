@@ -32,7 +32,7 @@
 </div>
 <br />
 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em;">
-	<div  id="addresses-tab">
+	<div id="addresses-tab">
 	{% if physician.get_addresses|length > 1 %}
 	    <div data-role="navbar" id="addresses-navbar">
 	        <ul>
@@ -88,6 +88,12 @@ $(document).on("pageshow", "#physician-page", function(event) {
         $( "#addresses-tab" ).tabs();
     });
 	
+	$('#addresses-navbar a').click(function(e) {		
+		href = $(this).attr('href');
+		id = href.substring(href.indexOf('-') + 1);
+		google.maps.event.trigger(eval("marker" + id), 'click');
+	});
+	
 	if (window.markers != undefined) {
 		for (i = 0; i < window.markers.length; i++) {
 			window.markers[i].setMap(null);
@@ -133,7 +139,11 @@ $(document).on("pageshow", "#physician-page", function(event) {
 	    window.markersBounds.extend(latlng{{forloop.counter}});
 	
 	    google.maps.event.addListener(marker{{forloop.counter}}, 'click', function() {
-	        infoWindow{{forloop.counter}}.open(window.map, marker{{forloop.counter}});	        	        
+	    	for (i = 1; i <= window.markers.length; i++) {
+	    		eval("infoWindow" + i).close();
+	        }
+	        infoWindow{{forloop.counter}}.open(window.map, marker{{forloop.counter}});
+	        window.map.setCenter(marker{{forloop.counter}}.getPosition());
 	    });	    
     {% endfor %}
     
