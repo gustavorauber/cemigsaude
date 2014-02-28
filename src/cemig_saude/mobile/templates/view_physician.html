@@ -32,12 +32,12 @@
 </div>
 <br />
 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em;">
-	<div data-role="tabs">
+	<div  id="addresses-tab">
 	{% if physician.get_addresses|length > 1 %}
-	    <div data-role="navbar">
+	    <div data-role="navbar" id="addresses-navbar">
 	        <ul>
 	            {% for a in physician.get_addresses %}
-	            <li><a href="#address-{{forloop.counter}}" {% if forloop.counter == 1 %}class="ui-btn-active"{% endif %}>{{a.neighborhood}} / {{a.city|title}}</a></li>
+	            <li><a href="#address-{{forloop.counter}}" data-role="tab" {% if forloop.counter == 1 %}class="ui-btn-active"{% endif %}>{{a.neighborhood}} / {{a.city|title}}</a>
 	            {% endfor %}
 	        </ul>
 	    </div>	    
@@ -83,6 +83,10 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).on("pageshow", "#physician-page", function(event) {
+	
+	$(function() {
+        $( "#addresses-tab" ).tabs();
+    });
 	
 	if (window.markers != undefined) {
 		for (i = 0; i < window.markers.length; i++) {
