@@ -138,31 +138,21 @@ def sync_cities():
 def sync_specialties():
     db = __get_db()
     collection = db['physicians']
-    cities = db['cities'].find()
     
     specialties = collection.distinct("specialty")
     specialties.sort()
-
-    for c in cities:
-        city_hash = c['_id']
         
-        for s in specialties:
-            count = collection.find({'specialty': s,
-                                     'city_hash': city_hash}).count()
-            
-            if count == 0:
-                continue
-            
-            hash = hashlib.sha256(unidecode(s).lower().strip()).hexdigest()
-            
-            db['specialties'].update({'_id': hash}, {"$set": { "specialty": s,
-                                        "city_hash": city_hash, 
-                                        "count": count}}, 
-                                     upsert=True)
-    
-            db['physicians'].update({'specialty': s}, 
-                                    {'$set': {'specialty_hash': hash}}, 
-                                    multi=True)
+    for s in specialties:
+        count = collection.find({'specialty': s}).count()
+        hash = hashlib.sha256(unidecode(s).lower().strip()).hexdigest()
+        
+        db['specialties'].update({'_id': hash}, {"$set": { "specialty": s,                                     
+                                    "count": count}}, 
+                                 upsert=True)
+
+        db['physicians'].update({'specialty': s}, 
+                                {'$set': {'specialty_hash': hash}}, 
+                                multi=True)
 
 def remove_duplicates():
     db = __get_db()
