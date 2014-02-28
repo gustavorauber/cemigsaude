@@ -4,7 +4,9 @@ from cemig_saude.index.search import search_physicians
 from cemig_saude.mobile.decorators import render_to_json
 
 from cemig_saude.model.mongo import get_one_physician, get_physicians, \
-    get_specialties, sync_specialties, sync_cities, update_physicians_phones
+    get_specialties, sync_specialties, sync_cities, update_physicians_phones, \
+    update_physicians_missing_hash, remove_duplicates, update_geocode, \
+    merge_addresses
 from cemig_saude.model.physician import Physician
 
 from django.shortcuts import render_to_response
@@ -27,9 +29,15 @@ def view_specialties(request, *args, **kwargs):
     ctx = {}
     ctx['specialties'] = get_specialties()
     
-    update_physicians_phones()
+#     update_physicians_missing_hash()
+#     update_physicians_phones()
 #     sync_cities()
 #     sync_specialties()
+
+#     remove_duplicates()
+#     update_geocode()
+    
+#     merge_addresses()
     
     return render_to_response('list_specialties.html', ctx,
                               context_instance=RequestContext(request))
@@ -59,11 +67,9 @@ def search(request, *args, **kwargs):
     if not query:
         return []
     
-    results = search_physicians(specialty=query, n=150, distance=distance,
+    results = search_physicians(query=query, n=150, distance=distance,
                                 lat=lat, lon=lon)
     physician_ids = list(x['_id'] for x in results)
-    
-    print len(results)
     
     filter_by = {}
     filter_by['hash'] = {'$in': physician_ids}

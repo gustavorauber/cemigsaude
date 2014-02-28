@@ -17,7 +17,11 @@ def create_index():
     es = Elasticsearch()
     client = IndicesClient(es)
     
-    client.delete('physicians')
+    try:
+        client.delete('physicians')
+    except Exception, e:
+        print e
+        
     client.create(index='physicians', 
                   body={'mappings': 
                         {'physician': physician_entry_mapping}

@@ -8,14 +8,15 @@ Created on Feb 13, 2014
 
 from elasticsearch import Elasticsearch
 
-def search_physicians(specialty="", n=10, distance=None, lat=None, lon=None):
+def search_physicians(query="", n=10, distance=None, lat=None, lon=None):
     es = Elasticsearch()
     res = es.search(index='physicians', doc_type="physician", 
             body={  "query": {
                         "multi_match": { 
-                            "query": specialty,
+                            "query": query,
                             #"type": "cross_fields", # waiting v.1.1
-                            "fields": ["specialty", "name", "neighborhood", "city"],
+                            "fields": ["specialty", "name", "neighborhood", 
+                                       "city"],
                             #"operator": "and"         
                                
                          },                      
