@@ -34,7 +34,7 @@ $(document).on("pageshow", "#search-page", function(event) {
 	$('#search').focus();
 	
 	if (navigator.geolocation) { 
-	   navigator.geolocation.getCurrentPosition(function (position) {                                                              //This gets the
+	   navigator.geolocation.getCurrentPosition(function (position) {
 		 window.latitude = position.coords.latitude;                  
 		 window.longitude = position.coords.longitude;
 	     var coords = new google.maps.LatLng(window.latitude, window.longitude); 
@@ -65,11 +65,11 @@ $(document).on("pageshow", "#search-page", function(event) {
     
     var onMarkerClick = function() {
         window.infoWindow.setContent(
-            "<div>" + 
-            "<h3>"+ this.val.name +"</h3>" +
+            "<div class='ginfo'>" + 
+            "<h3><a href=\"/show/" + this.val.id + "\">"+ this.val.name +"</a></h3>" +
             "<h4>"+ this.val.specialty +"</h4>" +
             "<p>" + 
-                "<br /><b>Tel</b>: " + this.address.phones +
+                "<b>Tel</b>: " + this.address.phones +
                 "<br /><b>Endereço</b>: " + this.address.street +
                 "<br />" + this.address.neighborhood +
             "</p>" +

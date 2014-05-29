@@ -76,13 +76,72 @@
 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em;">
     <div id="physician-map" style="height:400px;"></div>
 </div>
-<div id="directions">
+<br />
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em; display: none;">
+    <div id="directions"></div>
 </div>
 {% endblock %}    
 
 {% block javascript %}
 <script type="text/javascript">
+$( document ).on( 'mobileinit', function(){
+	  $.mobile.loader.prototype.options.text = "loading";
+	  $.mobile.loader.prototype.options.textVisible = true;
+	  $.mobile.loader.prototype.options.theme = "b";
+	  $.mobile.loader.prototype.options.html = "";
+});
 $(document).on("pageshow", "#physician-page", function(event) {
+	$.mobile.loader.prototype.options.text = "loading";
+    $.mobile.loader.prototype.options.textVisible = true;
+    $.mobile.loader.prototype.options.theme = "b";
+    $.mobile.loader.prototype.options.html = "";
+	$.mobile.loader( 'show' );
+	$.fn.navigateTo = function ( idx ) {
+		//@TODO: add processing overlay
+		a = $.mobile.loader( 'show' );
+		console.info(a);
+		if (navigator.geolocation) {
+			markerTarget = window.markers[idx];
+			console.info(markerTarget);
+			
+		    navigator.geolocation.getCurrentPosition(function (position) {                                                              
+	           window.latitude = position.coords.latitude;                  
+	           window.longitude = position.coords.longitude;
+	           var coords = new google.maps.LatLng(window.latitude, window.longitude); 
+	           
+	           if (window.directionsDisplay == undefined) {
+	               window.directionsDisplay = new google.maps.DirectionsRenderer();   
+	           }
+	        
+	           var directionsService = new google.maps.DirectionsService();
+	        
+	           window.directionsDisplay.setMap(window.map);     
+	           window.directionsDisplay.setPanel(document.getElementById("directions"));        
+	        
+	           var request = {
+	              origin: coords,
+	              destination: markerTarget.getPosition(),
+	              travelMode: google.maps.TravelMode.DRIVING
+	              // Note that Javascript allows us to access the constant
+	              // using square brackets and a string value as its
+	              // "property."
+	              //travelMode: google.maps.TravelMode[selectedMode]        
+	           };
+	        
+	           directionsService.route(request, function(response, status) {           
+	               if (status == google.maps.DirectionsStatus.OK) {             
+	                   $('#directions').empty();                
+	                   window.directionsDisplay.setDirections(response);
+	                   $('#directions').parent().show();
+	               }        
+	           });      
+	       });
+	    }
+		
+		//$.mobile.loading( 'hide' );
+		
+		return false;
+	};
 	
 	$(function() {
         $( "#addresses-tab" ).tabs();
@@ -105,9 +164,11 @@ $(document).on("pageshow", "#physician-page", function(event) {
 	$('#directions').empty();
 	$('#physician-map').empty();    
 	
+	var myLatLng = null;
+	
     {% for addr in physician.get_addresses %}
         {% if forloop.first %}
-        var myLatLng = new google.maps.LatLng({{addr.lat}}, {{addr.lon}}); 
+        myLatLng = new google.maps.LatLng({{addr.lat}}, {{addr.lon}}); 
         var mapOptions = {
           zoom: 15,
           center: myLatLng
@@ -115,81 +176,48 @@ $(document).on("pageshow", "#physician-page", function(event) {
         window.map = new google.maps.Map(document.getElementById('physician-map'), mapOptions);    
         {% endif %}        
         
-        var contentString{{forloop.counter}} = '<div>'+
-        '<div id="siteNotice">'+
-        '</div>'+
+        var contentString{{forloop.counter0}} = '<div class="ginfo">'+
+        '<div>'+
         '<h2 class="firstHeading">{{physician.get_name|title}}</h2>'+
+        '</div>'+        
         '<div>'+
         '<p><b>Especialidade(s)</b>: {{physician.get_specialty|title}} ' +
-        '<p><b>Endereço</b>: {{addr.street|title}} ' +      
+        '<br /><b>Endereço</b>: {{addr.street|title}} ' +      
+        '<br /><br /><a onClick="$.fn.navigateTo({{forloop.counter0}});">Direções</a>&nbsp;&nbsp;-&nbsp;&nbsp;<a href="geo:{{addr.lat}},{{addr.lon}};u=35">GPS</a>' +
+        '</p>'+
         '</div>'+
         '</div>';
 
-        var infoWindow{{forloop.counter}} = new google.maps.InfoWindow();
-        infoWindow{{forloop.counter}}.setContent(contentString{{forloop.counter}});
+        var infoWindow{{forloop.counter0}} = new google.maps.InfoWindow();
+        infoWindow{{forloop.counter0}}.setContent(contentString{{forloop.counter0}});
 	    
-	    var latlng{{forloop.counter}} = new google.maps.LatLng({{addr.lat}}, {{addr.lon}});
-	    var marker{{forloop.counter}} = new google.maps.Marker({
-	        position: latlng{{forloop.counter}},
+	    var latlng{{forloop.counter0}} = new google.maps.LatLng({{addr.lat}}, {{addr.lon}});
+	    var marker{{forloop.counter0}} = new google.maps.Marker({
+	        position: latlng{{forloop.counter0}},
 	        map: window.map,
 	        title: '{{physician.get_name|title}}'
 	    });
 	    
-	    window.markers.push(marker{{forloop.counter}});
-	    window.markersBounds.extend(latlng{{forloop.counter}});
+	    window.markers.push(marker{{forloop.counter0}});
+	    window.markersBounds.extend(latlng{{forloop.counter0}});
 	
-	    google.maps.event.addListener(marker{{forloop.counter}}, 'click', function() {
-	    	for (i = 1; i <= window.markers.length; i++) {
+	    google.maps.event.addListener(marker{{forloop.counter0}}, 'click', function() {
+	    	for (i = 0; i < window.markers.length; i++) {
 	    		eval("infoWindow" + i).close();
 	        }
-	        infoWindow{{forloop.counter}}.open(window.map, marker{{forloop.counter}});
-	        window.map.setCenter(marker{{forloop.counter}}.getPosition());
+	        infoWindow{{forloop.counter0}}.open(window.map, marker{{forloop.counter0}});
+	        window.map.setCenter(marker{{forloop.counter0}}.getPosition());
 	    });	    
     {% endfor %}
     
     {% if physician.num_addresses > 1 %}
     window.map.fitBounds(window.markersBounds);
     {% endif %}
-    google.maps.event.trigger(marker1, 'click');    
+    google.maps.event.trigger(marker0, 'click');    
     
     //google.maps.event.trigger(window.map, 'resize');
-    //window.map.setCenter(myLatlng);
+    //window.map.setCenter(myLatlng);        
     
-    /*
-    if (navigator.geolocation) { 
-       navigator.geolocation.getCurrentPosition(function (position) {                                                              
-           window.latitude = position.coords.latitude;                  
-           window.longitude = position.coords.longitude;
-           var coords = new google.maps.LatLng(window.latitude, window.longitude); 
-           
-           if (window.directionsDisplay == undefined) {
-        	   window.directionsDisplay = new google.maps.DirectionsRenderer();   
-           }
-	    
-           var directionsService = new google.maps.DirectionsService();
-	    
-           window.directionsDisplay.setMap(window.map);	    
-           window.directionsDisplay.setPanel(document.getElementById("directions"));	    
-	    
-           var request = {
-		      origin: coords,
-		      destination: myLatlng,
-		      travelMode: google.maps.TravelMode.DRIVING
-		      // Note that Javascript allows us to access the constant
-		      // using square brackets and a string value as its
-		      // "property."
-		      //travelMode: google.maps.TravelMode[selectedMode]		
-           };
-		
-           directionsService.route(request, function(response, status) {		   
-        	   if (status == google.maps.DirectionsStatus.OK) {		    	
-        		   $('#directions').empty();		        
-        		   window.directionsDisplay.setDirections(response);		    
-        	   }		
-           });		
-       });
-    }
-    */
 });
 </script>    
 {% endblock %}
