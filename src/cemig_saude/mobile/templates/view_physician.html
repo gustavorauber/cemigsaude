@@ -84,23 +84,12 @@
 
 {% block javascript %}
 <script type="text/javascript">
-$( document ).on( 'mobileinit', function(){
-	  $.mobile.loader.prototype.options.text = "loading";
-	  $.mobile.loader.prototype.options.textVisible = true;
-	  $.mobile.loader.prototype.options.theme = "b";
-	  $.mobile.loader.prototype.options.html = "";
-});
 $(document).on("pageshow", "#physician-page", function(event) {
-	$.mobile.loader.prototype.options.text = "loading";
-    $.mobile.loader.prototype.options.textVisible = true;
-    $.mobile.loader.prototype.options.theme = "b";
-    $.mobile.loader.prototype.options.html = "";
-	$.mobile.loader( 'show' );
+	
 	$.fn.navigateTo = function ( idx ) {
-		//@TODO: add processing overlay
-		a = $.mobile.loader( 'show' );
-		console.info(a);
 		if (navigator.geolocation) {
+			$.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
+			
 			markerTarget = window.markers[idx];
 			console.info(markerTarget);
 			
@@ -133,12 +122,11 @@ $(document).on("pageshow", "#physician-page", function(event) {
 	                   $('#directions').empty();                
 	                   window.directionsDisplay.setDirections(response);
 	                   $('#directions').parent().show();
+	                   $.mobile.loading( 'hide' );
 	               }        
 	           });      
 	       });
 	    }
-		
-		//$.mobile.loading( 'hide' );
 		
 		return false;
 	};
