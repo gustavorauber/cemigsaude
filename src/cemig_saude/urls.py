@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     
     url(r'^show/(?P<physician>\w+)/', 'cemig_saude.mobile.views.view_physician'),
+    url(r'^list/distance/(?P<specialty>\w+)/', 'cemig_saude.mobile.views.list_physicians_by_distance'),
     url(r'^list/(?P<specialty>\w+)/', 'cemig_saude.mobile.views.list_physicians'),
     url(r'^list/', 'cemig_saude.mobile.views.view_specialties'),
     url(r'^map/', 'cemig_saude.mobile.views.map_search'),

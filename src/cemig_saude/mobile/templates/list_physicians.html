@@ -7,6 +7,10 @@
 {% endblock %}
 
 {% block content %}
+<div class="ui-grid-a">
+    <div class="ui-block-a"><a href="#" class="ui-shadow ui-btn ui-btn-b ui-corner-all ui-btn-icon-left ui-icon-arrow-d">A-Z</a></div>
+    <div class="ui-block-b"><a href="/list/distance/{{specialty}}/" id="a-by-distance" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Distância</a></div>
+</div>
 <form>
   <input type="text" data-type="search" id="physician-input" />
 </form>
@@ -26,6 +30,20 @@ $(document).bind("pageshow", "#list-physicians-page", function() {
 	$('FORM').on('submit', function(e) {
         e.preventDefault();
 	});
+	
+	if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(function (position) {
+         window.latitude = position.coords.latitude;                  
+         window.longitude = position.coords.longitude;
+         
+         $('#a-by-distance').attr('href', $('#a-by-distance').attr('href') + '?lat=' + window.latitude + '&lon=' + window.longitude);
+       });
+    } else {
+        window.latitude = -19.932696;
+        window.longitude = -43.944035;
+        $('#a-by-distance').attr('href', $('#a-by-distance').attr('href') + '?lat=' + window.latitude + '&lon=' + window.longitude);
+    }
+
 });
 </script>
 {% endblock %}

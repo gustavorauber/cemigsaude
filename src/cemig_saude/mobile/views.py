@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 from cemig_saude.index.search import search_physicians
 
 from cemig_saude.mobile.decorators import render_to_json
@@ -6,7 +6,7 @@ from cemig_saude.mobile.decorators import render_to_json
 from cemig_saude.model.mongo import get_one_physician, get_physicians, \
     get_specialties, sync_specialties, sync_cities, update_physicians_phones, \
     update_physicians_missing_hash, remove_duplicates, update_geocode, \
-    merge_addresses
+    merge_addresses, get_one_specialty
 from cemig_saude.model.physician import Physician
 
 from django.shortcuts import render_to_response
@@ -42,10 +42,33 @@ def view_specialties(request, *args, **kwargs):
     return render_to_response('list_specialties.html', ctx,
                               context_instance=RequestContext(request))
     
+def list_physicians_by_distance(request, *args, **kwargs):
+    ctx = {}    
+    hash = kwargs.get('specialty', '')    
+    lat = request.GET.get('lat', '')
+    lon = request.GET.get('lon', '')
+    
+    specialty = get_one_specialty(filter_by={'hash': hash})    
+    
+    ctx['specialty'] = hash
+    physicians = search_physicians(query=specialty['specialty'], n=150,
+                                      lat=lat, lon=lon, sort_by_distance=True)
+    
+    ctx['physicians'] = []
+    for p in physicians:
+        print p
+        physician = p['_source']
+        physician['distance'] = p['sort'][0]
+        ctx['physicians'].append(physician)
+    
+    return render_to_response('list_physicians_by_distance.html', ctx,
+                              context_instance=RequestContext(request))
+    
 def list_physicians(request, *args, **kwargs):
     ctx = {}    
     hash = kwargs.get('specialty', '')    
     
+    ctx['specialty'] = hash
     ctx['physicians'] = get_physicians(filter_by={'specialty_hash': hash},
                                        sort_by='name', sort_order=1)    
     

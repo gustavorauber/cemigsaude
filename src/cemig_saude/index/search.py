@@ -8,10 +8,11 @@ Created on Feb 13, 2014
 
 from elasticsearch import Elasticsearch
 
-def search_physicians(query="", n=10, distance=None, lat=None, lon=None):
+def search_physicians(query="", n=10, distance=None, lat=None, lon=None,
+                      show_distance=False, sort_by_distance=False):
     es = Elasticsearch()
-    res = es.search(index='physicians', doc_type="physician", 
-            body={  "query": {
+    
+    query_body =  {  "query": {
                         "multi_match": { 
                             "query": query,
                             #"type": "cross_fields", # waiting v.1.1
@@ -21,17 +22,45 @@ def search_physicians(query="", n=10, distance=None, lat=None, lon=None):
                                
                          },                      
                     },
-                    "size": n,
-                    "filter": {
-                         "geo_distance": {
-                             "distance": str(distance) + "km",
+                    "size": n
+            }    
+    
+    if distance:
+        query_body['filter']['geo_distance'] = {
+                "geo_distance": {                             
                              "physician.location": {
                                  "lat": lat,
                                  "lon": lon
-                             }
-                         }
-                    }
-            })
+                             },
+                             'distance': str(distance) + "km"
+                }
+        }
+        
+    if show_distance:
+        query_body['fields'] = ["_source"]
+        query_body['script_fields'] = {
+               "distance": {
+                    "params": {
+                        "lat": lat,
+                        "lon": lon
+                    },
+                    "script": "doc['physician.location'].distanceInKm(lat,lon)"
+                }
+        }
+        
+    if sort_by_distance:
+        query_body['sort'] = [{"_geo_distance": {
+            "physician.location": {
+                       "lat": lat,
+                       "lon": lon
+            },
+            "order": "asc",
+            "mode": "min",
+            "unit": "km"                     
+         }}]
+    
+    res = es.search(index='physicians', doc_type="physician", 
+            body=query_body)
     
     return res['hits']['hits']
 

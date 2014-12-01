@@ -61,6 +61,17 @@ def get_specialties():
     
     return specialties
 
+def get_one_specialty(filter_by={}):
+    db = __get_db()
+    collection = db['specialties']
+    
+    specialty = collection.find_one(filter_by)
+    if specialty:
+        specialty['id'] = str(specialty['_id'])
+        del specialty['_id']
+    
+    return specialty
+
 def get_one_physician(filter_by={}):
     db = __get_db()
     collection = db['physicians']
@@ -147,7 +158,7 @@ def sync_specialties():
         hash = hashlib.sha256(unidecode(s).lower().strip()).hexdigest()
         
         db['specialties'].update({'_id': hash}, {"$set": { "specialty": s,                                     
-                                    "count": count}}, 
+                                    "count": count, "hash": hash}}, 
                                  upsert=True)
 
         db['physicians'].update({'specialty': s}, 
