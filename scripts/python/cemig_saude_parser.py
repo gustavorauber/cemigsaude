@@ -5,6 +5,7 @@ Created on 29/01/2014
 '''
 
 import json
+import os
 import sys
 import hashlib
 import httplib
@@ -21,6 +22,8 @@ from selenium.webdriver.common.keys import Keys
 
 from unidecode import unidecode
 
+SLEEP_TIME = 5
+
 
 def get_db():
     client = MongoClient("127.0.0.1", 27017)
@@ -31,7 +34,7 @@ def get_entry_hash(entry):
     return hashlib.sha256(unidecode(base_string).strip().lower()).hexdigest()     
 
 def parse_entries(html):
-    soup = BeautifulSoup(page, 'html.parser')    
+    soup = BeautifulSoup(html, 'html.parser')    
     elements = soup.select('div.panelRepeaterEnd')
     
     entries = []
@@ -39,10 +42,16 @@ def parse_entries(html):
     for div in elements:
         entry = {}
         
+        # Obtain third-party physician ID
+        for el in div.previous_elements:
+            if el:
+                if el.name == "a":
+                    entry['cemig_saude_id'] = el.get('name')                
+                    break
+        
         entry['name'] = div.select('table.tabelaConveniados2 > tbody > tr > td > span.arial12')[0].get_text()
         spans = div.select('table.tabelaConveniados > tbody > tr > td > span.arial12')
         
-        speciality, email, site, register,  = "", "", "", ""
         for span in spans:
             if span.get('id').endswith('EmailRept'):
                 entry['email'] = span.get_text().strip()
@@ -133,12 +142,9 @@ def fetch_all_physicians():
             
             driver.get(url)
             
-            sleep(5)
+            sleep(SLEEP_TIME)
             
-            page = driver.page_source
-            
-            with open('test.html', 'w') as f:
-                f.write(page.encode('utf8'))
+            page = driver.page_source            
             
             iframe = driver.find_element_by_id("MSOPageViewerWebPart_WebPartWPQ1")
             driver.switch_to_frame(iframe)
@@ -154,7 +160,7 @@ def fetch_all_physicians():
                     submit = driver.find_element_by_id("btnConsulta")
                     submit.click()
                     
-                    sleep(5)
+                    sleep(SLEEP_TIME)
                     
                     page = driver.page_source
                     with open(city + ".html", "w") as f:
@@ -170,16 +176,64 @@ def fetch_all_physicians():
     finally:
         driver.quit()
 
-def get_specialties():
+def fetch_specialties(driver, id):
     # @TODO: phantomjs parser
-    url = "http://legado.cemigsaude.org.br/portal/prosaude/Convenios/ConsultaConveniado.aspx?codigo=8090&amp;nome=Adjar%20Mendes%20da%20Silva"         
+    url = "http://legado.cemigsaude.org.br/portal/prosaude/Convenios/ConsultaConveniado.aspx?codigo=" + str(id)
+    
+    driver.get(url)            
+    sleep(SLEEP_TIME)         
+    
+    page = driver.page_source
+    with open('specialties/' + str(id) + '.html', 'w') as f:
+        f.write(page.encode('utf8'))        
+        
+def fetch_all_missings_specialties():
+    missing_specialties_ids = set()
+    
+    db = get_db()
+    physicians = db['physicians'].find()
+    for p in physicians:
+        if p.get('cemig_saude_id', '') and not p.get('specialty'):
+            missing_specialties_ids.add(p['cemig_saude_id'])
+    
+    if len(missing_specialties_ids) > 0:
+        print "Physicians missing specialty:", len(missing_specialties_ids)
+        
+#         driver = webdriver.PhantomJS(service_log_path='')
+        driver = webdriver.PhantomJS(service_log_path='',
+                                     executable_path="D:\Users\c057384\phantomjs\phantomjs")
+        driver.set_window_size(1024, 768)
+        
+        driver.get("http://www.cemigsaude.org.br/Paginas/Geral/Prosaude/Convenios/Convenios_Disponiveis.aspx")
+        sleep(SLEEP_TIME)
+        
+        iframe = driver.find_element_by_id("MSOPageViewerWebPart_WebPartWPQ1")
+        driver.switch_to_frame(iframe)
+        options = driver.find_elements_by_css_selector("#cboCidade > option")
+        
+        for j, option in enumerate(options):
+            if 1 == j:
+                downloaded = True
+                city = unidecode(option.text)     
+                option.click()       
+            
+                submit = driver.find_element_by_id("btnConsulta")
+                submit.click()
+                
+                sleep(SLEEP_TIME)
+                break
+             
+        count = 0
+        for id in missing_specialties_ids:
+            fetch_specialties(driver, id)
+            sleep(SLEEP_TIME)
+            
+            count += 1
+            
+            if count % 10 == 0:
+                print count
 
-if __name__ == '__main__':
-    
-    # Fetch ALL
-#    fetch_all_physicians()
-#    exit(-1)
-    
+def parse_physicians():
     print "YO", sys.argv[1]
     
     page = ""
@@ -202,6 +256,50 @@ if __name__ == '__main__':
             sleep(1)
             
         collection.insert(entry)        
-        print i
+        print i    
+        
+def consolidate_cemig_saude_ids():
+    db = get_db()
+    collection = db['physicians']
+    
+    count = 0
+    for filename in os.listdir(sys.argv[1]):
+        page = ""
+        with open(sys.argv[1].strip('/') + '/' + filename, 'r') as f:
+            page = f.read()     
+            
+        physicians = parse_entries(page)
+        for p in physicians:
+            if 'cemig_saude_id' in p:
+                count += 1
+                db['physicians'].update(
+                            {"name": p['name'], "register": p['register']}, 
+                            {"$set": {'cemig_saude_id': p['cemig_saude_id']}})
+                
+    print "Records updated", count
+
+if __name__ == '__main__':
+    
+    # Fetch ALL
+#    fetch_all_physicians()
+#    exit(-1)
+    
+#     consolidate_cemig_saude_ids()
+    fetch_all_missings_specialties()
+    
+# Just a test
+#     db = get_db()
+#     physicians = db['physicians'].find()
+#     all = set()
+#     for p in physicians:
+#         x = unidecode(p['name']) + " " + unidecode(p.get('register', ''))
+#         
+#         if x not in all:
+#             all.add(x)
+#         else:
+#             print x
+            
+            
+        
             
     
