@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from cemig_saude.index.index_entries import create_index, index_all_physicians 
 from cemig_saude.index.search import search_physicians
 
 from cemig_saude.mobile.decorators import render_to_json
@@ -11,6 +12,8 @@ from cemig_saude.model.physician import Physician
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+
+from unidecode import unidecode
 
 def home(request, *args, **kwargs):
     ctx = {}
@@ -28,6 +31,9 @@ def view_physician(request, *args, **kwargs):
 def view_specialties(request, *args, **kwargs):
     ctx = {}
     ctx['specialties'] = get_specialties()
+    
+#     create_index()
+#     index_all_physicians()
     
 #     update_physicians_missing_hash()
 #     update_physicians_phones()
@@ -48,19 +54,20 @@ def list_physicians_by_distance(request, *args, **kwargs):
     lat = request.GET.get('lat', '')
     lon = request.GET.get('lon', '')
     
-    specialty = get_one_specialty(filter_by={'hash': hash})    
+    specialty = get_one_specialty(filter_by={'hash': hash})
     
     ctx['specialty'] = hash
-    physicians = search_physicians(query=specialty['specialty'], n=150,
-                                      lat=lat, lon=lon, sort_by_distance=True)
+    physicians = search_physicians(n=150,
+                  lat=lat, lon=lon, sort_by_distance=True,
+                  filter={"specialty.raw": unidecode(specialty['specialty'])})
     
     ctx['physicians'] = []
-    for p in physicians:
-        print p
+    for p in physicians:        
         physician = p['_source']
+        physician['id'] = p['_id']
         physician['distance'] = p['sort'][0]
-        ctx['physicians'].append(physician)
-    
+        ctx['physicians'].append(physician)        
+        
     return render_to_response('list_physicians_by_distance.html', ctx,
                               context_instance=RequestContext(request))
     

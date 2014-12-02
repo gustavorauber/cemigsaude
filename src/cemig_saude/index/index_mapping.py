@@ -10,7 +10,7 @@ physician_entry_mapping = {
             'name': {
                 'boost': 1.0,
                 'index': 'analyzed',
-                'analyzer': 'standard',
+                'analyzer': 'brazilian',
                 'store': 'no',
                 'type': 'string',
                 'term_vector': 'with_positions_offsets'
@@ -26,14 +26,14 @@ physician_entry_mapping = {
             'neighborhood': {
                 'boost': 1.0,
                 'index': 'analyzed',
-                'analyzer': 'standard',                                    
+                'analyzer': 'brazilian',                                    
                 'store': 'no',
                 'type': 'string' 
             },
             'city': {
                 'boost': 1.0,
                 'index': 'analyzed',
-                'analyzer': 'standard',                                    
+                'analyzer': 'brazilian',                                    
                 'store': 'no',
                 'type': 'string',
                 'term_vector': 'with_positions_offsets'
@@ -41,16 +41,21 @@ physician_entry_mapping = {
             'state': {
                 'boost': 1.0,
                 'index': 'analyzed',
-                'analyzer': 'standard',                                    
+                'analyzer': 'brazilian',                                    
                 'store': 'no',
                 'type': 'string' 
             },
             'specialty': {
-                'boost': 1.0,
-                'index': 'analyzed',
-                'analyzer': 'standard',                                    
+                'boost': 1.0,                                                    
                 'store': 'no',
-                'type': 'string'
+                'type': 'multi_field',
+                'fields': {
+                    'specialty': {'type': 'string', 
+                                  'index': 'analyzed', 
+                                  'analyzer': 'brazilian'},
+                    'raw': {'type': 'string', 
+                                  'index': 'not_analyzed'}
+                }
             }
         }
     }

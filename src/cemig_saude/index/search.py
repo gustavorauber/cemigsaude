@@ -9,21 +9,26 @@ Created on Feb 13, 2014
 from elasticsearch import Elasticsearch
 
 def search_physicians(query="", n=10, distance=None, lat=None, lon=None,
-                      show_distance=False, sort_by_distance=False):
+                      show_distance=False, sort_by_distance=False, 
+                      fields=["specialty", "name", "neighborhood","city"],
+                      filter=None):
+    """
+    """
     es = Elasticsearch()
     
     query_body =  {  "query": {
                         "multi_match": { 
                             "query": query,
                             #"type": "cross_fields", # waiting v.1.1
-                            "fields": ["specialty", "name", "neighborhood", 
-                                       "city"],
-                            #"operator": "and"         
-                               
+                            "fields": fields,
+                            #"operator": "and"
                          },                      
                     },
                     "size": n
             }    
+    
+    if filter:
+        query_body['query'] = {'filtered': {'filter': {'term':  filter}}}
     
     if distance:
         query_body['filter']['geo_distance'] = {
@@ -58,6 +63,8 @@ def search_physicians(query="", n=10, distance=None, lat=None, lon=None,
             "mode": "min",
             "unit": "km"                     
          }}]
+    
+    print query_body
     
     res = es.search(index='physicians', doc_type="physician", 
             body=query_body)
