@@ -57,6 +57,8 @@ def list_physicians_by_distance(request, *args, **kwargs):
     specialty = get_one_specialty(filter_by={'hash': hash})
     
     ctx['specialty'] = hash
+    ctx['specialty_name'] = specialty['specialty']
+    
     physicians = search_physicians(n=150,
                   lat=lat, lon=lon, sort_by_distance=True,
                   filter={"specialty.raw": unidecode(specialty['specialty'])})
@@ -75,7 +77,11 @@ def list_physicians(request, *args, **kwargs):
     ctx = {}    
     hash = kwargs.get('specialty', '')    
     
+    specialty = get_one_specialty(filter_by={'hash': hash})
+    
     ctx['specialty'] = hash
+    ctx['specialty_name'] = specialty['specialty']
+    
     ctx['physicians'] = get_physicians(filter_by={'specialty_hash': hash},
                                        sort_by='name', sort_order=1)    
     

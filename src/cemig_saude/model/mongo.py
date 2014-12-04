@@ -160,10 +160,22 @@ def sync_specialties():
         db['specialties'].update({'_id': hash}, {"$set": { "specialty": s,                                     
                                     "count": count, "hash": hash}}, 
                                  upsert=True)
-
+    
         db['physicians'].update({'specialty': s}, 
                                 {'$set': {'specialty_hash': hash}}, 
                                 multi=True)
+        
+    for p in collection.find():
+        if isinstance(p['specialty'], list):
+            print p['specialty']
+            hashes = []
+            for s in p['specialty']:
+                hash = hashlib.sha256(unidecode(s).lower().strip()).hexdigest()
+                hashes.append(hash)
+                
+            db['physicians'].update({'_id': p['_id']}, 
+                                {'$set': {'specialty_hash': hashes}})
+                
 
 def remove_duplicates():
     db = __get_db()

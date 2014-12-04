@@ -21,7 +21,15 @@
 	    </thead>
 	    <tbody>
 	        <tr>
-	           <td>{{physician.get_specialty|title}}</td>
+	           <td>
+                    {% if physician.get_specialty|length > 1 %}
+                        {% for sp in physician.get_specialty %}                            
+                            {{sp|title}}{% if not forloop.last %},{% endif %}                            
+                        {% endfor %}
+                    {% else %}
+                        {{physician.get_specialty|title}}
+                    {% endif %}
+               </td>
 	           <td>{{physician.get_register}}</td>
 	           {% if physician.get_email %}
 	               <td><a href="mailto:{{physician.get_email}}">{{physician.get_email}}</a></td>
@@ -169,8 +177,7 @@ $(document).on("pageshow", "#physician-page", function(event) {
         '<h2 class="firstHeading">{{physician.get_name|title}}</h2>'+
         '</div>'+        
         '<div>'+
-        '<p><b>Especialidade(s)</b>: {{physician.get_specialty|title}} ' +
-        '<br /><b>Endereço</b>: {{addr.street|title}} ' +      
+        '<b>Endereço</b>: {{addr.street|title}} ' +      
         '<br /><br /><a onClick="$.fn.navigateTo({{forloop.counter0}});">Direções</a>&nbsp;&nbsp;-&nbsp;&nbsp;<a href="geo:{{addr.lat}},{{addr.lon}};u=35">GPS</a>' +
         '</p>'+
         '</div>'+

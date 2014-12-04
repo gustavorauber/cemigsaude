@@ -47,13 +47,23 @@ def index_all_physicians():
             states.append(unidecode(addr['state']))
             neighborhoods.append(unidecode(addr['neighborhood']))
         
+        specialty = ""
+        if isinstance(phy.get_specialty(), list):
+            sp = []
+            for s in phy.get_specialty():
+                sp.append(unidecode(s))
+                
+            specialty = sp
+        else:        
+            specialty = unidecode(phy.get_specialty())
+        
         es.index(index='physicians', doc_type='physician', id=phy.get_id(),
                  body={'name': unidecode(phy.get_name()),
                        'location': locations,
                        'neighborhood': neighborhoods,
                        'city': cities,
                        'state': states,
-                       'specialty': unidecode(phy.get_specialty())})        
+                       'specialty': specialty})        
         
 
 if __name__ == "__main__":

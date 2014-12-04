@@ -177,16 +177,41 @@ def fetch_all_physicians():
         driver.quit()
 
 def fetch_specialties(driver, id):
-    # @TODO: phantomjs parser
+    filename = 'specialties/' + str(id) + '.html'
+    
+    # Skip existing files
+    if os.path.exists(filename):
+        return
+    
     url = "http://legado.cemigsaude.org.br/portal/prosaude/Convenios/ConsultaConveniado.aspx?codigo=" + str(id)
     
     driver.get(url)            
-    sleep(SLEEP_TIME)         
+    sleep(SLEEP_TIME)
     
     page = driver.page_source
-    with open('specialties/' + str(id) + '.html', 'w') as f:
+    with open(filename, 'w') as f:
         f.write(page.encode('utf8'))        
+
+def make_fake_click(driver):
+    driver.get("http://www.cemigsaude.org.br/Paginas/Geral/Prosaude/Convenios/Convenios_Disponiveis.aspx")
+    sleep(SLEEP_TIME)
+    
+    iframe = driver.find_element_by_id("MSOPageViewerWebPart_WebPartWPQ1")
+    driver.switch_to_frame(iframe)
+    options = driver.find_elements_by_css_selector("#cboCidade > option")
+    
+    for j, option in enumerate(options):
+        if 1 == j:
+            downloaded = True
+            city = unidecode(option.text)     
+            option.click()       
         
+            submit = driver.find_element_by_id("btnConsulta")
+            submit.click()
+            
+            sleep(SLEEP_TIME)
+            break
+            
 def fetch_all_missings_specialties():
     missing_specialties_ids = set()
     
@@ -202,26 +227,8 @@ def fetch_all_missings_specialties():
 #         driver = webdriver.PhantomJS(service_log_path='')
         driver = webdriver.PhantomJS(service_log_path='',
                                      executable_path="D:\Users\c057384\phantomjs\phantomjs")
-        driver.set_window_size(1024, 768)
-        
-        driver.get("http://www.cemigsaude.org.br/Paginas/Geral/Prosaude/Convenios/Convenios_Disponiveis.aspx")
-        sleep(SLEEP_TIME)
-        
-        iframe = driver.find_element_by_id("MSOPageViewerWebPart_WebPartWPQ1")
-        driver.switch_to_frame(iframe)
-        options = driver.find_elements_by_css_selector("#cboCidade > option")
-        
-        for j, option in enumerate(options):
-            if 1 == j:
-                downloaded = True
-                city = unidecode(option.text)     
-                option.click()       
-            
-                submit = driver.find_element_by_id("btnConsulta")
-                submit.click()
-                
-                sleep(SLEEP_TIME)
-                break
+        driver.set_window_size(1024, 768)        
+        make_fake_click(driver)
              
         count = 0
         for id in missing_specialties_ids:
@@ -230,8 +237,52 @@ def fetch_all_missings_specialties():
             
             count += 1
             
-            if count % 10 == 0:
-                print count
+            if count % 5 == 0:
+                if count % 10 == 0:
+                    print count
+                    
+                make_fake_click(driver)
+
+def parse_specialties(filename):
+    specialties = []
+    html = ""
+    with open(filename, 'r') as f:
+        html = f.read()
+        
+    soup = BeautifulSoup(html, 'html.parser')
+    items = soup.select('#grdEspecialidade > tbody > tr > td')
+    for i, td in enumerate(items):
+        if i > 0:
+            specialty = td.get_text().strip()
+            specialties.append(specialty)
+        
+    return specialties
+                
+def update_missing_specialties():
+    missing_specialties_ids = set()
+    
+    db = get_db()
+    physicians = db['physicians'].find()
+    for p in physicians:
+        if p.get('cemig_saude_id', '') and not p.get('specialty'):
+            missing_specialties_ids.add(p['cemig_saude_id'])                
+
+    count = 0
+    if len(missing_specialties_ids) > 0:
+        for id in missing_specialties_ids:
+            filename = 'specialties/' + str(id) + '.html'
+            
+            if os.path.exists(filename):
+                specialties = parse_specialties(filename)
+                
+                db['physicians'].update(
+                            {"cemig_saude_id": id}, 
+                            {"$set": {'specialty': specialties}})
+                
+                count += 1
+                
+                
+    print "Updated physicians = ", count
 
 def parse_physicians():
     print "YO", sys.argv[1]
@@ -285,7 +336,9 @@ if __name__ == '__main__':
 #    exit(-1)
     
 #     consolidate_cemig_saude_ids()
-    fetch_all_missings_specialties()
+#     fetch_all_missings_specialties()
+
+    update_missing_specialties()
     
 # Just a test
 #     db = get_db()
