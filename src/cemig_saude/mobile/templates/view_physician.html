@@ -71,7 +71,7 @@
 		                   {% endif %}
 		                </td>
 		                <td>
-		                    <a href="geo:{{a.lat}},{{a.lon}};u=35">{{a.street|title}}, {{a.neighborhood}}, {{a.city|title}}</a>
+		                    <a href="geo:{{a.lat}},{{a.lon}}">{{a.street|title}}, {{a.neighborhood}}, {{a.city|title}}</a>
 		                </td>
 		            </tr>            
 		        </tbody>
@@ -99,7 +99,6 @@ $(document).on("pageshow", "#physician-page", function(event) {
 			$.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
 			
 			markerTarget = window.markers[idx];
-			console.info(markerTarget);
 			
 		    navigator.geolocation.getCurrentPosition(function (position) {                                                              
 	           window.latitude = position.coords.latitude;                  
@@ -178,7 +177,7 @@ $(document).on("pageshow", "#physician-page", function(event) {
         '</div>'+        
         '<div>'+
         '<b>Endereço</b>: {{addr.street|title}} ' +      
-        '<br /><br /><a onClick="$.fn.navigateTo({{forloop.counter0}});">Direções</a>&nbsp;&nbsp;-&nbsp;&nbsp;<a href="geo:{{addr.lat}},{{addr.lon}};u=35">GPS</a>' +
+        '<br /><br /><a onClick="$.fn.navigateTo({{forloop.counter0}});">Direções</a>&nbsp;&nbsp;-&nbsp;&nbsp;<a href="geo:{{addr.lat}},{{addr.lon}}">GPS</a>' +
         '</p>'+
         '</div>'+
         '</div>';
