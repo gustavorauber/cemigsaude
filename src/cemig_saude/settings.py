@@ -2,6 +2,8 @@
 
 import os
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -25,6 +27,11 @@ DATABASES = {
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+    'cemig_saude.mobile.views.context_processor',
+)
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts

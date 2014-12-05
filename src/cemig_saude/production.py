@@ -12,7 +12,7 @@ ALLOWED_HOSTS = ['fb.cemig.com.br', '200.150.7.91', '192.168.7.80']
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-SITE_PREFIX = 'saude/'
+SITE_PREFIX = '/saude/'
 
 LOGGING = {
     'version': 1,

@@ -16,6 +16,11 @@ from django.template import RequestContext
 
 from unidecode import unidecode
 
+def context_processor(request):
+    d = {}    
+    d['site_prefix'] = settings.SITE_PREFIX    
+    return d
+
 def home(request, *args, **kwargs):
     ctx = {}
     return render_to_response('index.html', ctx,

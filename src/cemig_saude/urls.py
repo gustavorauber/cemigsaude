@@ -17,5 +17,5 @@ mobile_patterns = patterns('cemig_saude.mobile.views',
 )
 
 urlpatterns = patterns('',
-    url(r'^' + settings.SITE_PREFIX, include(mobile_patterns)),
+    url(r'^' + settings.SITE_PREFIX.lstrip('/'), include(mobile_patterns)),
 )

@@ -15,7 +15,7 @@
 {% block content %}
 <div class="ui-grid-a">
     <div class="ui-block-a"><a href="#" class="ui-shadow ui-btn ui-btn-b ui-corner-all ui-btn-icon-left ui-icon-arrow-d">A-Z</a></div>
-    <div class="ui-block-b"><a href="/list/distance/{{specialty}}/" id="a-by-distance" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Distância</a></div>
+    <div class="ui-block-b"><a href="{{ site_prefix }}/list/distance/{{specialty}}/" id="a-by-distance" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Distância</a></div>
 </div>
 <form>
   <input type="text" data-type="search" id="physician-input" />
@@ -23,7 +23,7 @@
 <br />
 <ul data-role="listview" data-autodividers="true" data-filter="true" data-input="#physician-input">
     {% for p in physicians %}
-        <li><a href="/show/{{p.id}}/" title="Ver Detalhes">{{p.name|title}}</a></li>
+        <li><a href="{{ site_prefix }}/show/{{p.id}}/" title="Ver Detalhes">{{p.name|title}}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
