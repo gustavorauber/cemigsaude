@@ -32,7 +32,7 @@ def search_physicians(query="", n=10, distance=None, lat=None, lon=None,
         query_body['query'] = {'filtered': {'filter': {'term':  filter}}}
     
     if distance:
-        query_body['filter']['geo_distance'] = {
+        query_body['filter'] = {
                 "geo_distance": {                             
                              "physician.location": {
                                  "lat": lat,
