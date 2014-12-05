@@ -22,7 +22,7 @@
 	    <tbody>
 	        <tr>
 	           <td>
-                    {% if physician.get_specialty|length > 1 %}
+                    {% if physician|is_instance_of:"list" %}
                         {% for sp in physician.get_specialty %}                            
                             {{sp|title}}{% if not forloop.last %},{% endif %}                            
                         {% endfor %}

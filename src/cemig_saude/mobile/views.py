@@ -18,7 +18,7 @@ from unidecode import unidecode
 
 def context_processor(request):
     d = {}    
-    d['site_prefix'] = settings.SITE_PREFIX    
+    d['site_prefix'] = settings.SITE_PREFIX.rstrip('/')
     return d
 
 def home(request, *args, **kwargs):
