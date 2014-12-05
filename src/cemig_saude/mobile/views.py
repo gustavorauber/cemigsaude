@@ -25,6 +25,15 @@ def home(request, *args, **kwargs):
     ctx = {}
     return render_to_response('index.html', ctx,
                               context_instance=RequestContext(request))
+    
+@render_to_json
+def reindex_physicians():
+    """
+    Admin function
+    """
+    create_index()
+    index_all_physicians()
+    return True
 
 def view_physician(request, *args, **kwargs):
     ctx = {}
@@ -38,8 +47,6 @@ def view_specialties(request, *args, **kwargs):
     ctx = {}
     ctx['specialties'] = get_specialties()
     
-#     create_index()
-#     index_all_physicians()
     
 #     update_physicians_missing_hash()
 #     update_physicians_phones()

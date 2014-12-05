@@ -13,6 +13,7 @@ mobile_patterns = patterns('cemig_saude.mobile.views',
     url(r'^list/', 'view_specialties'),
     url(r'^map/', 'map_search'),
     url(r'^search', 'search'),
+    url(r'^admin/reindex', 'reindex_physicians'),
     url(r'^$', 'home'),
 )
 
