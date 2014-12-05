@@ -54,7 +54,7 @@ def setup_pkgs():
     packages.extend(['language-pack-en-base'])
     
     # elasticsearch
-    packages.extend(['elasticsearch'])
+    packages.extend(['elasticsearch', 'openjdk-7-jre'])
     
     # mongodb
     packages.extend(['mongodb-server'])
