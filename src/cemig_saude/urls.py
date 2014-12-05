@@ -5,23 +5,17 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns(settings.SITE_PREFIX,
-    # Examples:
-    # url(r'^$', 'cemig_saude.views.home', name='home'),
-    # url(r'^cemig_saude/', include('cemig_saude.foo.urls')),
+mobile_patterns = patterns('cemig_saude.mobile.views',    
+    url(r'^show/(?P<physician>\w+)/', 'view_physician'),
+    url(r'^get/distance/', 'get_physicians_by_distance'),
+    url(r'^list/distance/(?P<specialty>\w+)/', 'list_physicians_by_distance'),
+    url(r'^list/(?P<specialty>\w+)/', 'list_physicians'),
+    url(r'^list/', 'view_specialties'),
+    url(r'^map/', 'map_search'),
+    url(r'^search', 'search'),
+    url(r'^$', 'home'),
+)
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-    
-    url(r'^show/(?P<physician>\w+)/', 'cemig_saude.mobile.views.view_physician'),
-    url(r'^get/distance/', 'cemig_saude.mobile.views.get_physicians_by_distance'),
-    url(r'^list/distance/(?P<specialty>\w+)/', 'cemig_saude.mobile.views.list_physicians_by_distance'),
-    url(r'^list/(?P<specialty>\w+)/', 'cemig_saude.mobile.views.list_physicians'),
-    url(r'^list/', 'cemig_saude.mobile.views.view_specialties'),
-    url(r'^map/', 'cemig_saude.mobile.views.map_search'),
-    url(r'^search', 'cemig_saude.mobile.views.search'),
-    url(r'^$', 'cemig_saude.mobile.views.home'),
+urlpatterns = patterns('',
+    url(r'^' + settings.SITE_PREFIX, include(mobile_patterns)),
 )
