@@ -48,7 +48,7 @@ TIME_ZONE = 'America/Sao_Paulo'
 LANGUAGE_CODE = 'pt-BR'
 
 SITE_ID = 1
-SITE_PREFIX = ''
+SITE_PREFIX = '/'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
