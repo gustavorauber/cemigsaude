@@ -27,7 +27,7 @@ def home(request, *args, **kwargs):
                               context_instance=RequestContext(request))
     
 @render_to_json
-def reindex_physicians():
+def reindex_physicians(request):
     """
     Admin function
     """
