@@ -11,7 +11,7 @@ from elasticsearch import Elasticsearch
 def search_physicians(query="", n=10, distance=None, lat=None, lon=None,
                       show_distance=False, sort_by_distance=False, 
                       fields=["specialty", "name", "neighborhood","city"],
-                      filter=None):
+                      filter=None, from_record=0):
     """
     """
     es = Elasticsearch()
@@ -24,6 +24,7 @@ def search_physicians(query="", n=10, distance=None, lat=None, lon=None,
                             #"operator": "and"
                          },                      
                     },
+                    "from": from_record,
                     "size": n
             }    
     
@@ -64,12 +65,10 @@ def search_physicians(query="", n=10, distance=None, lat=None, lon=None,
             "unit": "km"                     
          }}]
     
-    print query_body
-    
     res = es.search(index='physicians', doc_type="physician", 
-            body=query_body)
+            body=query_body)    
     
-    return res['hits']['hits']
+    return res['hits']['hits'], res['hits']['total'] 
 
 def search_specialties(distance=None, lat=None, lon=None):
     es = Elasticsearch()

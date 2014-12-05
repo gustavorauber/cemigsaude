@@ -10,6 +10,7 @@ from cemig_saude.model.mongo import get_one_physician, get_physicians, \
     merge_addresses, get_one_specialty
 from cemig_saude.model.physician import Physician
 
+from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -47,20 +48,47 @@ def view_specialties(request, *args, **kwargs):
     
     return render_to_response('list_specialties.html', ctx,
                               context_instance=RequestContext(request))
+
+@render_to_json
+def get_physicians_by_distance(request):
+    lat = request.POST.get('lat', '')
+    lon = request.POST.get('lon', '')
+    hash = request.POST.get('specialty', '')
+    from_record = request.POST.get('from_record', 0)
     
+    specialty = get_one_specialty(filter_by={'hash': hash})
+    
+    physicians, total = search_physicians(n=settings.PAGE_SIZE,
+                  lat=lat, lon=lon, sort_by_distance=True,
+                  filter={"specialty.raw": unidecode(specialty['specialty'])},
+                  from_record=from_record)
+    
+    results = []
+    for p in physicians:
+        physician = p['_source']
+        physician['id'] = p['_id']
+        physician['distance'] = p['sort'][0]
+        
+        results.append(physician)
+        
+        print physician
+            
+    return results
+
 def list_physicians_by_distance(request, *args, **kwargs):
     ctx = {}    
     hash = kwargs.get('specialty', '')    
-    lat = request.GET.get('lat', '')
-    lon = request.GET.get('lon', '')
+    ctx['lat'] = request.GET.get('lat', '')
+    ctx['lon'] = request.GET.get('lon', '')
     
     specialty = get_one_specialty(filter_by={'hash': hash})
     
     ctx['specialty'] = hash
     ctx['specialty_name'] = specialty['specialty']
+    ctx['page_size'] = settings.PAGE_SIZE
     
-    physicians = search_physicians(n=150,
-                  lat=lat, lon=lon, sort_by_distance=True,
+    physicians, ctx['total'] = search_physicians(n=settings.PAGE_SIZE,
+                  lat=ctx['lat'], lon=ctx['lon'], sort_by_distance=True,
                   filter={"specialty.raw": unidecode(specialty['specialty'])})
     
     ctx['physicians'] = []
@@ -68,7 +96,7 @@ def list_physicians_by_distance(request, *args, **kwargs):
         physician = p['_source']
         physician['id'] = p['_id']
         physician['distance'] = p['sort'][0]
-        ctx['physicians'].append(physician)        
+        ctx['physicians'].append(physician)    
         
     return render_to_response('list_physicians_by_distance.html', ctx,
                               context_instance=RequestContext(request))
@@ -103,7 +131,7 @@ def search(request, *args, **kwargs):
     if not query:
         return []
     
-    results = search_physicians(query=query, n=150, distance=distance,
+    results, total = search_physicians(query=query, n=150, distance=distance,
                                 lat=lat, lon=lon)
     physician_ids = list(x['_id'] for x in results)
     

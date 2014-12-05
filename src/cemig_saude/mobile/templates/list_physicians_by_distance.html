@@ -21,7 +21,7 @@
   <input type="text" data-type="search" id="physician-distance-input" />
 </form>
 <br />
-<ul data-role="listview" data-filter="true" data-input="#physician-distance-input">
+<ul id="physician-distance-ul" data-role="listview" data-filter="true" data-input="#physician-distance-input">
     {% for p in physicians %}
         <li>
             <a href="/show/{{p.id}}/" title="Ver Detalhes">
@@ -31,15 +31,58 @@
         </li>
     {% endfor %}
 </ul>
+
+{% if total > page_size %}
+<br />
+<button id="distance-btn-more" class="ui-btn ui-corner-all ui-shadow">Carregar mais...</button>
+{% endif %}
+
+<div style="visibility: hidden; display: none;">
+    <li id="physician-li">
+        <a href="#" title="Ver Detalhes">
+            <p><strong class="physician-name"></strong></p>
+            <span class="physician-distance ui-li-count"></span>
+        </a>
+    </li>
+</div>
 {% endblock %}
 
 {% block javascript %}
 <script type="text/javascript">
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 $(document).bind("pageshow", "#list-physicians-by-distance-page", function() {
     $('#physician-distance-input').focus();
     
     $('FORM').on('submit', function(e) {
         e.preventDefault();
+    });
+    
+    $('#distance-btn-more').on('click', function(e){
+        from_record = $('#physician-distance-ul > li').size();
+        
+        postData = { 
+                lat: {{lat}}, 
+                lon: {{lon}},
+                specialty: '{{specialty}}',
+                from_record: from_record
+        };
+        
+        $.post( "/get/distance/", postData, function( data ) {            
+            $.each(data, function ( index, val ) {    
+            	console.info(val);
+            	li = $('#physician-li').clone();
+            	li.find('a').attr('href', '/show/' + val.id + '/');
+            	li.find('.physician-name').html(toTitleCase(val.name));
+            	li.find('.physician-distance').html(val.distance.toFixed(2) + ' km');
+            	
+                $('#physician-distance-ul').append(li);
+            });            
+            
+            $('#physician-distance-ul').listview('refresh');
+        });
     });
 });
 </script>
