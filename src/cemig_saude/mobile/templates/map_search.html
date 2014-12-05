@@ -88,6 +88,8 @@ $(document).on("pageshow", "#search-page", function(event) {
         		lon: window.longitude
         };
         $.post( "{{ site_prefix }}/search", postData, function( data ) {
+        	$.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
+        	
             for (var i = 0; i < window.markers.length; i++) {
                 markers[i].setMap(null);
             }
@@ -119,6 +121,8 @@ $(document).on("pageshow", "#search-page", function(event) {
                     }
                 }
             });
+            
+            $.mobile.loading( 'hide' );
             
             if (!window.markersBounds.isEmpty()) {
             	window.map.fitBounds(window.markersBounds);	

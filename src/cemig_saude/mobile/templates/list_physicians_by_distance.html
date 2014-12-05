@@ -70,7 +70,6 @@ $(document).bind("pageshow", "#list-physicians-by-distance-page", function() {
         
         $.post( "{{ site_prefix }}/get/distance/", postData, function( data ) {            
             $.each(data, function ( index, val ) {    
-            	console.info(val);
             	li = $('#physician-li').clone();
             	li.find('a').attr('href', '{{ site_prefix }}/show/' + val.id + '/');
             	li.find('.physician-name').html(toTitleCase(val.name));
