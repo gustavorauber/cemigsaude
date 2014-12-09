@@ -64,17 +64,24 @@ $(document).on("pageshow", "#search-page", function(event) {
     window.infoWindow = new google.maps.InfoWindow;
     
     var onMarkerClick = function() {
-        window.infoWindow.setContent(
-            "<div class='ginfo'>" + 
-            "<h3><a href=\"{{ site_prefix }}/show/" + this.val.id + "\">"+ this.val.name +"</a></h3>" +
-            "<h4>"+ this.val.specialty +"</h4>" +
-            "<p>" + 
-                "<b>Tel</b>: " + this.address.phones +
-                "<br /><b>Endereço</b>: " + this.address.street +
-                "<br />" + this.address.neighborhood +
-            "</p>" +
-            "</div>"
-        );
+    	info = "<div class='ginfo'>" + 
+        "<h3><a href=\"{{ site_prefix }}/show/" + this.val.id + "\">"+ this.val.name +"</a></h3>" + 
+        "<h4>";
+        
+        if (this.val.specialty.length > 5) {
+        	info += "Múltiplas Especialidades";
+        } else {
+        	info += this.val.specialty;
+        }
+        
+        info += "</h4><p>" + 
+            "<b>Tel</b>: " + this.address.phones +
+            "<br /><b>Endereço</b>: " + this.address.street +
+            "<br />" + this.address.neighborhood +
+        "</p>" +
+        "</div>"; 
+    	
+    	window.infoWindow.setContent(info);
         window.infoWindow.open(window.map, this);
         window.map.setCenter(this.getPosition());
     };
