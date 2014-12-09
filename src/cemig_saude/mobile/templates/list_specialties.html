@@ -11,10 +11,10 @@
   <input type="text" data-type="search" id="specialty-input" />
 </form>
 <br />
-<ul data-role="listview" data-autodividers="true" data-filter="true" data-input="#specialty-input">
+<ul id="specialties" data-role="listview" data-autodividers="true" data-filter="true" data-input="#specialty-input">
     {% for s in specialties %}
         <li>
-            <a href="{{ site_prefix }}/list/{{s.id}}/">
+            <a href="{{ site_prefix }}/list/distance/{{s.id}}/">
                 {% if s.specialty %}
                     {{s.specialty|title}}
                 {% else %}
@@ -33,6 +33,46 @@ $(document).bind("pageshow", "#list-physicians-page", function() {
     $('FORM').on('submit', function(e) {
         e.preventDefault();
     });
+    
+    var updateURLParams = function (el) {
+    	uri = $(el).attr('href');
+    	
+	    var reLat = new RegExp("([?&])lat=.*?(&|$)", "i");
+	    var reLon = new RegExp("([?&])lon=.*?(&|$)", "i");
+	    
+	    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+	    if (uri.match(reLat)) {
+	        uri = uri.replace(reLat, '$1lat=' + window.latitude + '$2');
+	    } else {
+	        uri = uri + separator + "lat=" + window.latitude;
+	    }	    
+	    
+	    
+	    if (uri.match(reLon)) {
+            uri = uri.replace(reLon, '$1lon=' + window.longitude + '$2');
+        } else {
+            uri = uri + "&lon=" + window.longitude;
+        }
+	    
+	    return uri;
+	};
+    
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          window.latitude = position.coords.latitude;                  
+          window.longitude = position.coords.longitude;
+          
+          $('#specialties a').attr('href', function (e) {
+        	  return updateURLParams($(this));        	  
+          });          
+        });
+     } else {
+         window.latitude = -19.932696;
+         window.longitude = -43.944035;
+         $('#specialties a').attr('href', function (e) {
+        	 return updateURLParams($(this));              
+         });
+     }
 });
 </script>
 {% endblock %}
