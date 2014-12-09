@@ -87,9 +87,10 @@ $(document).on("pageshow", "#search-page", function(event) {
         		lat: window.latitude,
         		lon: window.longitude
         };
+        
+        $.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
+        
         $.post( "{{ site_prefix }}/search", postData, function( data ) {
-        	$.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
-        	
             for (var i = 0; i < window.markers.length; i++) {
                 markers[i].setMap(null);
             }
