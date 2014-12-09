@@ -79,6 +79,21 @@ $(document).on("pageshow", "#search-page", function(event) {
         window.map.setCenter(this.getPosition());
     };
     
+    var getDistanceFromLatLonInKm = function(lat1,lon1,lat2,lon2) {
+    	var deg2rad = 0.017453292519943295; // === Math.PI / 180
+        var cos = Math.cos;
+        lat1 *= deg2rad;
+        lon1 *= deg2rad;
+        lat2 *= deg2rad;
+        lon2 *= deg2rad;
+        var a = (
+            (1 - cos(lat2 - lat1)) +
+            (1 - cos(lon2 - lon1)) * cos(lat1) * cos(lat2)
+        ) / 2;
+        
+        return 12742 * Math.asin(Math.sqrt(a)); // Diameter of the earth in km (2 * 6371)
+	};	
+    
     var performSearch = function(e) {
         e.preventDefault();
         postData = { 
@@ -95,28 +110,33 @@ $(document).on("pageshow", "#search-page", function(event) {
                 markers[i].setMap(null);
             }
             window.markers = [];
-            window.markersBounds = new google.maps.LatLngBounds();            
+            window.markersBounds = new google.maps.LatLngBounds();
+            
+            q_dist = parseInt($('#distance').val());
             
             $.each(data, function ( index, val ) {                
                 for (i=0; i < val.addresses.length; i++) {                      
                     address = val.addresses[i];                     
                     if ( address.geocode != undefined ) {
                         results = address.geocode.results;
-                        if (results.length > 0) {                               
+                        if (results.length > 0) {
                             result = results[0];
                             l = result.geometry.location;
-                            position = new google.maps.LatLng(l.lat, l.lng);
-                            marker = new google.maps.Marker({
-                                position: position,
-                                map: window.map
-                            });
-                            marker.val = val;
-                            marker.address = address;
-                            google.maps.event.addListener(marker, 'click', 
-                                onMarkerClick
-                            );
-                            window.markers.push(marker);
-                            window.markersBounds.extend(position);
+                            
+                            if (val.addresses.length == 1 || getDistanceFromLatLonInKm(window.latitude, window.longitude, l.lat, l.lng) < q_dist) {
+                                position = new google.maps.LatLng(l.lat, l.lng);
+                                marker = new google.maps.Marker({
+                                    position: position,
+                                    map: window.map
+                                });
+                                marker.val = val;
+                                marker.address = address;
+                                google.maps.event.addListener(marker, 'click', 
+                                    onMarkerClick
+                                );
+                                window.markers.push(marker);
+                                window.markersBounds.extend(position);                            
+                            }
                         }
                     }
                 }
