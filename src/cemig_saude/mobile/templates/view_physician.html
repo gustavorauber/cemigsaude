@@ -45,13 +45,13 @@
 	    <div data-role="navbar" id="addresses-navbar">
 	        <ul>
 	            {% for a in physician.get_addresses %}
-	            <li><a href="#address-{{forloop.counter0}}" data-role="tab" {% if forloop.counter == 1 %}class="ui-btn-active"{% endif %}>{{a.neighborhood}} / {{a.city|title}}</a>
+	            <li><a href="#address-{{forloop.counter0}}" data-role="tab" {% if forloop.counter0 == 0 %}class="ui-btn-active"{% endif %}>{{a.neighborhood}} / {{a.city|title}}</a>
 	            {% endfor %}
 	        </ul>
 	    </div>	    
 	{% endif %}
 	{% for a in physician.get_addresses %}
-		<div id="address-{{forloop.counter}}" style="padding-top: 10px;">    
+		<div id="address-{{forloop.counter0}}" style="padding-top: 10px;">    
 		    <table data-role="table" data-mode="reflow" id="physician-data-{{forloop.counter}}">
 		        <thead>
 		            <tr>
