@@ -129,13 +129,13 @@ def geocode_address(address):
 def fetch_all_physicians():
     url = "http://www.cemigsaude.org.br/Paginas/Geral/Prosaude/Convenios/Convenios_Disponiveis.aspx"
     
-    driver = webdriver.PhantomJS(service_log_path='')
-#    driver = webdriver.PhantomJS(service_log_path='',
-#                                 executable_path="D:\Users\c057384\phantomjs\phantomjs")
+#     driver = webdriver.PhantomJS(service_log_path='')
+    driver = webdriver.PhantomJS(service_log_path='',
+                                 executable_path="D:\Users\c057384\phantomjs\phantomjs")
     driver.set_window_size(1024, 768)
     
     try:
-        i = 136
+        i = 1
         
         while True:
             downloaded = False
@@ -153,7 +153,7 @@ def fetch_all_physicians():
             for j, option in enumerate(options):
                 if i == j:
                     downloaded = True
-                    print i, option.text
+                    print i, unidecode(option.text)
                     city = unidecode(option.text)     
                     option.click()       
                 
@@ -161,18 +161,15 @@ def fetch_all_physicians():
                     submit.click()
                     
                     sleep(SLEEP_TIME)
-                    
+                        
                     page = driver.page_source
-                    with open(city + ".html", "w") as f:
+                    with open('new/' + city + ".html", "w") as f:
                         f.write(page.encode('utf8'))
             
             if not downloaded:
                 break
                     
-            i += 1
-        
-    except Exception, e:
-        print e
+            i += 1        
     finally:
         driver.quit()
 
@@ -332,13 +329,13 @@ def consolidate_cemig_saude_ids():
 if __name__ == '__main__':
     
     # Fetch ALL
-#    fetch_all_physicians()
-#    exit(-1)
+    fetch_all_physicians()
+    exit(-1)
     
 #     consolidate_cemig_saude_ids()
 #     fetch_all_missings_specialties()
 
-    update_missing_specialties()
+#     update_missing_specialties()
     
 # Just a test
 #     db = get_db()
