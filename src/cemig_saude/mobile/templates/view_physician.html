@@ -1,14 +1,15 @@
-{% extends "index.html" %}
+{% extends "index_child.html" %}
 {% load mobile_tags %}
 
 {% block page_id %}physician-page{% endblock %}
 
-{% block header %}
+{% block title %}
 <h1>{{physician.get_name|title}}</h1>
 {% endblock %}          
 
 {% block content %}
 <div id="view-physician-page">
+    {% if physician.get_specialty %}
     <div class="ui-corner-all custom-corners">
         <div data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right">
             <h4>Especialidade(s)</h4>
@@ -23,6 +24,7 @@
             </ul>
         </div>
     </div>
+    {% endif %}
     
     {% if physician.get_register %}
     <div class="ui-corner-all custom-corners" style="margin-top: 10px;">

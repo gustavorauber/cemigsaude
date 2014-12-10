@@ -22,11 +22,11 @@
 </head>
 <body>
   <div data-role="page" id="{% block page_id %}index-page{% endblock %}">
-      <div data-role="header" data-add-back-btn="true" data-back-btn-text="Voltar">
       {% block header %}
-          <h1>Cemig Saúde</h1>
-      {% endblock %}
+      <div data-role="header" data-add-back-btn="true" data-back-btn-text="Voltar">      
+          {% block title %}<h1>Cemig Saúde</h1>{% endblock %}
       </div>
+      {% endblock %}
       <div role="content" class="ui-content">
       {% block content %}
           <ul data-role="listview">
@@ -40,8 +40,20 @@
           <div style="text-align: center;"><img src="{{ site_prefix }}/static/imgs/logo_cemig_saude.gif" /></div>
       {% endblock %}
       </div>
+      
+      {% block menu %}{% endblock %}
      
       {% block javascript %}{% endblock %}
+      <script type="text/javascript">
+      $('#' + $('div[data-role="page"]').last().attr('id')).on('pageinit', 
+	      function(e, data) {
+    	      var page_id = e.target.id;
+              $('#' + page_id + ' .ui-icon-bars').on('click', function(e) {
+                  $('#' + page_id + ' .menu').panel('open');
+              });
+          }
+      );         
+      </script>
   </div>  
 </body>
 </html>  
