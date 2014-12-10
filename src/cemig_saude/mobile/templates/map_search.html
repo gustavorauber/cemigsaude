@@ -29,34 +29,20 @@
 
 {% block javascript %}
 <script type="text/javascript">
-$(document).on("pageshow", "#search-page", function(event) {
-	
+var searchPageMapInit = function () {	
+	window.latitude = -19.932696;
+    window.longitude = -43.944035;
+    var coords = new google.maps.LatLng(window.latitude, window.longitude);
+    var mapOptions = {
+      zoom: 14,
+      center: coords
+    };
+    window.map = new google.maps.Map(document.getElementById('search-map'), 
+    		mapOptions);
+};
+
+$(document).on("pageshow", "#search-page", function(event) {	
 	$('#search').focus();
-	
-	if (navigator.geolocation) { 
-	   navigator.geolocation.getCurrentPosition(function (position) {
-		 window.latitude = position.coords.latitude;                  
-		 window.longitude = position.coords.longitude;
-	     var coords = new google.maps.LatLng(window.latitude, window.longitude); 
-	     var mapOptions = {
-	       zoom: 14,  
-	       center: coords
-	     };
-	     
-	     window.map = new google.maps.Map(document.getElementById('search-map'), 
-	             mapOptions);	      
-	   });
-	} else {
-		window.latitude = -19.932696;
-		window.longitude = -43.944035;
-		var coords = new google.maps.LatLng(window.latitude, window.longitude);
-	    var mapOptions = {
-	      zoom: 14,
-	      center: coords
-	    };
-	    window.map = new google.maps.Map(document.getElementById('search-map'), 
-                window.mapOptions);        
-	}
 
     window.markers = [];
     window.markersBounds = new google.maps.LatLngBounds();
@@ -104,14 +90,14 @@ $(document).on("pageshow", "#search-page", function(event) {
     var performSearch = function(e) {
         e.preventDefault();
         postData = { 
-        		q: $('#search').val(), 
-        		d: $('#distance').val(),
-        		lat: window.latitude,
-        		lon: window.longitude
+            q: $('#search').val(), 
+        	d: $('#distance').val(),
+        	lat: window.latitude,
+        	lon: window.longitude
         };
         
         $.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
-        
+       
         $.post( "{{ site_prefix }}/search", postData, function( data ) {
             for (var i = 0; i < window.markers.length; i++) {
                 markers[i].setMap(null);
@@ -173,6 +159,24 @@ $(document).on("pageshow", "#search-page", function(event) {
         	performSearch(e);            
         }
     });
+    
+    searchPageMapInit();
+    
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            window.latitude = position.coords.latitude;                  
+            window.longitude = position.coords.longitude;
+            var coords = new google.maps.LatLng(window.latitude, 
+            	window.longitude); 
+            var mapOptions = {
+                zoom: 14,  
+                center: coords
+            };
+            window.map = new google.maps.Map(
+            		document.getElementById('search-map'), mapOptions);         
+        }, function(e) { console.debug('error')}, {enableHighAccuracy: true, 
+            timeout: 1000});
+    }    
 });
 </script>    
 {% endblock %}

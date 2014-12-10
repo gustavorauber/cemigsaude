@@ -57,22 +57,22 @@ $(document).bind("pageshow", "#list-physicians-page", function() {
 	    return uri;
 	};
     
+	window.latitude = -19.932696;
+    window.longitude = -43.944035;
+    $('#specialties a').attr('href', function (e) {
+        return updateURLParams($(this));              
+    });
+	
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-          window.latitude = position.coords.latitude;                  
-          window.longitude = position.coords.longitude;
+            window.latitude = position.coords.latitude;                  
+            window.longitude = position.coords.longitude;
           
-          $('#specialties a').attr('href', function (e) {
-        	  return updateURLParams($(this));        	  
-          });          
+            $('#specialties a').attr('href', function (e) {
+        	    return updateURLParams($(this));        	  
+            });          
         });
-     } else {
-         window.latitude = -19.932696;
-         window.longitude = -43.944035;
-         $('#specialties a').attr('href', function (e) {
-        	 return updateURLParams($(this));              
-         });
-     }
+    }
 });
 </script>
 {% endblock %}
