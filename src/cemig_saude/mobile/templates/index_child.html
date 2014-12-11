@@ -16,4 +16,18 @@
         <li data-icon="false"><a href="{{ site_prefix }}/list/">Listagem por Especialidade</a></li>
     </ul>                
 </div>
+<script type="text/javascript">
+$('#' + $('div[data-role="page"]').last().attr('id')).on('pageinit', 
+  function(e, data) {
+      var page_id = e.target.id;
+      $('#' + page_id + ' .ui-icon-bars').on('click', function(e) {
+          $('#' + page_id + ' .menu').panel('open');
+      });
+    
+      $('#' + page_id ).on("swipeleft", function(e) {
+    	  $('#' + page_id + ' .menu').panel('open');
+      });
+  }
+);         
+</script>
 {% endblock %}
