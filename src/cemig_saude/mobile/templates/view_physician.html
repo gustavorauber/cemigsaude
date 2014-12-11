@@ -69,7 +69,7 @@
     		                   {% endif %}
     		                </td>
     		                <td>
-    		                    <a href="geo:{{a.lat}},{{a.lon}}">{{a.street|title}}, {{a.neighborhood}}, {{a.city|title}}</a>
+    		                    <a href="https://maps.google.com/maps?z=12&t=m&q=loc:{{a.lat}}+{{a.lon}}">{{a.street|title}}, {{a.neighborhood}}, {{a.city|title}}</a>
     		                </td>
     		            </tr>            
     		        </tbody>
@@ -159,46 +159,48 @@ $(document).on("pageshow", "#physician-page", function(event) {
 	var myLatLng = null;
 	
     {% for addr in physician.get_addresses %}
-        {% if forloop.first %}
-        myLatLng = new google.maps.LatLng({{addr.lat}}, {{addr.lon}}); 
-        var mapOptions = {
-          zoom: 15,
-          center: myLatLng
-        };
-        window.map = new google.maps.Map(document.getElementById('physician-map'), mapOptions);    
-        {% endif %}        
-        
-        var contentString{{forloop.counter0}} = '<div class="ginfo">'+
-        '<div>'+
-        '<h2 class="firstHeading">{{physician.get_name|title}}</h2>'+
-        '</div>'+        
-        '<div>'+
-        '<b>Endereço</b>: {{addr.street|title}} ' +      
-        '<br /><br /><a onClick="$.fn.navigateTo({{forloop.counter0}});">Direções</a>&nbsp;&nbsp;-&nbsp;&nbsp;<a href="geo:{{addr.lat}},{{addr.lon}}">GPS</a>' +
-        '</p>'+
-        '</div>'+
-        '</div>';
-
-        var infoWindow{{forloop.counter0}} = new google.maps.InfoWindow();
-        infoWindow{{forloop.counter0}}.setContent(contentString{{forloop.counter0}});
-	    
-	    var latlng{{forloop.counter0}} = new google.maps.LatLng({{addr.lat}}, {{addr.lon}});
-	    var marker{{forloop.counter0}} = new google.maps.Marker({
-	        position: latlng{{forloop.counter0}},
-	        map: window.map,
-	        title: '{{physician.get_name|title}}'
-	    });
-	    
-	    window.markers.push(marker{{forloop.counter0}});
-	    window.markersBounds.extend(latlng{{forloop.counter0}});
-	
-	    google.maps.event.addListener(marker{{forloop.counter0}}, 'click', function() {
-	    	for (i = 0; i < window.markers.length; i++) {
-	    		eval("infoWindow" + i).close();
-	        }
-	        infoWindow{{forloop.counter0}}.open(window.map, marker{{forloop.counter0}});
-	        window.map.setCenter(marker{{forloop.counter0}}.getPosition());
-	    });	    
+        {% if addr.lat %}
+            {% if forloop.first %}
+            myLatLng = new google.maps.LatLng({{addr.lat}}, {{addr.lon}}); 
+            var mapOptions = {
+              zoom: 15,
+              center: myLatLng
+            };
+            window.map = new google.maps.Map(document.getElementById('physician-map'), mapOptions);    
+            {% endif %}        
+            
+            var contentString{{forloop.counter0}} = '<div class="ginfo">'+
+            '<div>'+
+            '<h2 class="firstHeading">{{physician.get_name|title}}</h2>'+
+            '</div>'+        
+            '<div>'+
+            '<b>Endereço</b>: {{addr.street|title}} ' +      
+            '<br /><br /><a onClick="$.fn.navigateTo({{forloop.counter0}});">Direções</a>&nbsp;&nbsp;-&nbsp;&nbsp;<a href="https://maps.google.com/maps?z=12&t=m&q=loc:{{addr.lat}}+{{addr.lon}}">GPS</a>' +
+            '</p>'+
+            '</div>'+
+            '</div>';
+    
+            var infoWindow{{forloop.counter0}} = new google.maps.InfoWindow();
+            infoWindow{{forloop.counter0}}.setContent(contentString{{forloop.counter0}});
+    	    
+    	    var latlng{{forloop.counter0}} = new google.maps.LatLng({{addr.lat}}, {{addr.lon}});
+    	    var marker{{forloop.counter0}} = new google.maps.Marker({
+    	        position: latlng{{forloop.counter0}},
+    	        map: window.map,
+    	        title: '{{physician.get_name|title}}'
+    	    });
+    	    
+    	    window.markers.push(marker{{forloop.counter0}});
+    	    window.markersBounds.extend(latlng{{forloop.counter0}});
+    	
+    	    google.maps.event.addListener(marker{{forloop.counter0}}, 'click', function() {
+    	    	for (i = 0; i < window.markers.length; i++) {
+    	    		eval("infoWindow" + i).close();
+    	        }
+    	        infoWindow{{forloop.counter0}}.open(window.map, marker{{forloop.counter0}});
+    	        window.map.setCenter(marker{{forloop.counter0}}.getPosition());
+    	    });	    
+        {% endif %} 
     {% endfor %}
     
     {% if physician.num_addresses > 1 %}
