@@ -71,12 +71,22 @@ $(document).bind("pageshow", "#list-physicians-by-distance-page", function() {
             	li = $('#physician-li').clone();
             	li.find('a').attr('href', '{{ site_prefix }}/show/' + val.id + '/');
             	li.find('.physician-name').html(toTitleCase(val.name));
-            	li.find('.physician-distance').html(val.distance.toFixed(2) + ' km');
+            	
+            	distance = val.distance.toFixed(2) + ' km';
+            	if (val.distance > 10000) {
+            		distance = '&infin;';
+            	}
+            	
+            	li.find('.physician-distance').html(distance);                
             	
                 $('#physician-distance-ul').append(li);
             });            
             
             $('#physician-distance-ul').listview('refresh');
+            
+            if (data.length < {{page_size}}) {
+            	$('#distance-btn-more').remove();
+            }             	
         });
     });
 });
