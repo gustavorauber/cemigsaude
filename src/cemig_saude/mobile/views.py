@@ -35,6 +35,14 @@ def reindex_physicians(request):
     index_all_physicians()
     return True
 
+@render_to_json
+def adm_sync_specialties(request):
+    """
+    Admin function
+    """
+    sync_specialties()
+    return True
+
 def view_physician(request, *args, **kwargs):
     ctx = {}
     hash = kwargs.get('physician', '')
@@ -82,8 +90,6 @@ def get_physicians_by_distance(request):
         physician['distance'] = p['sort'][0]
         
         results.append(physician)
-        
-        print physician
             
     return results
 
