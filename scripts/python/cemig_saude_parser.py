@@ -9,6 +9,7 @@ import os
 import sys
 import hashlib
 import httplib
+import time
 import urllib
 import urllib2
 
@@ -49,7 +50,7 @@ def parse_entries(html):
                     entry['cemig_saude_id'] = el.get('name')                
                     break
         
-        entry['name'] = div.select('table.tabelaConveniados2 > tbody > tr > td > span.arial12')[0].get_text()
+        entry['name'] = div.select('table.tabelaConveniados2 > tbody > tr > td > span.arial12')[0].get_text().rstrip('.')
         spans = div.select('table.tabelaConveniados > tbody > tr > td > span.arial12')
         
         for span in spans:
@@ -115,10 +116,10 @@ def geocode_address(address):
     request_url = url + urllib.urlencode(params)
     
     # Proxy Handling
-#    proxy = urllib2.ProxyHandler({'http': 'http://c057384:XXX@proxycemig.cemig.ad.corp:8080'})
-#    auth = urllib2.HTTPBasicAuthHandler()
-#    opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
-#    urllib2.install_opener(opener)
+    proxy = urllib2.ProxyHandler({'http': 'http://c057384:!G4l0doido!1@proxycemig.cemig.ad.corp:8080'})
+    auth = urllib2.HTTPBasicAuthHandler()
+    opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
+    urllib2.install_opener(opener)
 
     sock = urllib2.urlopen(request_url)
     response = sock.read()
@@ -278,7 +279,6 @@ def update_missing_specialties():
                 
                 count += 1
                 
-                
     print "Updated physicians = ", count
 
 def parse_physicians():
@@ -326,16 +326,130 @@ def consolidate_cemig_saude_ids():
                 
     print "Records updated", count
 
+def update_missing_geocode():
+    db = get_db()
+    collection = db['physicians']
+    
+    count = 0
+    
+    for p in collection.find():
+        updated = False
+        
+        for ad in p['addresses']:
+            if 'geocode' not in ad:
+                count+= 1
+#                 geocode_json = geocode_address(ad)
+#                 ad['geocode'] = json.loads(geocode_json)
+#                 updated = True
+                
+                print count
+                
+#         if updated:
+#             collection.update(
+#                     {'cemig_saude_id': p['cemig_saude_id']}, 
+#                     {"$set": {'addresses': p['addresses']}})
+#             
+#             sleep(0.1)
+                
+    print "# Addresses missing geocode:", count
+
+def sync_physicians(download_path):
+    """
+    Synchronizes a new web snapshot with the existent physicians DB 
+    """    
+    download_path = download_path.rstrip('/') + '/'
+    
+    db = get_db()
+    collection = db['physicians']
+    
+    existent_ids = set(collection.distinct("cemig_saude_id"))
+    print "# Current Physicians:", len(existent_ids)
+    
+    current_ids = set()
+    
+    new_entries = 0
+    updated_entries = 0
+    
+    for city_file in os.listdir(download_path):
+        print "Processing", city_file
+        
+        html = ""
+        with open(download_path + city_file, 'r') as f:
+            html = f.read()
+            
+        physicians = parse_entries(html)
+        for p in physicians:
+            current_ids.add(p['cemig_saude_id'])
+            
+            # New entries
+            if p['cemig_saude_id'] not in existent_ids:
+                new_entries += 1            
+                collection.insert(p)
+            
+            # Entries to update
+            else:
+                db_p = collection.find_one({'cemig_saude_id': p['cemig_saude_id']})
+                update_dict = {}
+                
+                for k, v in p.iteritems():
+                    if k == "addresses":
+                        db_ads = db_p['addresses']
+                        db_streets = set(unidecode(x['street']) for x in db_ads)
+                        
+                        streets = set(unidecode(x['street']) for x in v)
+                        
+                        if streets - db_streets:                        
+                            
+                            # Just grab geocode info for existing ones
+                            for ad in v:
+                                uni_ad = unidecode(ad['street'])
+                                if uni_ad in db_streets:
+                                    
+                                    for db_ad in db_ads:
+                                        if unidecode(db_ad['street']) == uni_ad:
+                                            if 'geocode' in db_ad:
+                                                ad['geocode'] = db_ad['geocode']
+                            
+                            update_dict['addresses'] = p['addresses']
+                            
+                    else:
+                        if k not in db_p:
+                            update_dict[k] = v
+                        elif db_p[k] != v:
+                            if k != "specialty" or v:    
+                                update_dict[k] = v
+                
+                if update_dict:
+                    updated_entries += 1                
+                    collection.update({"cemig_saude_id": p['cemig_saude_id']}, 
+                          {'$set': update_dict})
+                
+
+    print "# New Physicians: ", new_entries
+    print "# Updated Physicians: ", updated_entries
+    
+    # Entries to remove
+    ids_to_remove = existent_ids - current_ids
+    for id in ids_to_remove:
+        collection.remove({'cemig_saude_id': id}, multi=False)
+    print "# Removed Physicians:", len(ids_to_remove)
+
 if __name__ == '__main__':
     
     # Fetch ALL
-    fetch_all_physicians()
-    exit(-1)
+#     fetch_all_physicians()
+#     exit(-1)
+
+    # Sync DB
+#     sync_physicians(sys.argv[1])
+    
+#     update_missing_geocode()
     
 #     consolidate_cemig_saude_ids()
 #     fetch_all_missings_specialties()
 
-#     update_missing_specialties()
+    update_missing_specialties()
+    
     
 # Just a test
 #     db = get_db()
