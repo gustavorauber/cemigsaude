@@ -5,7 +5,7 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-mobile_patterns = patterns('cemig_saude.mobile.views',    
+mobile_patterns = patterns('cemig_saude.mobile.views',
     url(r'^show/(?P<physician>\w+)/', 'view_physician'),
     url(r'^get/distance/', 'get_physicians_by_distance'),
     url(r'^list/distance/(?P<specialty>\w+)/', 'list_physicians_by_distance'),
@@ -18,6 +18,11 @@ mobile_patterns = patterns('cemig_saude.mobile.views',
     url(r'^$', 'home'),
 )
 
+api_patterns = patterns('cemig_saude.mobile.api',
+    url(r'^api/list/?', 'list_specialties'),
+)
+
 urlpatterns = patterns('',
     url(r'^' + settings.SITE_PREFIX.lstrip('/'), include(mobile_patterns)),
+    url(r'^' + settings.SITE_PREFIX.lstrip('/'), include(api_patterns)),
 )
