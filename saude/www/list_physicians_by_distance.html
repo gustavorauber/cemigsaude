@@ -1,94 +1,61 @@
-{% extends "index_child.html" %}
+<div data-role="page" id="list-physicians-by-distance-page" data-dom-cache="true">
+    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Voltar">
+        <h2 class="title">Especialidade</h2>
+        <a href="#" class="ui-btn ui-btn-right ui-btn-icon-right ui-icon-bars ui-shadow ui-corner-all">Menu</a>
+    </div>
+    <div role="content" class="ui-content">
+        <div class="ui-grid-a">
+            <div class="ui-block-a"><a href="#" class="ui-shadow ui-btn ui-btn-b ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Distância</a></div>
+            <div class="ui-block-b"><a href="list_physicians.html?specialty=" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d">A-Z</a></div>
+        </div>
+        <form>
+            <input type="text" data-type="search" id="physician-distance-input" />
+            <input type="hidden" id="specialty" />
+        </form>
+        <br />
+        <ul id="physician-distance-ul" data-role="listview" data-filter="true" data-input="#physician-distance-input">
 
-{% block page_id %}list-physicians-by-distance-page{% endblock %}
+        </ul>
 
-{% block title %}
-{% if specialty_name %}
-    {{specialty_name|title}}
-{% else %}
-    Múltiplas Especialidades
-{% endif %}
-{% endblock %}
+        <!-- @TODO: load more -->
+        <br />
+        <button id="distance-btn-more" class="ui-btn ui-corner-all ui-shadow">Carregar mais...</button>
+        <!-- @TODO: load more -->
 
-{% block content %}
-<div class="ui-grid-a">
-    <div class="ui-block-a"><a href="#" class="ui-shadow ui-btn ui-btn-b ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Distância</a></div>
-    <div class="ui-block-b"><a href="{{ site_prefix }}/list/{{specialty}}/" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d">A-Z</a></div>    
-</div>
-<form>
-  <input type="text" data-type="search" id="physician-distance-input" />
-</form>
-<br />
-<ul id="physician-distance-ul" data-role="listview" data-filter="true" data-input="#physician-distance-input">
-    {% for p in physicians %}
-        <li>
-            <a href="{{ site_prefix }}/show/{{p.id}}/" title="Ver Detalhes">
-                <p><strong>{{p.name|title}}</strong></p>
-                <span class="ui-li-count">{{p.distance|floatformat:"2"}} km</span>    
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+        <div style="visibility: hidden; display: none;">
+            <li id="physician-li">
+                <a href="#" title="Ver Detalhes">
+                    <p><strong class="physician-name"></strong></p>
+                    <span class="physician-distance ui-li-count"></span>
+                </a>
+            </li>
+        </div>
+    </div>
+    <div class="menu" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
+        <ul data-role="listview">
+            <li data-role="list-divider">Menu</li>
+            <li data-icon="false"><a href="index.html" class="ui-btn ui-btn-icon-left ui-icon-home">&nbsp;</a></li>
+            <li data-icon="false"><a href="map_search.html">Busca</a></li>
+            <li data-icon="false"><a href="list_specialties.html">Listagem por Especialidade</a></li>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <div style="text-align: center;"><img src="img/logo_cemig_saude.gif" /></div>
+    </div>
 
-{% if total > page_size %}
-<br />
-<button id="distance-btn-more" class="ui-btn ui-corner-all ui-shadow">Carregar mais...</button>
-{% endif %}
-
-<div style="visibility: hidden; display: none;">
-    <li id="physician-li">
-        <a href="#" title="Ver Detalhes">
-            <p><strong class="physician-name"></strong></p>
-            <span class="physician-distance ui-li-count"></span>
-        </a>
-    </li>
-</div>
-{% endblock %}
-
-{% block javascript %}
-<script type="text/javascript">
-function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
-
-$(document).bind("pageshow", "#list-physicians-by-distance-page", function() {
-    $('FORM').on('submit', function(e) {
-        e.preventDefault();
-    });
-    
-    $('#distance-btn-more').on('click', function(e){
-        from_record = $('#physician-distance-ul > li').size();
-        
-        postData = { 
-                lat: {{lat}}, 
-                lon: {{lon}},
-                specialty: '{{specialty}}',
-                from_record: from_record
-        };
-        
-        $.post( "{{ site_prefix }}/get/distance/", postData, function( data ) {            
-            $.each(data, function ( index, val ) {    
-            	li = $('#physician-li').clone();
-            	li.find('a').attr('href', '{{ site_prefix }}/show/' + val.id + '/');
-            	li.find('.physician-name').html(toTitleCase(val.name));
-            	
-            	distance = val.distance.toFixed(2) + ' km';
-            	if (val.distance > 10000) {
-            		distance = '&infin;';
-            	}
-            	
-            	li.find('.physician-distance').html(distance);                
-            	
-                $('#physician-distance-ul').append(li);
-            });            
-            
-            $('#physician-distance-ul').listview('refresh');
-            
-            if (data.length < {{page_size}}) {
-            	$('#distance-btn-more').remove();
-            }             	
+    <script type="text/javascript">
+    $(document).bind("pageshow", "#list-physicians-by-distance-page", function(data) {
+        alert('yo2');
+        $('FORM').on('submit', function(e) {
+            e.preventDefault();
         });
+
+        $('#distance-btn-more').on('click', $.mobile.ff.retrievePhysicians);
+
+        $('#physician-distance-ul').empty();
+        $.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
+        $.mobile.ff.retrievePhysicians();
+        $.mobile.loading( 'hide' );
     });
-});
-</script>
-{% endblock %}
+    </script>
+</div>

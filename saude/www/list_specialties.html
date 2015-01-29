@@ -6,6 +6,7 @@
     <div role="content" class="ui-content">
         <form>
             <input type="text" data-type="search" id="specialty-input" />
+            <input type="hidden" id="specialty" />
         </form>
         <br />
         <ul id="specialties" data-role="listview" data-autodividers="true" data-filter="true" data-input="#specialty-input">
@@ -39,7 +40,7 @@
 
     <div style="visibility: hidden; display: none;">
         <li id="specialty-clone">
-            <a href="/list/distance/id">
+            <a href="list_physicians_by_distance.html">
                 <span class="specialty-title"></span>
                 <span class="ui-li-count"></span>
             </a>
@@ -83,6 +84,8 @@
                 parent = $('#specialties');
                 $.each(data, function ( index, val ) {
                     dom = $('#specialty-clone').clone();
+                    dom.attr('id', '');
+
                     if (val.specialty === "") {
                         dom.find('.specialty-title').html("Múltiplas Especialidades");
                     } else {
@@ -90,6 +93,8 @@
                     }
 
                     dom.find('.ui-li-count').html(val.count);
+                    dom.find('a').attr('hash', val.hash);
+
                     parent.append(dom);
                 });
 
