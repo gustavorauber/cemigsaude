@@ -15,3 +15,8 @@ from cemig_saude.model.mongo import get_specialties
 @render_to_json
 def list_specialties(request):
     return get_specialties()
+
+@render_to_json
+def get_physician(request):
+    hash = kwargs.get('physician', '')
+    return get_one_physician(filter_by={'hash': hash})
