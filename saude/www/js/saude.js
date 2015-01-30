@@ -26,7 +26,6 @@ function getParameterByName(uri, name) {
 $(document).bind("pagecreate", "#list_specialties", function() {
     $('#specialties').off("click", "**");
     $('#specialties').on("click", "a", function() {
-        alert('click ' + $(this).attr('hash'));
         $('#specialty').val($(this).attr('hash'));
     });
 });
@@ -153,29 +152,18 @@ $.mobile.ff.retrievePhysicians = function(e) {
         $('#physician-distance-ul').listview('refresh');
 
         if (data.length < $.mobile.ff.pageSize) {
-        	$('#distance-btn-more').remove();
+        	$('#distance-btn-more').hide();
         }
     });
 
     $.mobile.loading( 'hide' );
 };
 
-$(document).bind("pagecreate", "#list-physicians-by-distance-page", function(data) {
-    alert('yo');
-    $('FORM').on('submit', function(e) {
-        e.preventDefault();
-    });
-
-    $('#distance-btn-more').on('click', $.mobile.ff.retrievePhysicians);
-
-    $('#physician-distance-ul').empty();
-    $.mobile.ff.retrievePhysicians();
-});
-
 $(document).bind("pageshow", "#list-physicians-by-distance-page", function(data) {
 
 });
 
+// Global INIT
 $(function() {
 	//$( "[data-role='navbar']" ).navbar();
 	$( "[data-role='header'], [data-role='footer']" ).toolbar();
@@ -183,6 +171,12 @@ $(function() {
     $('.ui-icon-bars').on('click', function(e) {
         $('.ui-page-active .menu').panel('open');
     });
+
+    $('FORM').on('submit', function(e) {
+        e.preventDefault();
+    });
+
+    $('#distance-btn-more').on('click', $.mobile.ff.retrievePhysicians);
 });
 
 // Update the contents of the toolbars
@@ -191,3 +185,13 @@ $( document ).on( "pagecontainerchange", function() {
 	$( "[data-role='header'] h1" ).text( current );
 });
 
+$( document ).on( "pagecontainerbeforeshow", function(event, ui) {
+    prevID = ui.prevPage.attr('id');
+    toID = ui.toPage.attr('id');
+
+    if (prevID === "list_specialties" && toID === "list-physicians-by-distance-page") {
+        $('#physician-distance-ul').empty();
+        $('#distance-btn-more').show();
+        $.mobile.ff.retrievePhysicians();
+    }
+});
