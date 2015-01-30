@@ -10,13 +10,13 @@
 #-------------------------------------------------------------------------------
 
 from cemig_saude.mobile.decorators import render_to_json
-from cemig_saude.model.mongo import get_specialties
+from cemig_saude.model.mongo import get_specialties, get_one_physician
 
 @render_to_json
 def list_specialties(request):
     return get_specialties()
 
 @render_to_json
-def get_physician(request):
+def get_physician(request, *args, **kwargs):
     hash = kwargs.get('physician', '')
     return get_one_physician(filter_by={'hash': hash})
