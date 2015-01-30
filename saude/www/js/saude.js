@@ -31,10 +31,6 @@ $(document).bind("pagecreate", "#list_specialties", function() {
 });
 
 $(document).bind("pagecreate", "#list_specialties", function() {
-    $('FORM').on('submit', function(e) {
-        e.preventDefault();
-    });
-
     var updateURLParams = function (el) {
     	uri = $(el).attr('href');
 
@@ -104,7 +100,7 @@ $(document).bind("pagecreate", "#list_specialties", function() {
         },
         error: function(req, status, error) {
             $.mobile.loading( 'hide' );
-            alert(error);
+            alert('error: ' + error);
         }
     });
 });
@@ -124,8 +120,6 @@ $.mobile.ff.retrievePhysicians = function(e) {
         return;
     }
 
-    $.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
-
     postData = {
             lat: -19.932696,
             lon: -43.944035,
@@ -136,7 +130,8 @@ $.mobile.ff.retrievePhysicians = function(e) {
     $.post( $.mobile.ff.domain + "/get/distance/", postData, function( data ) {
         $.each(data, function ( index, val ) {
         	li = $('#physician-li').clone();
-        	li.find('a').attr('href', 'view_physician.html?id=' + val.id);
+            li.attr('id', '');
+        	li.find('a').attr('hash', val.id);
         	li.find('.physician-name').html(toTitleCase(val.name));
 
         	distance = val.distance.toFixed(2) + ' km';
@@ -155,13 +150,97 @@ $.mobile.ff.retrievePhysicians = function(e) {
         	$('#distance-btn-more').hide();
         }
     });
-
-    $.mobile.loading( 'hide' );
 };
 
 $(document).bind("pageshow", "#list-physicians-by-distance-page", function(data) {
 
 });
+
+/****************************************
+*
+*
+*        Show Physician Methods
+*
+*
+*****************************************/
+$.mobile.ff.showPhysician = function(e) {
+    id = $("#physician").val();
+
+    if (id == undefined || id === "") {
+        return;
+    }
+
+    $.getJSON($.mobile.ff.domain + '/api/physician/' + id, function (physician) {
+        $('#physician-name').html(toTitleCase(physician.name));
+
+        // Especialidades
+        if (physician.specialty == undefined || physician.specialty === "") {
+            $('#view-physician-specialty').hide();
+        } else {
+            $('#physician-specialties').empty();
+
+            if (typeof physician.specialty === "string") {
+                $('#physician-specialties').append("<li>" + toTitleCase(physician.specialty) + "</li>");
+            } else {
+                for (sp in physician.specialty) {
+                    $('#physician-specialties').append("<li>" + toTitleCase(sp) + "</li>");
+                }
+            }
+
+            $('#physician-specialties').listview('refresh');
+            $('#view-physician-specialty').show();
+        }
+
+        // Registro
+        if (physician.register == undefined || physician.register === "") {
+            $('#view-physician-register').hide();
+        } else {
+            $('#physician-register').html(physician.register);
+            $('#view-physician-register').show();
+        }
+
+        // Email
+        if (physician.email == undefined || physician.email === "") {
+            $('#view-physician-email').hide();
+        } else {
+            link = $('#physician-email a');
+            link.attr('href', 'mailto:' + physician.email);
+            link.html(physician.email);
+            $('#view-physician-email').show();
+        }
+
+        // Addresses
+        if (physician.addresses == undefined) {
+            $('#view-physician-addresses').hide();
+        } else {
+            $('#physician-addresses-tab').empty();
+
+            alert(physician.addresses.length);
+            for (i = 0, size = physician.addresses.length; i < size; i++) {
+                ad = physician.addresses[i];
+                li = $('address-li').clone();
+                li.attr('id', '');
+
+                if (i == 0) {
+                    li.attr('class', 'ui-btn-active');
+                }
+
+                link = li.find('a');
+                link.attr('href', '#address-' + i)
+                link.html(ad.neighborhood + ' / ' + toTitleCase(ad.city));
+
+                $('#physician-addresses-tab').append(li);
+            }
+
+            $('#addresses-navbar').attr('data-role', 'navbar');
+            $('#addresses-navbar').trigger('create');
+            $("#addresses-tab" ).tabs();
+            $('#view-physician-addresses').show();
+        }
+
+        $('#physician-page').trigger('create');
+    });
+};
 
 // Global INIT
 $(function() {
@@ -177,6 +256,11 @@ $(function() {
     });
 
     $('#distance-btn-more').on('click', $.mobile.ff.retrievePhysicians);
+
+    $('#physician-distance-ul').off("click", "**");
+    $('#physician-distance-ul').on('click', 'a', function() {
+        $('#physician').val($(this).attr('hash'));
+    });
 });
 
 // Update the contents of the toolbars
@@ -193,5 +277,7 @@ $( document ).on( "pagecontainerbeforeshow", function(event, ui) {
         $('#physician-distance-ul').empty();
         $('#distance-btn-more').show();
         $.mobile.ff.retrievePhysicians();
+    } else if (toID === "physician-page") {
+        $.mobile.ff.showPhysician();
     }
 });

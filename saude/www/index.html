@@ -74,8 +74,7 @@
                 <input type="hidden" id="specialty" />
             </form>
             <br />
-            <ul id="specialties" data-role="listview" data-autodividers="true" data-filter="true" data-input="#specialty-input">
-            </ul>
+            <ul id="specialties" data-role="listview" data-autodividers="true" data-filter="true" data-input="#specialty-input"></ul>
         </div>
 
         <!-- MENU -->
@@ -114,16 +113,13 @@
             <form>
                 <input type="text" data-type="search" id="physician-distance-input" />
                 <input type="hidden" id="specialty" />
+                <input type="hidden" id="physician" />
             </form>
             <br />
-            <ul id="physician-distance-ul" data-role="listview" data-filter="true" data-input="#physician-distance-input">
+            <ul id="physician-distance-ul" data-role="listview" data-filter="true" data-input="#physician-distance-input"></ul>
 
-            </ul>
-
-            <!-- @TODO: load more -->
             <br />
             <button id="distance-btn-more" class="ui-btn ui-corner-all ui-shadow">Carregar mais...</button>
-            <!-- @TODO: load more -->
 
             <!-- MENU -->
             <div data-role="panel" class="menu" data-position="right" data-display="overlay" data-theme="a">
@@ -137,11 +133,68 @@
 
             <div style="visibility: hidden; display: none;">
                 <li id="physician-li">
-                    <a href="#" title="Ver Detalhes">
+                    <a href="#physician-page" title="Ver Detalhes">
                         <p><strong class="physician-name"></strong></p>
                         <span class="physician-distance ui-li-count"></span>
                     </a>
                 </li>
+                <li id="address-li">
+                    <a href="#" data-role="tab"></a>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    *******************************************
+    *
+    *          View Physician Page
+    *
+    *******************************************
+    -->
+    <div data-role="page" id="physician-page" data-title="Conveniado">
+        <div role="content" class="ui-content">
+            <h3 id="physician-name" class="ui-bar ui-bar-b ui-corner-all"></h3>
+
+            <div id="view-physician-specialty">
+                <div class="ui-corner-all custom-corners">
+                    <div id="physicians-specialties-collapsible" data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right">
+                        <h4>Especialidade(s)</h4>
+                        <ul data-role="listview" id="physician-specialties"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-physician-register">
+                <div class="ui-corner-all custom-corners" style="margin-top: 10px;">
+                    <div class="ui-header ui-bar ui-bar-b"><h3>Registro Profissional</h3></div>
+                    <div class="ui-footer ui-body ui-body-a"><span id="physician-register"></span></div>
+                </div>
+            </div>
+
+            <div id="view-physician-email">
+                <div class="ui-corner-all custom-corners" style="margin-top: 10px;">
+                    <div class="ui-header ui-bar ui-bar-b"><h3>E-Mail</h3></div>
+                    <div class="ui-footer ui-body ui-body-a"><span id="physician-email"><a href="#"></a></span></div>
+                </div>
+            </div>
+
+            <div id="view-physician-addresses" class="ui-corner-all ui-shadow" style="padding: 0.5em; margin-top: 10px;">
+            	<div id="addresses-tab" data-role="tabs">
+            	    <div id="addresses-navbar" data-role="navbar">
+            	        <ul id="physician-addresses-tab"></ul>
+            	    </div>
+            	</div>
+            </div>
+
+            <!-- MENU -->
+            <div data-role="panel" class="menu" data-position="right" data-display="overlay" data-theme="a">
+                <ul data-role="listview">
+                    <li data-role="list-divider">Menu</li>
+                    <li data-icon="false"><a href="#index-page" class="ui-btn ui-btn-icon-left ui-icon-home">&nbsp;</a></li>
+                    <li data-icon="false"><a href="map_search.html">Busca</a></li>
+                    <li data-icon="false"><a href="#list_specialties">Listagem por Especialidade</a></li>
+                </ul>
             </div>
         </div>
     </div>
