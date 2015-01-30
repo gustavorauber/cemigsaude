@@ -1,33 +1,33 @@
 {% extends "index.html" %}
 
 {% block header %}
-<div data-role="header" data-add-back-btn="true" data-back-btn-text="Voltar">      
+<div data-role="header" data-add-back-btn="true" data-back-btn-text="Voltar" data-position="fixed">
     <h2>{% block title %}Cemig Saúde{% endblock %}</h2>
     <a href="#" class="ui-btn ui-btn-right ui-btn-icon-right ui-icon-bars ui-shadow ui-corner-all">Menu</a>
 </div>
 {% endblock %}
 
 {% block menu %}
-<div class="menu" data-role="panel" data-position="right" data-display="overlay" data-theme="a">              
+<div class="menu" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
     <ul data-role="listview">
         <li data-role="list-divider">Menu</li>
         <li data-icon="false"><a href="{{ site_prefix }}/" class="ui-btn ui-btn-icon-left ui-icon-home">&nbsp;</a></li>
         <li data-icon="false"><a href="{{ site_prefix }}/map/">Busca</a></li>
         <li data-icon="false"><a href="{{ site_prefix }}/list/">Listagem por Especialidade</a></li>
-    </ul>                
+    </ul>
 </div>
 <script type="text/javascript">
-$('#' + $('div[data-role="page"]').last().attr('id')).on('pageinit', 
+$('#' + $('div[data-role="page"]').last().attr('id')).on('pageinit',
   function(e, data) {
       var page_id = e.target.id;
       $('#' + page_id + ' .ui-icon-bars').on('click', function(e) {
           $('#' + page_id + ' .menu').panel('open');
       });
-    
+
       $('#' + page_id ).on("swipeleft", function(e) {
     	  $('#' + page_id + ' .menu').panel('open');
       });
   }
-);         
+);
 </script>
 {% endblock %}
