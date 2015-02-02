@@ -263,6 +263,12 @@ $(function() {
     });
 });
 
+$( document ).ready(function() {
+    $('body').on("swipeleft", function(e) {
+        $('.ui-page-active .menu').panel('open');
+    });
+});
+
 // Update the contents of the toolbars
 $( document ).on( "pagecontainerchange", function() {
 	var current = $( ".ui-page-active" ).jqmData( "title" );
@@ -280,4 +286,9 @@ $( document ).on( "pagecontainerbeforeshow", function(event, ui) {
     } else if (toID === "physician-page") {
         $.mobile.ff.showPhysician();
     }
+});
+
+
+$(document).bind("mobileinit", function(){
+  $.mobile.defaultPageTransition="none";
 });
