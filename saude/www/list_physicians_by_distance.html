@@ -1,61 +1,37 @@
-<div data-role="page" id="list-physicians-by-distance-page" data-dom-cache="true">
-    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Voltar">
-        <h2 class="title">Especialidade</h2>
-        <a href="#" class="ui-btn ui-btn-right ui-btn-icon-right ui-icon-bars ui-shadow ui-corner-all">Menu</a>
-    </div>
-    <div role="content" class="ui-content">
-        <div class="ui-grid-a">
-            <div class="ui-block-a"><a href="#" class="ui-shadow ui-btn ui-btn-b ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Distância</a></div>
-            <div class="ui-block-b"><a href="list_physicians.html?specialty=" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d">A-Z</a></div>
-        </div>
-        <form>
-            <input type="text" data-type="search" id="physician-distance-input" />
-            <input type="hidden" id="specialty" />
-        </form>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta charset="utf-8" />
+    <title>Cemig Saúde</title>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!--link rel="stylesheet" href="css/saude.min.css" /-->
+    <link rel="stylesheet" href="css/ratchet.min.css" />
+    <link rel="stylesheet" href="css/ratchet-theme-ios.min.css" />
+    <link rel="stylesheet" href="css/saude-custom.css" />
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/ratchet.min.js"></script>
+</head>
+<body>
+    <header class="bar bar-nav">
+        <a class="icon icon-left-nav pull-left" href="list_specialties.html" data-transition="slide-out"></a>
+        <h1 class="title"><strong>Especialidades</strong></h1>
+    </header>
+
+    <div class="content" id="page-physicians">
+        <ul class="table-view" id="physicians"></ul>
+
         <br />
-        <ul id="physician-distance-ul" data-role="listview" data-filter="true" data-input="#physician-distance-input">
-
-        </ul>
-
-        <!-- @TODO: load more -->
-        <br />
-        <button id="distance-btn-more" class="ui-btn ui-corner-all ui-shadow">Carregar mais...</button>
-        <!-- @TODO: load more -->
-
-        <div style="visibility: hidden; display: none;">
-            <li id="physician-li">
-                <a href="#" title="Ver Detalhes">
-                    <p><strong class="physician-name"></strong></p>
-                    <span class="physician-distance ui-li-count"></span>
-                </a>
-            </li>
+        <div class="card">
+            <button id="distance-btn-more" class="btn btn-block">Carregar mais...</button>
         </div>
     </div>
-    <div class="menu" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
-        <ul data-role="listview">
-            <li data-role="list-divider">Menu</li>
-            <li data-icon="false"><a href="index.html" class="ui-btn ui-btn-icon-left ui-icon-home">&nbsp;</a></li>
-            <li data-icon="false"><a href="map_search.html">Busca</a></li>
-            <li data-icon="false"><a href="list_specialties.html">Listagem por Especialidade</a></li>
-        </ul>
-    </div>
-    <div data-role="footer">
-        <div style="text-align: center;"><img src="img/logo_cemig_saude.gif" /></div>
-    </div>
 
-    <script type="text/javascript">
-    $(document).bind("pageshow", "#list-physicians-by-distance-page", function(data) {
-        alert('yo2');
-        $('FORM').on('submit', function(e) {
-            e.preventDefault();
-        });
-
-        $('#distance-btn-more').on('click', $.mobile.ff.retrievePhysicians);
-
-        $('#physician-distance-ul').empty();
-        $.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
-        $.mobile.ff.retrievePhysicians();
-        $.mobile.loading( 'hide' );
-    });
-    </script>
-</div>
+    <nav class="bar bar-tab">
+        <div class="tab-item" style="text-align: center;"><img src="img/logo_cemig_saude.gif" /></div>
+    </nav>
+</body>
+</html>

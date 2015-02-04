@@ -1,5 +1,5 @@
 
-var domain = 'http://127.0.0.1:8000';
+var domain = 'https://fb.cemig.com.br/saude';
 var pageSize = 20;
 
 var toTitleCase = function (str) {
@@ -11,32 +11,27 @@ var getParameterByName = function(uri, name) {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
+var createSpecialty = function( sp ) {
+    return '<li class="table-view-cell">' +
+                '<a class="navigate-right" href="list_physicians_by_distance.html?hash=' + sp.hash + '" data-transition="slide-in">' +
+                    '<small>' + ((sp.specialty === "") ? "M&uacute;ltiplas Especialidades" : toTitleCase(sp.specialty)) + '</small>' +
+                    '<span class="badge">' + sp.count + '</span>' +
+                '</a>' +
+            '</li>';
+};
+
 var loadSpecialties = function() {
     $.ajax({
         url: domain + "/api/list/",
         crossDomain: true,
         success: function( data ) {
             parent = $('#specialties');
+            parent.empty();
+
             $.each(data, function ( index, val ) {
-                li = $('#specialty-clone').clone();
-                li.removeAttr('id');
-
-                if (val.specialty === "") {
-                    li.find('.specialty-title').html("M&uacute;ltiplas Especialidades");
-                } else {
-                    li.find('.specialty-title').html(toTitleCase(val.specialty));
-                }
-
-                li.find('.badge').html(val.count);
-                href = li.find('a').attr('href');
-                li.find('a').attr('hash', val.hash);
-                li.find('a').attr('href', href + '?hash=' + val.hash);
-
+                li = createSpecialty(val);
                 parent.append(li);
             });
-
-
-            //$('#specialties').listview('refresh');
 
             window.latitude = -19.932696;
             window.longitude = -43.944035;
@@ -71,6 +66,20 @@ var loadSpecialties = function() {
 *
 *
 *****************************************/
+var createPhysician = function ( p ) {
+    distance = p.distance.toFixed(2) + ' km';
+	if (p.distance > 10000) {
+		distance = '&infin;';
+	}
+
+    return  '<li class="table-view-cell">' +
+                '<a class="navigate-right" href="view_physician.html?hash=' + p.id + '" data-transition="slide-in">' +
+                    '<small>' + toTitleCase(p.name) + '</small>' +
+                    '<span class="badge">' + distance + '</span>' +
+                '</a>' +
+            '</li>';
+};
+
 var retrievePhysicians = function(e) {
     from_record = $('#physician-distance-ul > li').size();
     specialty = getParameterByName(window.location.href, 'hash');
@@ -96,31 +105,118 @@ var retrievePhysicians = function(e) {
         console.info(data);
         parent = $('#physicians');
         $.each(data, function ( index, val ) {
-        	li = $('#physician-clone').clone();
-            li.removeAttr('id');
-
-        	li.find('a').attr('hash', val.id);
-        	li.find('.physician-name').html(toTitleCase(val.name));
-
-        	distance = val.distance.toFixed(2) + ' km';
-        	if (val.distance > 10000) {
-        		distance = '&infin;';
-        	}
-
-        	li.find('.physician-distance').html(distance);
-
-            console.info(li.html());
+        	li = createPhysician(val);
             parent.append(li);
         });
 
-
         if (data.length < pageSize) {
             console.info(data.length + ' ' + pageSize);
-        	$('#distance-btn-more').hide();
+            console.info($('#distance-btn-more-container'));
+        	$('#distance-btn-more-container').hide();
         } else {
-            $('#distance-btn-more').show();
+            $('#distance-btn-more-container').show();
         }
     }});
+};
+
+/****************************************
+*
+*
+*        Show Physician Methods
+*
+*
+*****************************************/
+var showPhysician = function(e) {
+    id = getParameterByName(window.location.href, 'hash');
+
+    if (id == undefined || id === "") {
+        return;
+    }
+
+    $.getJSON(domain + '/api/physician/' + id, function (physician) {
+        $('#physician-name').html(toTitleCase(physician.name));
+
+        // Especialidades
+        if (physician.specialty == undefined || physician.specialty === "") {
+            $('#physician-specialties-container').hide();
+        } else {
+            //$('#physician-specialties').empty();
+
+            if (typeof physician.specialty === "string") {
+                $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty) + "</li>");
+            } else {
+                for (sp in physician.specialty) {
+                    $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(sp) + "</li>");
+                }
+            }
+
+            $('#physician-specialties-container').show();
+        }
+
+        // Registro
+        console.info('register = "' + physician.register + '"');
+        if (physician.register == undefined || physician.register === "") {
+            console.info('hiding');
+            $('#physician-register-container').hide();
+        } else {
+            //$('#physician-register').empty();
+            $('#physician-register').append("<li class='table-view-cell'>" + physician.register + "</li>");
+            $('#physician-register-container').show();
+        }
+
+        // Email
+        if (physician.email == undefined || physician.email === "") {
+            $('#physician-email-container').hide();
+        } else {
+            link = $('#physician-email a');
+            link.attr('href', 'mailto:' + physician.email);
+            link.html(physician.email);
+            $('#physician-email-container').show();
+        }
+
+        // Addresses
+        if (physician.addresses == undefined) {
+            $('#physician-addresses-container').hide();
+        } else {
+            $('#physician-addresses-header').empty();
+            $('#physician-addresses').empty();
+
+            alert(physician.addresses.length);
+            for (i = 0, size = physician.addresses.length; i < size; i++) {
+                ad = physician.addresses[i];
+                link =  '<a class="control-item' + ((i == 0) ? " active" : "") + '" href="#address' + i + '">' +
+                            ad.neighborhood + ' / ' + toTitleCase(ad.city) +
+                        '</a>';
+
+                $('#physician-addresses-header').append(link);
+
+                address = toTitleCase(ad.street) + '<br />' + ad.neighborhood + '<br />' + toTitleCase(ad.city);
+                phone = '';
+
+                if (ad.phones != undefined && ad.phones.length > 0) {
+                    if (typeof physician.specialty === "string") {
+                        phone = ad.phones;
+                    } else {
+                        phone = ad.phones[0];
+                    }
+                }
+
+                info =  '<div id="address' + i + '" class="control-content' + ((i == 0) ? " active" : "") + '">' +
+                            '<ul class="table-view" id="physician-specialties">' +
+                                '<li class="table-view-cell table-view-divider">Telefone</li>' +
+                                '<li class="table-view-cell"><a href="tel:' + phone + '" data-ignore="push">' + phone + '</a></li>' +
+                                '<li class="table-view-cell table-view-divider">Endere&ccedil;o</li>' +
+                                '<li class="table-view-cell">' + address + '</li>' +
+                            '</ul>' +
+                        '</div>';
+
+
+                $('#physician-addresses').append(info);
+            }
+
+            $('#physician-addresses-container').show();
+        }
+    });
 };
 
 var pageChanged = function( data ) {
@@ -129,17 +225,12 @@ var pageChanged = function( data ) {
     if (document.getElementById('page-specialties')) {
         console.info('page-specialties');
         loadSpecialties();
-        $('#specialties').off("touchstart", "**");
-        $('#specialties').on("touchstart", "a", function() {
-            console.info('touchstart registered');
-            $('#specialty').val($(this).attr('hash'));
-            console.info($(this).attr('hash'));
-        });
     } else if (document.getElementById('page-physicians')) {
         console.info('page-physicians');
-        $('#physician-distance-ul').empty();
-        $('#distance-btn-more').show();
         retrievePhysicians();
+    } else if (document.getElementById('page-physician')) {
+        console.info('page-physician');
+        showPhysician();
     }
 };
 
