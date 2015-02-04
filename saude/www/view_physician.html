@@ -1,214 +1,66 @@
-{% extends "index_child.html" %}
-{% load mobile_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta charset="utf-8" />
+    <title>Cemig Saúde</title>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!--link rel="stylesheet" href="css/saude.min.css" /-->
+    <link rel="stylesheet" href="css/ratchet.min.css" />
+    <link rel="stylesheet" href="css/ratchet-theme-ios.min.css" />
+    <link rel="stylesheet" href="css/saude-custom.css" />
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/ratchet.min.js"></script>
+</head>
+<body>
+    <header class="bar bar-nav">
+        <a class="icon icon-left-nav pull-left" href="javascript:history.back();" data-transition="slide-out"></a>
+        <h1 class="title"><strong>Conveniado</strong></h1>
+    </header>
 
-{% block page_id %}physician-page{% endblock %}
+    <div class="content" id="page-physician">
+        <div class="card">
+            <div class="content-padded" style="text-align: center;">
+                <h4><small id="physician-name"></small></h4>
+            </div>
+        </div>
 
-{% block title %}{{physician.get_name|title}}{% endblock %}          
-
-{% block content %}
-<div id="view-physician-page">
-    {% if physician.get_specialty %}
-    <div class="ui-corner-all custom-corners">
-        <div data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right">
-            <h4>Especialidade(s)</h4>
-            <ul data-role="listview">
-                {% if physician.get_specialty|is_instance_of:"list" %}
-                    {% for sp in physician.get_specialty %}
-                        <li>{{sp|title}}</li>
-                    {% endfor %}
-                {% else %}
-                    <li>{{physician.get_specialty|title}}</li>
-                {% endif %}
+        <div class="card" id="physician-specialties-container">
+            <ul class="table-view" id="physician-specialties">
+                <li class="table-view-cell table-view-divider">Especialidade(s)</li>
             </ul>
         </div>
-    </div>
-    {% endif %}
-    
-    {% if physician.get_register %}
-    <div class="ui-corner-all custom-corners" style="margin-top: 10px;">
-        <div class="ui-header ui-bar ui-bar-b"><h3>Registro Profissional</h3></div>
-        <div class="ui-footer ui-body ui-body-a"><span >{{physician.get_register}}</span></div>
-    </div>
-    {% endif %}
-    
-    {% if physician.get_email %}
-    <div class="ui-corner-all custom-corners" style="margin-top: 10px;">
-        <div class="ui-header ui-bar ui-bar-b"><h3>E-Mail</h3></div>
-        <div class="ui-footer ui-body ui-body-a"><span ><a href="mailto:{{physician.get_email}}">{{physician.get_email}}</a></span></div>
-    </div>
-    {% endif %}
-    <div class="ui-corner-all ui-shadow" style="padding: 0.5em; margin-top: 10px;">
-    	<div id="addresses-tab">    	
-    	    <div data-role="navbar" id="addresses-navbar">
-    	        <ul>
-    	            {% for a in physician.get_addresses %}
-    	            <li><a href="#address-{{forloop.counter0}}" data-role="tab" {% if forloop.counter0 == 0 %}class="ui-btn-active"{% endif %}>{{a.neighborhood}} / {{a.city|title}}</a>
-    	            {% endfor %}
-    	        </ul>
-    	    </div>
-    	    {% for a in physician.get_addresses %}
-    		<div id="address-{{forloop.counter0}}" style="padding-top: 10px;">    
-    		    <table data-role="table" data-mode="reflow" id="physician-data-{{forloop.counter}}">
-    		        <thead>
-    		            <tr>
-    		                <th>Telefone</th>
-    		                <th>Endereço</th>
-    		            </tr>
-    		        </thead>
-    		        <tbody>
-    		            <tr>
-    		                <td>
-    		                   {% if a.phone|is_instance_of:"list" %}
-    		                       {% for phone in a.phone %}
-    		                       <a href="tel:{{phone}}">{{phone}}</a>&nbsp;
-    		                       {% endfor %}
-    		                   {% else %} 
-    		                   <a href="tel:{{a.phone}}">{{a.phone}}</a>
-    		                   {% endif %}
-    		                </td>
-    		                <td>
-    		                    <a href="https://maps.google.com/maps?z=12&t=m&q=loc:{{a.lat}}+{{a.lon}}">{{a.street|title}}, {{a.neighborhood}}, {{a.city|title}}</a>
-    		                </td>
-    		            </tr>            
-    		        </tbody>
-    		    </table>
-    		</div>    
-    	    {% endfor %}
-    	</div>
-    </div>
-    <div class="ui-bar ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em; margin-top: 10px;">
-        <div id="physician-map" style="height:400px;"></div>
-    </div>
-    <div class="ui-bar ui-bar-c ui-corner-all ui-shadow" style="padding: 0.5em; margin-top: 10px; display: none;">
-        <div id="directions"></div>
-    </div>
-</div>
-{% endblock %}    
 
-{% block javascript %}
-<script type="text/javascript">
-$(document).on("pageshow", "#physician-page", function(event) {
-	
-	$.fn.navigateTo = function ( idx ) {
-		if (navigator.geolocation) {
-			$.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
-			
-			markerTarget = window.markers[idx];
-			
-		    navigator.geolocation.getCurrentPosition(function (position) {                                                              
-	           window.latitude = position.coords.latitude;                  
-	           window.longitude = position.coords.longitude;
-	           var coords = new google.maps.LatLng(window.latitude, window.longitude); 
-	           
-	           if (window.directionsDisplay == undefined) {
-	               window.directionsDisplay = new google.maps.DirectionsRenderer();   
-	           }
-	        
-	           var directionsService = new google.maps.DirectionsService();
-	        
-	           window.directionsDisplay.setMap(window.map);     
-	           window.directionsDisplay.setPanel(document.getElementById("directions"));        
-	        
-	           var request = {
-	              origin: coords,
-	              destination: markerTarget.getPosition(),
-	              travelMode: google.maps.TravelMode.DRIVING
-	              // Note that Javascript allows us to access the constant
-	              // using square brackets and a string value as its
-	              // "property."
-	              //travelMode: google.maps.TravelMode[selectedMode]        
-	           };
-	        
-	           directionsService.route(request, function(response, status) {           
-	               if (status == google.maps.DirectionsStatus.OK) {             
-	                   $('#directions').empty();                
-	                   window.directionsDisplay.setDirections(response);
-	                   $('#directions').parent().show();
-	                   $.mobile.loading( 'hide' );
-	               }        
-	           });      
-	       });
-	    }
-		
-		return false;
-	};
-	
-	$(function() {
-        $( "#addresses-tab" ).tabs();
-    });
-	
-	$('#addresses-navbar a').click(function(e) {		
-		href = $(this).attr('href');
-		id = href.substring(href.indexOf('-') + 1);
-		google.maps.event.trigger(eval("marker" + id), 'click');
-	});
-	
-	if (window.markers != undefined) {
-		for (i = 0; i < window.markers.length; i++) {
-			window.markers[i].setMap(null);
-		}
-	}
-	
-	window.markers = [];
-	window.markersBounds = new google.maps.LatLngBounds();
-	$('#directions').empty();
-	$('#physician-map').empty();    
-	
-	var myLatLng = null;
-	
-    {% for addr in physician.get_addresses %}
-        {% if addr.lat %}
-            {% if forloop.first %}
-            myLatLng = new google.maps.LatLng({{addr.lat}}, {{addr.lon}}); 
-            var mapOptions = {
-              zoom: 15,
-              center: myLatLng
-            };
-            window.map = new google.maps.Map(document.getElementById('physician-map'), mapOptions);    
-            {% endif %}        
-            
-            var contentString{{forloop.counter0}} = '<div class="ginfo">'+
-            '<div>'+
-            '<h2 class="firstHeading">{{physician.get_name|title}}</h2>'+
-            '</div>'+        
-            '<div>'+
-            '<b>Endereço</b>: {{addr.street|title}} ' +      
-            '<br /><br /><a onClick="$.fn.navigateTo({{forloop.counter0}});">Direções</a>&nbsp;&nbsp;-&nbsp;&nbsp;<a href="https://maps.google.com/maps?z=12&t=m&q=loc:{{addr.lat}}+{{addr.lon}}">GPS</a>' +
-            '</p>'+
-            '</div>'+
-            '</div>';
-    
-            var infoWindow{{forloop.counter0}} = new google.maps.InfoWindow();
-            infoWindow{{forloop.counter0}}.setContent(contentString{{forloop.counter0}});
-    	    
-    	    var latlng{{forloop.counter0}} = new google.maps.LatLng({{addr.lat}}, {{addr.lon}});
-    	    var marker{{forloop.counter0}} = new google.maps.Marker({
-    	        position: latlng{{forloop.counter0}},
-    	        map: window.map,
-    	        title: '{{physician.get_name|title}}'
-    	    });
-    	    
-    	    window.markers.push(marker{{forloop.counter0}});
-    	    window.markersBounds.extend(latlng{{forloop.counter0}});
-    	
-    	    google.maps.event.addListener(marker{{forloop.counter0}}, 'click', function() {
-    	    	for (i = 0; i < window.markers.length; i++) {
-    	    		eval("infoWindow" + i).close();
-    	        }
-    	        infoWindow{{forloop.counter0}}.open(window.map, marker{{forloop.counter0}});
-    	        window.map.setCenter(marker{{forloop.counter0}}.getPosition());
-    	    });	    
-        {% endif %} 
-    {% endfor %}
-    
-    {% if physician.num_addresses > 1 %}
-    window.map.fitBounds(window.markersBounds);
-    {% endif %}
-    google.maps.event.trigger(marker0, 'click');    
-    
-    //google.maps.event.trigger(window.map, 'resize');
-    //window.map.setCenter(myLatlng);        
-    
-});
-</script>    
-{% endblock %}
+        <div class="card" id="physician-register-container">
+            <ul class="table-view" id="physician-register">
+                <li class="table-view-cell table-view-divider">Registro Profissional</li>
+            </ul>
+        </div>
+
+        <div class="card" id="physician-email-container">
+            <ul class="table-view" id="physician-email">
+                <li class="table-view-cell table-view-divider">E-Mail</li>
+                <li class="table-view-cell"><a href="#"></a></li>
+            </ul>
+        </div>
+
+        <div id="physician-addresses-container">
+            <div class="card">
+                <div class="segmented-control" id="physician-addresses-header"></div>
+            </div>
+
+            <div class="card" id="physician-addresses"></div>
+
+            <div class="card" id="physician-map" style="height:400px;"></div>
+            <div class="card" id="directions"></div>
+        </div>
+    </div>
+
+    <nav class="bar bar-tab">
+        <div class="tab-item" style="text-align: center;"><img src="img/logo_cemig_saude.gif" /></div>
+    </nav>
+</body>
+</html>
