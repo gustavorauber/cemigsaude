@@ -191,6 +191,19 @@ var showPhysician = function(e) {
                 $('#physician-addresses-header').append(link);
 
                 address = toTitleCase(ad.street) + '<br />' + ad.neighborhood + '<br />' + toTitleCase(ad.city);
+
+                try {
+                    console.info(ad);
+                    if (ad.geocode.status == "OK" && ad.geocode.results.length > 0) {
+                        lat = ad.geocode.results[0].geometry.location.lat;
+                        lng = ad.geocode.results[0].geometry.location.lng;
+
+                        address = '<a href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-ignore="push">' + address + '</a>';
+                    }
+                } catch (err) {
+                    console.error(err);
+                }
+
                 phone = '';
 
                 if (ad.phones != undefined && ad.phones.length > 0) {
@@ -200,7 +213,6 @@ var showPhysician = function(e) {
                         phone = ad.phones[0];
                     }
                 }
-
                 info =  '<div id="address' + i + '" class="control-content' + ((i == 0) ? " active" : "") + '">' +
                             '<ul class="table-view" id="physician-specialties">' +
                                 '<li class="table-view-cell table-view-divider">Telefone</li>' +
