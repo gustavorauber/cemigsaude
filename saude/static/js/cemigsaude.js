@@ -145,8 +145,8 @@ var showPhysician = function(e) {
             if (typeof physician.specialty === "string") {
                 $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty) + "</li>");
             } else {
-                for (sp in physician.specialty) {
-                    $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(sp) + "</li>");
+                for (i=0, size = physician.specialty.length; i < size; i++) {
+                    $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty[i]) + "</li>");
                 }
             }
 
@@ -181,7 +181,7 @@ var showPhysician = function(e) {
             $('#physician-addresses-header').empty();
             $('#physician-addresses').empty();
 
-            alert(physician.addresses.length);
+            console.info(physician.addresses.length);
             for (i = 0, size = physician.addresses.length; i < size; i++) {
                 ad = physician.addresses[i];
                 link =  '<a class="control-item' + ((i == 0) ? " active" : "") + '" href="#address' + i + '">' +
