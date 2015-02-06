@@ -31,6 +31,7 @@ DATABASES = {
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'cemig_saude.mobile.views.context_processor',
+    'django_mobile.context_processors.flavour',
 )
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -101,6 +102,7 @@ SECRET_KEY = '0wkle)1$xyu68+jiht@v4_8m#15z*0uf)%oplu$sc=9try46wa'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+    'django_mobile.loader.Loader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
@@ -114,6 +116,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware'
 )
 
 ROOT_URLCONF = 'cemig_saude.urls'
@@ -138,7 +142,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'cemig_saude.mobile'
+    'cemig_saude.mobile',
+    'django_mobile'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -175,3 +180,5 @@ MONGO_HOST = "127.0.0.1"
 MONGO_PORT = 27017
 
 PAGE_SIZE = 20
+
+FLAVOURS = ('full', 'mobile')
