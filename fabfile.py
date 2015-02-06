@@ -211,7 +211,7 @@ def deploy(branch=None):
     """    
     env.release = time.strftime('%Y%m%d%H%M%S')
     
-    __upload_tar_from_git(branch)
+    __upload_tar_from_git(branch=branch)
     __symlink_current_release()
     __install_site()
     reload_nginx()

@@ -1,0 +1,180 @@
+{% extends "index_child.html" %}
+
+{% block page_id %}search-page{% endblock %}
+
+{% block title %}Busca{% endblock %}          
+
+{% block content %}
+<div class="ui-bar-c ui-corner-all ui-shadow" style="padding: 1em;" id="map-search-page">
+    <form id="form" action="#">
+        <div class="ui-field-contain" style="border: 0;">
+            <label for="search"><strong>Busca</strong></label>
+            <input id="search" class="ui-bar-c" type="text" placeholder="ex: Pediatria" />
+        </div>
+        <div class="ui-field-contain" style="border: 0;" >
+	        <label for="distance"><strong>Distância máxima (Kms):</strong></label>
+	        <input type="range" id="distance" value="5" min="1" max="50" />
+        </div>                
+        <a id="submit" href="#" data-role="button" data-icon="search" data-corners="true" data-iconpos="right" data-inline="false">Buscar conveniados</a>
+        <div id="search-map" style="height:400px;"></div>
+    </form>
+</div>
+<div id="no-results" class="ui-content" data-role="popup" data-overlay-theme="b" data-theme="a">
+    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fechar</a> 
+    <h3>Nenhum resultado encontrado</h3>    
+</div>
+{% endblock %}    
+
+{% block javascript %}
+<script type="text/javascript">
+var searchPageMapInit = function () {	
+	window.latitude = -19.932696;
+    window.longitude = -43.944035;
+    var coords = new google.maps.LatLng(window.latitude, window.longitude);
+    var mapOptions = {
+      zoom: 14,
+      center: coords
+    };
+    window.map = new google.maps.Map(document.getElementById('search-map'), 
+    		mapOptions);
+};
+
+$(document).on("pageshow", "#search-page", function(event) {	
+	$('#search').focus();
+
+    window.markers = [];
+    window.markersBounds = new google.maps.LatLngBounds();
+    
+    window.infoWindow = new google.maps.InfoWindow;
+    
+    var onMarkerClick = function() {
+    	info = "<div class='ginfo'>" + 
+        "<h3><a href=\"{{ site_prefix }}/show/" + this.val.id + "\">"+ this.val.name +"</a></h3>" + 
+        "<h4>";
+        
+        if (this.val.specialty.length > 5) {
+        	info += "Múltiplas Especialidades";
+        } else {
+        	info += this.val.specialty;
+        }
+        
+        info += "</h4><p>" + 
+            "<b>Tel</b>: " + this.address.phones +
+            "<br /><b>Endereço</b>: " + this.address.street +
+            "<br />" + this.address.neighborhood +
+        "</p>" +
+        "</div>"; 
+    	
+    	window.infoWindow.setContent(info);
+        window.infoWindow.open(window.map, this);
+        window.map.setCenter(this.getPosition());
+    };
+    
+    var getDistanceFromLatLonInKm = function(lat1,lon1,lat2,lon2) {
+    	var deg2rad = 0.017453292519943295; // === Math.PI / 180
+        var cos = Math.cos;
+        lat1 *= deg2rad;
+        lon1 *= deg2rad;
+        lat2 *= deg2rad;
+        lon2 *= deg2rad;
+        var a = (
+            (1 - cos(lat2 - lat1)) +
+            (1 - cos(lon2 - lon1)) * cos(lat1) * cos(lat2)
+        ) / 2;
+        
+        return 12742 * Math.asin(Math.sqrt(a)); // Diameter of the earth in km (2 * 6371)
+	};	
+    
+    var performSearch = function(e) {
+        e.preventDefault();
+        postData = { 
+            q: $('#search').val(), 
+        	d: $('#distance').val(),
+        	lat: window.latitude,
+        	lon: window.longitude
+        };
+        
+        $.mobile.loading( 'show' , {theme: 'b', text: 'carregando...', textVisible: true});
+       
+        $.post( "{{ site_prefix }}/search", postData, function( data ) {
+            for (var i = 0; i < window.markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            window.markers = [];
+            window.markersBounds = new google.maps.LatLngBounds();
+            
+            q_dist = parseInt($('#distance').val());
+            
+            $.each(data, function ( index, val ) {                
+                for (i=0; i < val.addresses.length; i++) {                      
+                    address = val.addresses[i];                     
+                    if ( address.geocode != undefined ) {
+                        results = address.geocode.results;
+                        if (results.length > 0) {
+                            result = results[0];
+                            l = result.geometry.location;
+                            
+                            if (val.addresses.length == 1 || getDistanceFromLatLonInKm(window.latitude, window.longitude, l.lat, l.lng) < q_dist) {
+                                position = new google.maps.LatLng(l.lat, l.lng);
+                                marker = new google.maps.Marker({
+                                    position: position,
+                                    map: window.map
+                                });
+                                marker.val = val;
+                                marker.address = address;
+                                google.maps.event.addListener(marker, 'click', 
+                                    onMarkerClick
+                                );
+                                window.markers.push(marker);
+                                window.markersBounds.extend(position);                            
+                            }
+                        }
+                    }
+                }
+            });
+            
+            $.mobile.loading( 'hide' );
+            
+            if (!window.markersBounds.isEmpty()) {
+            	window.map.fitBounds(window.markersBounds);	
+            } else {
+            	$('#no-results').popup("open");
+            	window.map.setZoom(15);
+            }
+        });
+    };
+    
+    $('#submit').on({
+        click: performSearch        
+    });
+    
+    $('#form').on({        
+        submit: performSearch
+    });
+    
+    $('#search').keypress(function(e) {
+        if (e.which == 13) {        	
+        	performSearch(e);            
+        }
+    });
+    
+    searchPageMapInit();
+    
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            window.latitude = position.coords.latitude;                  
+            window.longitude = position.coords.longitude;
+            var coords = new google.maps.LatLng(window.latitude, 
+            	window.longitude); 
+            var mapOptions = {
+                zoom: 14,  
+                center: coords
+            };
+            window.map = new google.maps.Map(
+            		document.getElementById('search-map'), mapOptions);         
+        }, function(e) { console.debug('error')}, {enableHighAccuracy: true, 
+            timeout: 1000});
+    }    
+});
+</script>    
+{% endblock %}
