@@ -1,0 +1,83 @@
+{% extends "default_child.html" %}
+{% load mobile_tags %}
+
+{% block title %}{{physician.get_name|title}}{% endblock %}
+
+{% block content %}
+<div class="content" id="page-physician">
+    {% if physician.get_specialty %}
+    <div class="card" id="physician-specialties-container">
+        <ul class="table-view" id="physician-specialties">
+            <li class="table-view-cell table-view-divider">Especialidade(s)</li>
+            {% if physician.get_specialty|is_instance_of:"list" %}
+                {% for sp in physician.get_specialty %}
+                    <li class="table-view-cell">{{sp|title}}</li>
+                {% endfor %}
+            {% else %}
+                <li class="table-view-cell">{{physician.get_specialty|title}}</li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if physician.get_register %}
+    <div class="card">
+        <ul class="table-view">
+            <li class="table-view-cell table-view-divider">Registro Profissional</li>
+            <li class="table-view-cell">{{physician.get_register}}</li>
+        </ul>
+    </div>
+    {% endif %}
+    
+    {% if physician.get_email %}
+    <div class="card">
+        <ul class="table-view">
+            <li class="table-view-cell table-view-divider">E-Mail</li>
+            <li class="table-view-cell"><a href="mailto:{{physician.get_email}}" data-ignore="push">{{physician.get_email}}</a></li>
+        </ul>
+    </div>
+    {% endif %}
+    
+    <div id="physician-addresses-container">
+        <div class="card">
+            <div class="segmented-control">
+            {% for a in physician.get_addresses %}
+                <a class="control-item {% if forloop.counter0 == 0 %}active{% endif %}" href="#address-{{forloop.counter0}}">{{a.neighborhood}} / {{a.city|title}}</a>
+                {% if forloop.counter|divisibleby:2 and not forloop.last%}
+                </div>
+                <div class="segmented-control">
+                {% endif %}                                    
+            {% endfor %}
+            </div>
+        </div>
+
+        <div class="card" id="physician-addresses">
+            {% for a in physician.get_addresses %}
+            <div id="address-{{forloop.counter0}}" class="control-content {% if forloop.counter0 == 0 %}active{% endif %}">
+                <ul class="table-view">
+                    <li class="table-view-cell table-view-divider">Telefone</li>
+                    {% if a.phone|is_instance_of:"list" %}
+                       {% for phone in a.phone %}
+                       <li class="table-view-cell"><a href="tel:{{phone}}" data-ignore="push">{{phone}}</a></li>
+                       {% endfor %}
+                    {% else %} 
+                       <li class="table-view-cell"><a href="tel:{{a.phone}}" data-ignore="push">{{a.phone}}</a></li>
+                    {% endif %}
+                    <li class="table-view-cell table-view-divider">Endere&ccedil;o</li>
+                    <li class="table-view-cell">
+                        <a href="geo:{{a.lat}},{{a.lon}};u=35;q={{a.lat}},{{a.lon}}" data-ignore="push">
+                            {{a.street|title}}<br />
+                            {{a.neighborhood}}<br />
+                            {{a.city|title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>      
+            {% endfor %}
+        </div>
+
+        <div class="card" id="physician-map" style="height:400px;"></div>
+        <div class="card" id="directions"></div>
+    </div>
+</div>
+{% endblock %}

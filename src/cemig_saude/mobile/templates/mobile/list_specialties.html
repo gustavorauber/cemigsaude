@@ -1,0 +1,24 @@
+{% extends "default_child.html" %}
+
+{% block title %}Especialidades{% endblock %}
+    
+{% block content %}
+<div class="content" id="page-specialties">
+    <ul class="table-view" id="specialties">
+        {% for s in specialties %}
+        <li class="table-view-cell">
+            <a href="{{ site_prefix }}/list/distance/{{s.id}}/" data-transition="slide-in">
+                <small>
+                {% if s.specialty %}
+                    {{s.specialty|title}}
+                {% else %}
+                    M&uacute;ltiplas Especialidades
+                {% endif %}
+                </small>
+                <span class="badge">{{s.count}}</span>
+            </a>
+        </li>
+        {% endfor %}    
+    </ul>
+</div>
+{% endblock %}

@@ -23,6 +23,9 @@ def context_processor(request):
 
 def home(request, *args, **kwargs):
     ctx = {}
+    print request
+    print request.flavour
+    print settings.FLAVOURS
     return render_to_response('index.html', ctx,
                               context_instance=RequestContext(request))
     
@@ -56,7 +59,7 @@ def view_specialties(request, *args, **kwargs):
     ctx['specialties'] = get_specialties()
     
     
-#     update_physicians_missing_hash()
+#    update_physicians_missing_hash()
 #     update_physicians_phones()
 #     sync_cities()
 #     sync_specialties()
@@ -71,8 +74,8 @@ def view_specialties(request, *args, **kwargs):
 
 @render_to_json
 def get_physicians_by_distance(request):
-    lat = request.POST.get('lat', '')
-    lon = request.POST.get('lon', '')
+    lat = request.POST.get('lat', '-19.932696')
+    lon = request.POST.get('lon', '-43.944035')
     hash = request.POST.get('specialty', '')
     from_record = request.POST.get('from_record', 0)
     
@@ -96,8 +99,8 @@ def get_physicians_by_distance(request):
 def list_physicians_by_distance(request, *args, **kwargs):
     ctx = {}    
     hash = kwargs.get('specialty', '')    
-    ctx['lat'] = request.GET.get('lat', '')
-    ctx['lon'] = request.GET.get('lon', '')
+    ctx['lat'] = request.GET.get('lat', '-19.932696')
+    ctx['lon'] = request.GET.get('lon', '-43.944035')
     
     specialty = get_one_specialty(filter_by={'hash': hash})
     
