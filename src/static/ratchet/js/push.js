@@ -204,6 +204,7 @@
   // =======================
 
   var PUSH = function (options) {
+	  console.info(options);
     var key;
     var xhr = PUSH.xhr;
 
@@ -400,6 +401,8 @@
     for (; target && target !== document; target = target.parentNode) {
       for (i = toggles.length; i--;) {
         if (toggles[i] === target) {
+        	console.info('Target');
+        	console.info(target);
           return target;
         }
       }
