@@ -11,6 +11,12 @@ var getParameterByName = function(uri, name) {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
+var centerMap = function (map) {
+    var latlng = new plugin.google.maps.LatLng(window.latitude,
+                                                    window.longitude);
+    map.setCenter(latlng);
+};
+
 /****************************************
 *
 *
@@ -196,6 +202,7 @@ var showPhysician = function(e) {
             hasGeocode = false;
 
             window.map = plugin.google.maps.Map.getMap(document.getElementById('physician-map'));
+            window.map.on(plugin.google.maps.event.MAP_READY, centerMap);
 
             for (i = 0, size = physician.addresses.length; i < size; i++) {
                 ad = physician.addresses[i];
@@ -214,11 +221,12 @@ var showPhysician = function(e) {
 
                 try {
                     console.info(ad);
+
                     if (ad.geocode.status == "OK" && ad.geocode.results.length > 0) {
                         lat = ad.geocode.results[0].geometry.location.lat;
                         lng = ad.geocode.results[0].geometry.location.lng;
 
-                        if (i == 0) {
+                        if (!hasGeocode) {
                             window.latitude = lat;
                             window.longitude = lng;
                             hasGeocode = true;
@@ -233,7 +241,7 @@ var showPhysician = function(e) {
                             });
                         });
 
-                        address = '<a href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-ignore="push">' + address + '</a>';
+                        address = '<a class="geo-link" href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-lat="' + lat + '" data-lng="' + lng + '" data-ignore="push">' + address + '</a>';
                     }
                 } catch (err) {
                     console.error(err);
@@ -242,12 +250,13 @@ var showPhysician = function(e) {
                 phone = '';
 
                 if (ad.phones != undefined && ad.phones.length > 0) {
-                    if (typeof physician.specialty === "string") {
+                    if (typeof ad.phones === "string") {
                         phone = ad.phones;
                     } else {
                         phone = ad.phones[0];
                     }
                 }
+
                 info =  '<div id="address' + i + '" class="control-content' + ((i == 0) ? " active" : "") + '">' +
                             '<ul class="table-view" id="physician-specialties">' +
                                 '<li class="table-view-cell table-view-divider">Telefone</li>' +
@@ -257,7 +266,6 @@ var showPhysician = function(e) {
                             '</ul>' +
                         '</div>';
 
-
                 $('#physician-addresses').append(info);
             }
 
@@ -265,11 +273,21 @@ var showPhysician = function(e) {
 
             if (hasGeocode) {
                 var latlng = new plugin.google.maps.LatLng(window.latitude, window.longitude);
-                map.setCenter(latlng);
+                window.map.setCenter(latlng);
             }
 
-            map.setZoom(16);
+            window.map.setZoom(16);
         }
+
+        $('#physician-addresses-header-container').off('touchend', '**');
+        $('#physician-addresses-header-container').on('touchend', 'a', function() {
+            target = $(this).attr('href');
+            link = $(target).find('a.geo-link');
+            if (link != undefined) {
+                var latlng = new plugin.google.maps.LatLng(parseFloat(link.attr('data-lat')), parseFloat(link.attr('data-lng')));
+                window.map.setCenter(latlng);
+            }
+        });
     });
 };
 
@@ -306,7 +324,6 @@ var onMapInit = function(map) {
 };
 
 var initMap = function () {
-    //alert('init map called');
     window.map = plugin.google.maps.Map.getMap(document.getElementById('search-map'));
     map.on(plugin.google.maps.event.MAP_READY, onMapInit);
 };
