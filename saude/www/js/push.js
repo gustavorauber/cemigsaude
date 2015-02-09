@@ -3,7 +3,7 @@
  * http://goratchet.com/components#push
  * ========================================================================
  * inspired by @defunkt's jquery.pjax.js
- * Copyright 2014 Connor Sears
+ * Copyright 2015 Connor Sears
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -22,9 +22,10 @@
   var maxCacheLength = 20;
   var cacheMapping   = sessionStorage;
   var domCache       = {};
+  // Change these to unquoted camelcase in the next major version bump
   var transitionMap  = {
-    slideIn  : 'slide-out',
-    slideOut : 'slide-in',
+    'slide-in'  : 'slide-out',
+    'slide-out' : 'slide-in',
     fade     : 'fade'
   };
 
@@ -42,7 +43,6 @@
     }
     cacheMapping[data.id] = JSON.stringify(data);
     window.history.replaceState(data.id, data.title, data.url);
-    domCache[data.id] = document.body.cloneNode(true);
   };
 
   var cachePush = function () {
@@ -60,7 +60,9 @@
       delete cacheMapping[cacheBackStack.shift()];
     }
 
-    window.history.pushState(null, '', cacheMapping[PUSH.id].url);
+    if (getCached(PUSH.id).url) {
+      window.history.pushState(null, '', getCached(PUSH.id).url);
+    }
 
     cacheMapping.cacheForwardStack = JSON.stringify(cacheForwardStack);
     cacheMapping.cacheBackStack    = JSON.stringify(cacheBackStack);
@@ -191,7 +193,9 @@
     swapContent(
       (activeObj.contents || activeDom).cloneNode(true),
       document.querySelector('.content'),
-      transition
+      transition, function () {
+        triggerStateChange();
+      }
     );
 
     PUSH.id = id;
@@ -229,7 +233,11 @@
         clearTimeout(options._timeout);
       }
       if (xhr.readyState === 4) {
-        xhr.status === 200 ? success(xhr, options) : failure(options.url);
+        if (xhr.status === 200) {
+          success(xhr, options);
+        } else {
+          failure(options.url);
+        }
       }
     };
 
@@ -239,9 +247,11 @@
         url        : window.location.href,
         title      : document.title,
         timeout    : options.timeout,
-        transition : null
+        transition : options.transition
       });
     }
+
+    cacheCurrentContent();
 
     if (options.timeout) {
       options._timeout = setTimeout(function () {  xhr.abort('timeout'); }, options.timeout);
@@ -253,6 +263,10 @@
       cachePush();
     }
   };
+
+  function cacheCurrentContent () {
+    domCache[PUSH.id] = document.body.cloneNode(true);
+  }
 
 
   // Main XHR handlers
@@ -325,7 +339,7 @@
         document.body.insertBefore(swap, document.querySelector('.content'));
       }
     } else {
-      enter  = /in$/.test(transition);
+      enter = /in$/.test(transition);
 
       if (transition === 'fade') {
         container.classList.add('in');
@@ -343,35 +357,41 @@
     }
 
     if (!transition) {
-      complete && complete();
+      if (complete) {
+        complete();
+      }
     }
 
     if (transition === 'fade') {
       container.offsetWidth; // force reflow
       container.classList.remove('in');
       var fadeContainerEnd = function () {
-        container.removeEventListener('webkitTransitionEnd', fadeContainerEnd);
+        container.removeEventListener(window.RATCHET.getTransitionEnd, fadeContainerEnd);
         swap.classList.add('in');
-        swap.addEventListener('webkitTransitionEnd', fadeSwapEnd);
+        swap.addEventListener(window.RATCHET.getTransitionEnd, fadeSwapEnd);
       };
       var fadeSwapEnd = function () {
-        swap.removeEventListener('webkitTransitionEnd', fadeSwapEnd);
+        swap.removeEventListener(window.RATCHET.getTransitionEnd, fadeSwapEnd);
         container.parentNode.removeChild(container);
         swap.classList.remove('fade');
         swap.classList.remove('in');
-        complete && complete();
+        if (complete) {
+          complete();
+        }
       };
-      container.addEventListener('webkitTransitionEnd', fadeContainerEnd);
+      container.addEventListener(window.RATCHET.getTransitionEnd, fadeContainerEnd);
 
     }
 
     if (/slide/.test(transition)) {
       var slideEnd = function () {
-        swap.removeEventListener('webkitTransitionEnd', slideEnd);
+        swap.removeEventListener(window.RATCHET.getTransitionEnd, slideEnd);
         swap.classList.remove('sliding', 'sliding-in');
         swap.classList.remove(swapDirection);
         container.parentNode.removeChild(container);
-        complete && complete();
+        if (complete) {
+          complete();
+        }
       };
 
       container.offsetWidth; // force reflow
@@ -379,7 +399,7 @@
       containerDirection = enter ? 'left' : 'right';
       container.classList.add(containerDirection);
       swap.classList.remove(swapDirection);
-      swap.addEventListener('webkitTransitionEnd', slideEnd);
+      swap.addEventListener(window.RATCHET.getTransitionEnd, slideEnd);
     }
   };
 
@@ -456,7 +476,7 @@
       head.innerHTML = responseText;
     }
 
-    data.title = head.querySelector('title');
+    data.title = head.querySelector('title') || document.querySelector('title');
     var text = 'innerText' in data.title ? 'innerText' : 'textContent';
     data.title = data.title && data.title[text].trim();
 
@@ -476,8 +496,15 @@
   window.addEventListener('touchstart', function () { isScrolling = false; });
   window.addEventListener('touchmove', function () { isScrolling = true; });
   window.addEventListener('touchend', touchend);
-  window.addEventListener('click', function (e) { if (getTarget(e)) {e.preventDefault();} });
+  window.addEventListener('click', function (e) {
+    if (getTarget(e)) {
+      e.preventDefault();
+    }
+  });
   window.addEventListener('popstate', popstate);
+
+  // TODO : Remove this line in the next major version
   window.PUSH = PUSH;
+  window.RATCHET.push = PUSH;
 
 }());

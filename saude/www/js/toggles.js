@@ -3,7 +3,7 @@
  * http://goratchet.com/components#toggles
  * ========================================================================
    Adapted from Brad Birdsall's swipe
- * Copyright 2014 Connor Sears
+ * Copyright 2015 Connor Sears
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -14,6 +14,7 @@
   var touchMove = false;
   var distanceX = false;
   var toggle    = false;
+  var transformProperty = window.RATCHET.getBrowserCapabilities.transform;
 
   var findToggle = function (target) {
     var i;
@@ -73,13 +74,13 @@
     e.preventDefault();
 
     if (distanceX < 0) {
-      return (handle.style.webkitTransform = 'translate3d(0,0,0)');
+      return (handle.style[transformProperty] = 'translate3d(0,0,0)');
     }
     if (distanceX > offset) {
-      return (handle.style.webkitTransform = 'translate3d(' + offset + 'px,0,0)');
+      return (handle.style[transformProperty] = 'translate3d(' + offset + 'px,0,0)');
     }
 
-    handle.style.webkitTransform = 'translate3d(' + distanceX + 'px,0,0)';
+    handle.style[transformProperty] = 'translate3d(' + distanceX + 'px,0,0)';
 
     toggle.classList[(distanceX > (toggleWidth / 2 - handleWidth / 2)) ? 'add' : 'remove']('active');
   });
@@ -96,15 +97,17 @@
     var slideOn     = (!touchMove && !toggle.classList.contains('active')) || (touchMove && (distanceX > (toggleWidth / 2 - handleWidth / 2)));
 
     if (slideOn) {
-      handle.style.webkitTransform = 'translate3d(' + offset + 'px,0,0)';
+      handle.style[transformProperty] = 'translate3d(' + offset + 'px,0,0)';
     } else {
-      handle.style.webkitTransform = 'translate3d(0,0,0)';
+      handle.style[transformProperty] = 'translate3d(0,0,0)';
     }
 
     toggle.classList[slideOn ? 'add' : 'remove']('active');
 
     e = new CustomEvent('toggle', {
-      detail: { isActive: slideOn },
+      detail: {
+        isActive: slideOn
+      },
       bubbles: true,
       cancelable: true
     });

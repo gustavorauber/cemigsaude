@@ -2,7 +2,7 @@
  * Ratchet: popovers.js v2.0.2
  * http://goratchet.com/components#popovers
  * ========================================================================
- * Copyright 2014 Connor Sears
+ * Copyright 2015 Connor Sears
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -26,7 +26,7 @@
 
   var onPopoverHidden = function () {
     popover.style.display = 'none';
-    popover.removeEventListener('webkitTransitionEnd', onPopoverHidden);
+    popover.removeEventListener(window.RATCHET.getTransitionEnd, onPopoverHidden);
   };
 
   var backdrop = (function () {
@@ -35,7 +35,7 @@
     element.classList.add('backdrop');
 
     element.addEventListener('touchend', function () {
-      popover.addEventListener('webkitTransitionEnd', onPopoverHidden);
+      popover.addEventListener(window.RATCHET.getTransitionEnd, onPopoverHidden);
       popover.classList.remove('visible');
       popover.parentNode.removeChild(backdrop);
     });
@@ -52,8 +52,7 @@
 
     try {
       popover = document.querySelector(anchor.hash);
-    }
-    catch (error) {
+    } catch (error) {
       popover = null;
     }
 

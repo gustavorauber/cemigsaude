@@ -7,13 +7,14 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <!--link rel="stylesheet" href="css/saude.min.css" /-->
     <link rel="stylesheet" href="css/ratchet.min.css" />
     <link rel="stylesheet" href="css/ratchet-theme-ios.min.css" />
     <link rel="stylesheet" href="css/saude-custom.css" />
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="cordova_plugins.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="js/ratchet.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV7ZAwzLSmKv2s3xSLGa7tk6-1WOTfhoQ"> </script>
 </head>
 <body>
     <header class="bar bar-nav">
@@ -27,7 +28,7 @@
     <div class="content">
         <ul class="table-view">
           <li class="table-view-cell media">
-            <a class="navigate-right" href="map_search.html" data-transition="slide-in">
+            <a class="navigate-right" href="https://fb.cemig.com.br/saude/map/" data-transition="slide-in">
                 <span class="media-object icon icon-search pull-left"></span>
                 <div class="media-body">
                     <strong>Busca</strong>
@@ -35,7 +36,7 @@
             </a>
           </li>
           <li class="table-view-cell">
-            <a class="navigate-right" href="list_specialties.html" data-transition="slide-in">
+            <a class="navigate-right" href="https://fb.cemig.com.br/saude/list/" data-transition="slide-in">
                 <span class="media-object icon icon-person pull-left"></span>
                 <div class="media-body">
                     <strong>Listagem por Especialidade</strong>
@@ -45,6 +46,52 @@
         </ul>
     </div>
 
-    <script type="text/javascript" src="js/cemigsaude.js"></script>
+    <script type="text/javascript">
+    var initMap = function (position) {
+        alert(window.latitude + ' ' + window.longitude);
+        var latLong = new google.maps.LatLng(window.latitude, window.longitude);
+        var mapOptions = {
+                zoom: 14,
+                center: latLong,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        window.map = new google.maps.Map(document.getElementById('search-map'),
+            mapOptions);
+    };
+
+    var initMapSucess = function (position) {
+        window.latitude = position.coords.latitude;
+        window.longitude = position.coords.longitude;
+
+        initMap();
+    };
+
+    var initMapError = function (error) {
+        window.latitude = -19.932696;
+        window.longitude = -43.944035;
+
+        initMap();
+    };
+
+    var initPosition = function () {
+        navigator.geolocation.getCurrentPosition(initMapSucess, initMapError);
+    };
+
+    var pageChanged = function( data ) {
+        console.info(data);
+        if (document.getElementById('page-map-search')) {
+            console.info('page-map-search');
+            initPosition();
+        } else if (document.getElementById('page-specialties')) {
+            console.info('page-specialties');
+        } else if (document.getElementById('page-physicians')) {
+            console.info('page-physicians');
+        } else if (document.getElementById('page-physician')) {
+            console.info('page-physician');
+        }
+    };
+
+    window.addEventListener('push', pageChanged);
+    </script>
 </body>
 </html>

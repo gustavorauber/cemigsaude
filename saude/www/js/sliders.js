@@ -3,7 +3,7 @@
  * http://goratchet.com/components#sliders
  * ========================================================================
    Adapted from Brad Birdsall's swipe
- * Copyright 2014 Connor Sears
+ * Copyright 2015 Connor Sears
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -23,6 +23,10 @@
   var slideNumber;
   var isScrolling;
   var scrollableArea;
+  var startedMoving;
+
+  var transformPrefix   = window.RATCHET.getBrowserCapabilities.prefix;
+  var transformProperty = window.RATCHET.getBrowserCapabilities.transform;
 
   var getSlider = function (target) {
     var i;
@@ -38,11 +42,9 @@
   };
 
   var getScroll = function () {
-    if ('webkitTransform' in slider.style) {
-      var translate3d = slider.style.webkitTransform.match(/translate3d\(([^,]*)/);
-      var ret = translate3d ? translate3d[1] : 0;
-      return parseInt(ret, 10);
-    }
+    var translate3d = slider.style[transformProperty].match(/translate3d\(([^,]*)/);
+    var ret = translate3d ? translate3d[1] : 0;
+    return parseInt(ret, 10);
   };
 
   var setSlideNumber = function (offset) {
@@ -75,7 +77,7 @@
 
     setSlideNumber(0);
 
-    slider.style['-webkit-transition-duration'] = 0;
+    slider.style[transformPrefix + 'transition-duration'] = 0;
   };
 
   var onTouchMove = function (e) {
@@ -83,12 +85,17 @@
       return; // Exit if a pinch || no slider
     }
 
+    // adjust the starting position if we just started to avoid jumpage
+    if (!startedMoving) {
+      pageX += (e.touches[0].pageX - pageX) - 1;
+    }
+
     deltaX = e.touches[0].pageX - pageX;
     deltaY = e.touches[0].pageY - pageY;
     pageX  = e.touches[0].pageX;
     pageY  = e.touches[0].pageY;
 
-    if (typeof isScrolling === 'undefined') {
+    if (typeof isScrolling === 'undefined' && startedMoving) {
       isScrolling = Math.abs(deltaY) > Math.abs(deltaX);
     }
 
@@ -103,7 +110,10 @@
     resistance = slideNumber === 0         && deltaX > 0 ? (pageX / sliderWidth) + 1.25 :
                  slideNumber === lastSlide && deltaX < 0 ? (Math.abs(pageX) / sliderWidth) + 1.25 : 1;
 
-    slider.style.webkitTransform = 'translate3d(' + offsetX + 'px,0,0)';
+    slider.style[transformProperty] = 'translate3d(' + offsetX + 'px,0,0)';
+
+    // started moving
+    startedMoving = true;
   };
 
   var onTouchEnd = function (e) {
@@ -111,14 +121,15 @@
       return;
     }
 
-    setSlideNumber(
-      (+new Date()) - startTime < 1000 && Math.abs(deltaX) > 15 ? (deltaX < 0 ? -1 : 1) : 0
-    );
+    // we're done moving
+    startedMoving = false;
+
+    setSlideNumber((+new Date()) - startTime < 1000 && Math.abs(deltaX) > 15 ? (deltaX < 0 ? -1 : 1) : 0);
 
     offsetX = slideNumber * sliderWidth;
 
-    slider.style['-webkit-transition-duration'] = '.2s';
-    slider.style.webkitTransform = 'translate3d(' + offsetX + 'px,0,0)';
+    slider.style[transformPrefix + 'transition-duration'] = '.2s';
+    slider.style[transformProperty] = 'translate3d(' + offsetX + 'px,0,0)';
 
     e = new CustomEvent('slide', {
       detail: { slideNumber: Math.abs(slideNumber) },
