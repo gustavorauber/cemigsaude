@@ -29,16 +29,6 @@
     {% endblock %}
 
     <script type="text/javascript">
-    var onMapInit = function(map) {
-        map.getMyLocation(positionSuccess, positionError);
-    };
-
-    var initMap = function () {
-        alert('init map called');
-        window.map = plugin.google.maps.Map.getMap(document.getElementById('search-map'));
-        map.on(plugin.google.maps.event.MAP_READY, onMapInit);
-    };
-
     var positionSuccess = function (location) {
         window.latitude = location.latlng.lat;
         window.longitude = location.latlng.lng;
@@ -59,6 +49,16 @@
         map.setZoom(15);
     };
 
+    var onMapInit = function(map) {
+        map.getMyLocation(positionSuccess, positionError);
+    };
+
+    var initMap = function () {
+        alert('init map called');
+        window.map = plugin.google.maps.Map.getMap(document.getElementById('search-map'));
+        map.on(plugin.google.maps.event.MAP_READY, onMapInit);
+    };
+
     var pageChanged = function( data ) {
         console.info(data);
         if (document.getElementById('page-map-search')) {
@@ -72,6 +72,10 @@
             console.info('page-physician');
         }
     };
+
+    document.addEventListener("deviceready", function() {
+        initMap();
+    });
 
     window.addEventListener('push', pageChanged);
     </script>
