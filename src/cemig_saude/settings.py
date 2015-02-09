@@ -182,4 +182,4 @@ MONGO_PORT = 27017
 
 PAGE_SIZE = 20
 
-FLAVOURS = ('mobile', 'full')
+FLAVOURS = ('full', 'mobile')
