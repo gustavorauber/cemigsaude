@@ -203,7 +203,7 @@ var showPhysician = function(e) {
 
                 if ((i + 1) % 2 == 0 && (i + 1) != size) {
                     $('#physician-addresses-header-container').append('<div class="segmented-control"></div>');
-                    controlParent = $('#physician-addresses-header-container').children().last();
+                    controlParent = $('#physician-addresses-header-container:last-child');
                 }
 
                 address = toTitleCase(ad.street) + '<br />' + ad.neighborhood + '<br />' + toTitleCase(ad.city);
