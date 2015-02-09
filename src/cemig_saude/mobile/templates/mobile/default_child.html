@@ -27,5 +27,53 @@
     {% block content %}
     <div class="content"> </div>
     {% endblock %}
+
+    <script type="text/javascript">
+    var onMapInit = function(map) {
+        map.getMyLocation(positionSuccess, positionError);
+    };
+
+    var initMap = function () {
+        alert('init map called');
+        window.map = plugin.google.maps.Map.getMap(document.getElementById('search-map'));
+        map.on(plugin.google.maps.event.MAP_READY, onMapInit);
+    };
+
+    var positionSuccess = function (location) {
+        window.latitude = location.latlng.lat;
+        window.longitude = location.latlng.lng;
+
+        var latlng = new plugin.google.maps.LatLng(window.latitude,
+                                                        window.longitude);
+        map.setCenter(latlng);
+        map.setZoom(15);
+    };
+
+    var positionError = function (msg) {
+        window.latitude = -19.932696;
+        window.longitude = -43.944035;
+
+        var latlng = new plugin.google.maps.LatLng(window.latitude,
+                                                        window.longitude);
+        map.setCenter(latlng);
+        map.setZoom(15);
+    };
+
+    var pageChanged = function( data ) {
+        console.info(data);
+        if (document.getElementById('page-map-search')) {
+            console.info('page-map-search');
+            initMap();
+        } else if (document.getElementById('page-specialties')) {
+            console.info('page-specialties');
+        } else if (document.getElementById('page-physicians')) {
+            console.info('page-physicians');
+        } else if (document.getElementById('page-physician')) {
+            console.info('page-physician');
+        }
+    };
+
+    window.addEventListener('push', pageChanged);
+    </script>
 </body>
 </html>
