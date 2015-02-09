@@ -193,6 +193,10 @@ var showPhysician = function(e) {
             controlParent = $('#physician-addresses-header-container').children().last();
             console.info('controlParent = ' + controlParent);
             console.info(controlParent);
+            hasGeocode = false;
+
+            window.map = plugin.google.maps.Map.getMap(document.getElementById('physician-map'));
+
             for (i = 0, size = physician.addresses.length; i < size; i++) {
                 ad = physician.addresses[i];
                 link =  '<a class="control-item' + ((i == 0) ? " active" : "") + '" href="#address' + i + '">' +
@@ -213,6 +217,21 @@ var showPhysician = function(e) {
                     if (ad.geocode.status == "OK" && ad.geocode.results.length > 0) {
                         lat = ad.geocode.results[0].geometry.location.lat;
                         lng = ad.geocode.results[0].geometry.location.lng;
+
+                        if (i == 0) {
+                            window.latitude = lat;
+                            window.longitude = lng;
+                            hasGeocode = true;
+                        }
+
+                        var latlng = new plugin.google.maps.LatLng(lat, lng);
+                        window.map.addMarker({'position': latlng,
+                            'title': toTitleCase(ad.street)
+                        }, function( marker ) {
+
+                            marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
+                            });
+                        });
 
                         address = '<a href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-ignore="push">' + address + '</a>';
                     }
@@ -243,6 +262,13 @@ var showPhysician = function(e) {
             }
 
             $('#physician-addresses-container').show();
+
+            if (hasGeocode) {
+                var latlng = new plugin.google.maps.LatLng(window.latitude, window.longitude);
+                map.setCenter(latlng);
+            }
+
+            map.setZoom(16);
         }
     });
 };
