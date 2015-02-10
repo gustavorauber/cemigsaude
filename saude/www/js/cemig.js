@@ -241,26 +241,30 @@ var showPhysician = function(e) {
                             });
                         });
 
-                        address = '<a class="geo-link" href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-lat="' + lat + '" data-lng="' + lng + '" data-ignore="push">' + address + '</a>';
+                        address = '<a class="geo-link push-right" href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-lat="' + lat + '" data-lng="' + lng + '" data-ignore="push">' + address + '</a>';
+
                     }
                 } catch (err) {
                     console.error(err);
                 }
 
-                phone = '';
+                phones = '';
 
                 if (ad.phones != undefined && ad.phones.length > 0) {
+                    phones = '<li class="table-view-cell table-view-divider">Telefone</li>';
+
                     if (typeof ad.phones === "string") {
-                        phone = ad.phones;
+                        phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones + '" data-ignore="push">' + ad.phones + '</a></li>';
                     } else {
-                        phone = ad.phones[0];
+                        for (p=0, size=ad.phones.length; p < size; p++) {
+                            phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones[p] + '" data-ignore="push">' + ad.phones[p] + '</a></li>';
+                        }
                     }
                 }
 
                 info =  '<div id="address' + i + '" class="control-content' + ((i == 0) ? " active" : "") + '">' +
                             '<ul class="table-view" id="physician-specialties">' +
-                                '<li class="table-view-cell table-view-divider">Telefone</li>' +
-                                '<li class="table-view-cell"><a href="tel:' + phone + '" data-ignore="push">' + phone + '</a></li>' +
+                                phones +
                                 '<li class="table-view-cell table-view-divider">Endere&ccedil;o</li>' +
                                 '<li class="table-view-cell">' + address + '</li>' +
                             '</ul>' +
@@ -345,7 +349,9 @@ var pageChanged = function( data ) {
         count = $('#physicians > li').size();
         if (count == 0) { // check if it is already loaded
             retrievePhysicians();
+            $('#distance-btn-more').on('touchend', retrievePhysicians);
         }
+
     } else if (document.getElementById('page-physician')) {
         console.info('page-physician');
         showPhysician();
