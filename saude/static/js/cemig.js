@@ -11,6 +11,12 @@ var getParameterByName = function(uri, name) {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
+var centerMap = function (map) {
+    var latlng = new plugin.google.maps.LatLng(window.latitude,
+                                                    window.longitude);
+    map.setCenter(latlng);
+};
+
 /****************************************
 *
 *
@@ -193,6 +199,11 @@ var showPhysician = function(e) {
             controlParent = $('#physician-addresses-header-container').children().last();
             console.info('controlParent = ' + controlParent);
             console.info(controlParent);
+            hasGeocode = false;
+
+            window.map = plugin.google.maps.Map.getMap(document.getElementById('physician-map'));
+            window.map.on(plugin.google.maps.event.MAP_READY, centerMap);
+
             for (i = 0, size = physician.addresses.length; i < size; i++) {
                 ad = physician.addresses[i];
                 link =  '<a class="control-item' + ((i == 0) ? " active" : "") + '" href="#address' + i + '">' +
@@ -203,47 +214,84 @@ var showPhysician = function(e) {
 
                 if ((i + 1) % 2 == 0 && (i + 1) != size) {
                     $('#physician-addresses-header-container').append('<div class="segmented-control"></div>');
-                    controlParent = $('#physician-addresses-header-container:last-child');
+                    controlParent = $('#physician-addresses-header-container').children().last();
                 }
 
                 address = toTitleCase(ad.street) + '<br />' + ad.neighborhood + '<br />' + toTitleCase(ad.city);
 
                 try {
                     console.info(ad);
+
                     if (ad.geocode.status == "OK" && ad.geocode.results.length > 0) {
                         lat = ad.geocode.results[0].geometry.location.lat;
                         lng = ad.geocode.results[0].geometry.location.lng;
 
-                        address = '<a href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-ignore="push">' + address + '</a>';
+                        if (!hasGeocode) {
+                            window.latitude = lat;
+                            window.longitude = lng;
+                            hasGeocode = true;
+                        }
+
+                        var latlng = new plugin.google.maps.LatLng(lat, lng);
+                        window.map.addMarker({'position': latlng,
+                            'title': toTitleCase(ad.street)
+                        }, function( marker ) {
+
+                            marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
+                            });
+                        });
+
+                        address = '<a class="geo-link push-right" href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-lat="' + lat + '" data-lng="' + lng + '" data-ignore="push">' + address + '</a>';
+
                     }
                 } catch (err) {
                     console.error(err);
                 }
 
-                phone = '';
+                phones = '';
 
                 if (ad.phones != undefined && ad.phones.length > 0) {
-                    if (typeof physician.specialty === "string") {
-                        phone = ad.phones;
+                    phones = '<li class="table-view-cell table-view-divider">Telefone</li>';
+
+                    if (typeof ad.phones === "string") {
+                        phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones + '" data-ignore="push">' + ad.phones + '</a></li>';
                     } else {
-                        phone = ad.phones[0];
+                        for (p=0, size=ad.phones.length; p < size; p++) {
+                            phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones[p] + '" data-ignore="push">' + ad.phones[p] + '</a></li>';
+                        }
                     }
                 }
+
                 info =  '<div id="address' + i + '" class="control-content' + ((i == 0) ? " active" : "") + '">' +
                             '<ul class="table-view" id="physician-specialties">' +
-                                '<li class="table-view-cell table-view-divider">Telefone</li>' +
-                                '<li class="table-view-cell"><a href="tel:' + phone + '" data-ignore="push">' + phone + '</a></li>' +
+                                phones +
                                 '<li class="table-view-cell table-view-divider">Endere&ccedil;o</li>' +
                                 '<li class="table-view-cell">' + address + '</li>' +
                             '</ul>' +
                         '</div>';
 
-
                 $('#physician-addresses').append(info);
             }
 
             $('#physician-addresses-container').show();
+
+            if (hasGeocode) {
+                var latlng = new plugin.google.maps.LatLng(window.latitude, window.longitude);
+                window.map.setCenter(latlng);
+            }
+
+            window.map.setZoom(16);
         }
+
+        $('#physician-addresses-header-container').off('touchend', '**');
+        $('#physician-addresses-header-container').on('touchend', 'a', function() {
+            target = $(this).attr('href');
+            link = $(target).find('a.geo-link');
+            if (link != undefined) {
+                var latlng = new plugin.google.maps.LatLng(parseFloat(link.attr('data-lat')), parseFloat(link.attr('data-lng')));
+                window.map.setCenter(latlng);
+            }
+        });
     });
 };
 
@@ -256,23 +304,27 @@ var showPhysician = function(e) {
 *****************************************/
 
 var positionSuccess = function (location) {
-    window.latitude = location.latlng.lat;
-    window.longitude = location.latlng.lng;
+    window.latitude = location.latLng.lat;
+    window.longitude = location.latLng.lng;
+
+    alert('[success]' + window.latitude + ' ' + window.longitude);
 
     var latlng = new plugin.google.maps.LatLng(window.latitude,
                                                     window.longitude);
-    map.setCenter(latlng);
-    map.setZoom(15);
+    window.map.setCenter(latlng);
+    window.map.setZoom(15);
 };
 
 var positionError = function (msg) {
     window.latitude = -19.932696;
     window.longitude = -43.944035;
 
+    alert('[error]' + window.latitude + ' ' + window.longitude);
+
     var latlng = new plugin.google.maps.LatLng(window.latitude,
                                                     window.longitude);
-    map.setCenter(latlng);
-    map.setZoom(15);
+    window.map.setCenter(latlng);
+    window.map.setZoom(15);
 };
 
 var onMapInit = function(map) {
@@ -280,17 +332,112 @@ var onMapInit = function(map) {
 };
 
 var initMap = function () {
-    //alert('init map called');
     window.map = plugin.google.maps.Map.getMap(document.getElementById('search-map'));
-    map.on(plugin.google.maps.event.MAP_READY, onMapInit);
+    window.map.on(plugin.google.maps.event.MAP_READY, onMapInit);
 };
+
+var getDistanceFromLatLonInKm = function(lat1,lon1,lat2,lon2) {
+	var deg2rad = 0.017453292519943295; // === Math.PI / 180
+    var cos = Math.cos;
+    lat1 *= deg2rad;
+    lon1 *= deg2rad;
+    lat2 *= deg2rad;
+    lon2 *= deg2rad;
+    var a = (
+        (1 - cos(lat2 - lat1)) +
+        (1 - cos(lon2 - lon1)) * cos(lat1) * cos(lat2)
+    ) / 2;
+
+    return 12742 * Math.asin(Math.sqrt(a)); // Diameter of the earth in km (2 * 6371)
+};
+
+var onMarkerClick = function(marker) {
+};
+
+var performSearch = function(e) {
+    e.preventDefault();
+
+    if (window.latitude == undefined || window.longitude == undefined) {
+        window.latitude = -19.932696;
+        window.longitude = -43.944035;
+    }
+
+    postData = {
+        q: $('#in-search').val(),
+    	d: 5,
+    	lat: window.latitude,
+    	lon: window.longitude
+    };
+
+    alert(postData.q + '\n' + postData.lat + '\n' + postData.lon);
+
+    $.post( domain + "/search", postData, function( data ) {
+        window.markers = [];
+        var points = [];
+
+        q_dist = 5;
+
+        alert(data.length);
+
+        $.each(data, function ( index, val ) {
+            for (i=0; i < val.addresses.length; i++) {
+                address = val.addresses[i];
+                if ( address.geocode != undefined ) {
+                    results = address.geocode.results;
+                    if (results.length > 0) {
+                        result = results[0];
+                        l = result.geometry.location;
+
+                        if (val.addresses.length == 1 || getDistanceFromLatLonInKm(window.latitude, window.longitude, l.lat, l.lng) < q_dist) {
+                            position = new plugin.google.maps.LatLng(l.lat, l.lng);
+                            points.push(position);
+                            window.map.addMarker({'position': latlng,
+                               'title': toTitleCase(address.street)
+                            }, function( marker ) {
+                                //marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, onMarkerClick);
+                                //marker.val = val;
+                                //marker.address = address;
+                            });
+                        }
+                    }
+                }
+            }
+        });
+
+        alert('data loaded');
+
+        if (points.length > 0) {
+            var latLngBounds = new plugin.google.maps.LatLngBounds(points);
+        	window.map.animateCamera({'target': latLngBounds});
+        } else {
+        	// $('#no-results').popup("open");
+        	window.map.setZoom(15);
+        }
+    });
+};
+
+
+
+/****************************************
+*
+*
+*    General Methods
+*
+*
+*****************************************/
 
 var pageChanged = function( data ) {
     console.info(data);
     if (document.getElementById('page-map-search')) {
-        alert('page-map-search');
         console.info('page-map-search');
         initMap();
+        $('#btn-search').on({click: performSearch, touchend: performSearch});
+        $('#form-search').on({submit: performSearch});
+        $('#in-search').keypress(function(e) {
+            if (e.which == 13) {
+            	performSearch(e);
+            }
+        });
     } else if (document.getElementById('page-specialties')) {
         console.info('page-specialties');
         count = $('#specialties > li').size();
@@ -302,7 +449,9 @@ var pageChanged = function( data ) {
         count = $('#physicians > li').size();
         if (count == 0) { // check if it is already loaded
             retrievePhysicians();
+            $('#distance-btn-more').on('touchend', retrievePhysicians);
         }
+
     } else if (document.getElementById('page-physician')) {
         console.info('page-physician');
         showPhysician();

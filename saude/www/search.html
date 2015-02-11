@@ -17,6 +17,7 @@
 </head>
 <body>
     <header class="bar bar-nav">
+        <a class="icon icon-left-nav pull-left" href="javascript:history.back();" data-transition="slide-out"></a>
         <h1 class="title"><strong>Busca</strong></h1>
     </header>
 
@@ -26,14 +27,21 @@
 
     <div class="content" id="page-map-search">
         <div class="card">
-            <form>
-                <input type="text" placeholder="ex: Pediatria" />
-                <button class="btn btn-positive btn-block" style="margin-bottom: 0px;">Buscar conveniados</button>
+            <form id="form-search" class="input-group">
+                <div class="input-row">
+                    <label>Consulta</label>
+                    <input id="in-search" type="text" placeholder="ex: Pediatria" />
+                </div>
+                <div class="input-row">
+                    <label>Distância (kms)</label>
+                    <input id="in-radius" type="number" value="5" />
+                </div>
+                <button id="btn-search" class="btn btn-positive btn-block" style="margin-bottom: 0px;">Buscar conveniados</button>
             </form>
         </div>
 
-        <div class="card">
-            <div id="search-map" style="height:400px;"></div>
+        <div class="card" id="map-canvas-container">
+            <div id="search-map" style=""></div>
         </div>
     </div>
 </body>
