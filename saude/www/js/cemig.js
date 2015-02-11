@@ -413,6 +413,42 @@ var performSearch = function(e) {
     });
 };
 
+/****************************************
+*
+*
+*    Favorite Physicians Methods
+*
+*
+*****************************************/
+var retrieveFavoritePhysicians = function(e) {
+    if (window.latitude == undefined || window.longitude == undefined) {
+        window.latitude = -19.932696;
+        window.longitude = -43.944035;
+    }
+
+    postData = {
+        lat: window.latitude,
+        lon: window.longitude
+    };
+
+    $.ajax({ url: domain + "/get/distance/",
+             data: postData, crossDomain: true,
+             type: 'POST',
+             success: function( data ) {
+                parent = $('#physicians');
+                $.each(data, function ( index, val ) {
+                	li = createPhysician(val);
+                    parent.append(li);
+                });
+
+                if (data.length < pageSize) {
+                	$('#distance-btn-more-container').hide();
+                } else {
+                    $('#distance-btn-more-container').show();
+                }
+             }
+    });
+};
 
 
 /****************************************
@@ -461,6 +497,11 @@ var pageChanged = function( data ) {
             });
 
             $('#physician-addresses-header-container').find('a').first().trigger('touchend');
+        }
+    } else if (document.getElementById('page-favorites')) {
+        count = $('#favorites > li').size();
+        if (count == 0) { // check if it is already loaded
+            retrieveFavoritePhysicians();
         }
     }
 };
