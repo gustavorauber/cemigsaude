@@ -47,9 +47,6 @@ var loadSpecialties = function() {
                 parent.append(li);
             });
 
-            window.latitude = -19.932696;
-            window.longitude = -43.944035;
-
             //$('#specialties a').attr('href', function (e) {
                 //return updateURLParams($(this));
             //});
@@ -288,7 +285,7 @@ var positionSuccess = function (location) {
     window.latitude = location.latLng.lat;
     window.longitude = location.latLng.lng;
 
-    // alert('[success]' + window.latitude + ' ' + window.longitude);
+    //alert('[success]' + window.latitude + ' ' + window.longitude);
 
     var latlng = new plugin.google.maps.LatLng(window.latitude,
                                                     window.longitude);
@@ -300,7 +297,7 @@ var positionError = function (msg) {
     window.latitude = -19.932696;
     window.longitude = -43.944035;
 
-    // alert('[error]' + window.latitude + ' ' + window.longitude);
+    //alert('[error]' + window.latitude + ' ' + window.longitude);
 
     var latlng = new plugin.google.maps.LatLng(window.latitude,
                                                     window.longitude);
@@ -510,6 +507,7 @@ document.addEventListener("deviceready", function() {
     navigator.geolocation.getCurrentPosition(function(position) {
         window.latitude = position.coords.latitude;
         window.longitude = position.coords.longitude;
+        //alert('[deviceready]' + window.latitude + ' ' + window.longitude);
     }, function (error) {
         console.info(error);
     });
