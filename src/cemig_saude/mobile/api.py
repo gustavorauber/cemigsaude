@@ -11,7 +11,7 @@
 
 from cemig_saude.mobile.decorators import render_to_json
 from cemig_saude.model.mongo import get_specialties, get_one_physician, \
-    add_favorite, remove_favorite, get_favorites
+    add_favorite, remove_favorite, get_favorites, get_physicians
 from cemig_saude.model.physician import Physician
 
 from logging import getLogger
