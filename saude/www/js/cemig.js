@@ -77,7 +77,38 @@ var loadSpecialties = function() {
 *
 *
 *****************************************/
+// @TODO: getNearestLocation
+var getPhysicianLocation = function ( p ) {
+    for (i=0; i < p.addresses.length; i++) {
+        address = p.addresses[i];
+        if ( address.geocode != undefined ) {
+            results = address.geocode.results;
+            if (results.length > 0) {
+                result = results[0];
+                l = result.geometry.location;
+                return l;
+            }
+        }
+    }
+
+    return undefined;
+};
+
 var createPhysician = function ( p ) {
+    if (p.distance == undefined) {
+        if (window.latitude != undefined) {
+           l = getPhysicianLocation(p);
+           if (l != undefined) {
+                p.distance = getDistanceFromLatLonInKm(l.lat, l.lng,
+                                            window.latitude, window.longitude);
+           } else {
+                 p.distance = 20000.00;
+            }
+        } else {
+            p.distance = 20000.00;
+        }
+    }
+
     distance = p.distance.toFixed(2) + ' km';
 	if (p.distance > 10000) {
 		distance = '&infin;';
@@ -137,6 +168,46 @@ var retrievePhysicians = function(e) {
 *
 *
 *****************************************/
+var favoritePhysicianRequest = function(physician, user, like) {
+    postData = {
+        user: user,
+        physician: physician,
+        like: like
+    };
+
+    $.ajax({ url: domain + "/api/set/favorite/",
+         data: postData, crossDomain: true,
+         type: 'POST',
+         success: function( data ) {
+            id = getParameterByName(window.location.href, 'hash');
+
+            if (physician === id) { // user might have navigated away
+                $('#btn-physician-favorite').toggleClass('icon-star');
+                $('#btn-physician-favorite').toggleClass('icon-star-filled');
+            }
+         }
+    });
+};
+
+var favoritePhysician = function(e) {
+    id = getParameterByName(window.location.href, 'hash');
+
+    if (id == undefined || id === "") {
+        return;
+    }
+
+    if (window.userID == undefined) {
+        facebookConnectPlugin.login(['email'], function(data) {
+            window.userID = data.authResponse.userID;
+            like = $('#btn-physician-favorite').hasClass('icon-star');
+            favoritePhysicianRequest(id, window.userID, like);
+        });
+    } else {
+        like = $('#btn-physician-favorite').hasClass('icon-star');
+        favoritePhysicianRequest(id, window.userID, like);
+    }
+};
+
 var showPhysician = function(e) {
     id = getParameterByName(window.location.href, 'hash');
 
@@ -418,35 +489,46 @@ var performSearch = function(e) {
 *
 *****************************************/
 var retrieveFavoritePhysicians = function(e) {
+    if (window.userID == undefined) {
+        alert('Deve-se estar conectado ao Facebook');
+        return false;
+    }
+
     if (window.latitude == undefined || window.longitude == undefined) {
         window.latitude = -19.932696;
         window.longitude = -43.944035;
     }
 
     postData = {
+        user: window.userID,
         lat: window.latitude,
         lon: window.longitude
     };
 
     $.ajax({ url: domain + "/get/distance/",
-             data: postData, crossDomain: true,
-             type: 'POST',
-             success: function( data ) {
-                parent = $('#physicians');
-                $.each(data, function ( index, val ) {
-                	li = createPhysician(val);
-                    parent.append(li);
-                });
-
-                if (data.length < pageSize) {
-                	$('#distance-btn-more-container').hide();
-                } else {
-                    $('#distance-btn-more-container').show();
-                }
-             }
+         data: postData, crossDomain: true,
+         type: 'POST',
+         success: function( data ) {
+            parent = $('#favorites');
+            $.each(data, function ( index, val ) {
+            	li = createPhysician(val);
+                parent.append(li);
+            });
+         }
     });
 };
 
+var loginFacebookAndRetrieveFavorites = function() {
+    facebookConnectPlugin.login(['email'], function(data) {
+        // authResponse[accessToken, expiresIn, session_key]
+        // status
+        //alert(JSON.stringify(data))
+        window.userID = data.authResponse.userID;
+        retrieveFavoritePhysicians();
+    }, function (error) {
+        alert('[error]' + error);
+    })
+};
 
 /****************************************
 *
@@ -455,7 +537,6 @@ var retrieveFavoritePhysicians = function(e) {
 *
 *
 *****************************************/
-
 var pageChanged = function( data ) {
     if (document.getElementById('page-map-search')) {
         initMap();
@@ -487,6 +568,8 @@ var pageChanged = function( data ) {
         count = $('.control-content').size();
         if (count == 0) { // check if it is already loaded
             showPhysician();
+
+            $('#btn-physician-favorite').on('touchend', favoritePhysician);
         } else {
             window.map = plugin.google.maps.Map.getMap(document.getElementById('physician-map'),
             {
@@ -498,7 +581,7 @@ var pageChanged = function( data ) {
     } else if (document.getElementById('page-favorites')) {
         count = $('#favorites > li').size();
         if (count == 0) { // check if it is already loaded
-            retrieveFavoritePhysicians();
+            loginFacebookAndRetrieveFavorites();
         }
     }
 };

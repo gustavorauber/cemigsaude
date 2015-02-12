@@ -21,6 +21,8 @@ mobile_patterns = patterns('cemig_saude.mobile.views',
 api_patterns = patterns('cemig_saude.mobile.api',
     url(r'^api/list/?', 'list_specialties'),
     url(r'^api/physician/(?P<physician>\w+)/?', 'get_physician'),
+    url(r'^api/set/favorite/?', 'set_favorite_physician'),
+    url(r'^api/get/favorites/?', 'get_favorite_physicians'),
 )
 
 urlpatterns = patterns('',

@@ -10,7 +10,13 @@
 #-------------------------------------------------------------------------------
 
 from cemig_saude.mobile.decorators import render_to_json
-from cemig_saude.model.mongo import get_specialties, get_one_physician
+from cemig_saude.model.mongo import get_specialties, get_one_physician, \
+    add_favorite, remove_favorite, get_favorites
+from cemig_saude.model.physician import Physician
+
+from logging import getLogger
+
+log = getLogger(__name__)
 
 @render_to_json
 def list_specialties(request):
@@ -20,3 +26,40 @@ def list_specialties(request):
 def get_physician(request, *args, **kwargs):
     hash = kwargs.get('physician', '')
     return get_one_physician(filter_by={'hash': hash})
+
+@render_to_json
+def get_favorite_physicians(request, *args, **kwargs):
+    user = kwargs.get('user', '')
+    favorites = get_favorites(filter_by={'_id': user})
+
+    try:
+        if len(favorites) > 0:
+            filter_by = {}
+            filter_by['hash'] = {'$in': favorites}
+            physicians = get_physicians(filter_by=filter_by)
+            physicians_objs = list(Physician(p).to_json() for p in physicians)
+
+            return physicians
+    except Exception, e:
+        log.exception('get_favorite_physicians [%s]', user, e)
+
+    return []
+
+@render_to_json
+def set_favorite_physician(request, *args, **kwargs):
+    user = kwargs.get('user', '')
+    hash = kwargs.get('physician', '')
+    like = kwargs.get('like', '')
+
+
+    try:
+        if like:
+            add_favorite(user, hash)
+        else:
+            remove_favorite(user, hash)
+
+        return True
+    except Exception, e:
+        log.exception('set_favorite_physician [%s %s %s]', user, hash, like, e)
+
+    return False
