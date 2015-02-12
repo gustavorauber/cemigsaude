@@ -29,7 +29,7 @@ def get_physician(request, *args, **kwargs):
 
 @render_to_json
 def get_favorite_physicians(request, *args, **kwargs):
-    user = kwargs.get('user', '')
+    user = request.POST.get('user', '')
     favorites = get_favorites(filter_by={'_id': user})
 
     try:
@@ -41,16 +41,15 @@ def get_favorite_physicians(request, *args, **kwargs):
 
             return physicians
     except Exception, e:
-        log.exception('get_favorite_physicians [%s]', user, e)
+        log.exception('get_favorite_physicians [%s]'.format(user), e)
 
     return []
 
 @render_to_json
 def set_favorite_physician(request, *args, **kwargs):
-    user = kwargs.get('user', '')
-    hash = kwargs.get('physician', '')
-    like = kwargs.get('like', '')
-
+    user = request.POST.get('user', '')
+    hash = request.POST.get('physician', '')
+    like = request.POST.get('like', '')
 
     try:
         if like:
@@ -60,6 +59,7 @@ def set_favorite_physician(request, *args, **kwargs):
 
         return True
     except Exception, e:
-        log.exception('set_favorite_physician [%s %s %s]', user, hash, like, e)
+        log.exception('set_favorite_physician [{0} {1} {2}]'.format(user, hash,
+                                                                like), e)
 
     return False
