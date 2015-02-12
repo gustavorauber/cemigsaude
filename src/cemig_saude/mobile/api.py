@@ -48,7 +48,7 @@ def get_favorite_physicians(request, *args, **kwargs):
 @render_to_json
 def set_favorite_physician(request, *args, **kwargs):
     user = request.POST.get('user', '')
-    hash = request.POST.get('physician', '')
+    hash = request.POST.get('physician', '').rstrip('#')
     like = request.POST.get('like', '')
 
     try:

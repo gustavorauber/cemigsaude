@@ -7,7 +7,7 @@ var toTitleCase = function (str) {
 };
 
 var getParameterByName = function(uri, name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(uri);
+    var match = RegExp('[?&]' + name + '=([^&#]*)').exec(uri);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
@@ -505,7 +505,7 @@ var retrieveFavoritePhysicians = function(e) {
         lon: window.longitude
     };
 
-    $.ajax({ url: domain + "/get/distance/",
+    $.ajax({ url: domain + "/api/get/favorites/",
          data: postData, crossDomain: true,
          type: 'POST',
          success: function( data ) {
@@ -519,15 +519,27 @@ var retrieveFavoritePhysicians = function(e) {
 };
 
 var loginFacebookAndRetrieveFavorites = function() {
-    facebookConnectPlugin.login(['email'], function(data) {
-        // authResponse[accessToken, expiresIn, session_key]
-        // status
-        //alert(JSON.stringify(data))
-        window.userID = data.authResponse.userID;
+    if (window.userID == undefined) {
+        facebookConnectPlugin.getLoginStatus(function(data) {
+            if ( data.authResponse.status === "connected" ) {
+                window.userID = data.authResponse.userID;
+                retrieveFavoritePhysicians();
+            } else if ( data.authResponse.status === "not_authorized" )  {
+                facebookConnectPlugin.login(['public_profile'], function (response) {
+                    window.userID = response.authResponse.userID;
+                    retrieveFavoritePhysicians();
+                }, function (error) {
+                    alert('Erro. Tente novamente.');
+                });
+            } else {
+                alert('Deve-se conectar ao Facebook.');
+            }
+        }, function (error) {
+            alert('Erro. Tente novamente.');
+        });
+    } else {
         retrieveFavoritePhysicians();
-    }, function (error) {
-        alert('[error]' + error);
-    })
+    }
 };
 
 /****************************************
