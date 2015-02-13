@@ -9,12 +9,6 @@ var toTitleCase = function (str) {
 var getParameterByName = function(uri, name) {
     var match = RegExp('[?&]' + name + '=([^&#]*)').exec(uri);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-}
-
-var centerMap = function (map) {
-    var latlng = new plugin.google.maps.LatLng(window.latitude,
-                                                    window.longitude);
-    map.setCenter(latlng);
 };
 
 /****************************************
@@ -215,132 +209,141 @@ var showPhysician = function(e) {
         return;
     }
 
-    $.getJSON(domain + '/api/physician/' + id, function (physician) {
-        $('.title').html('<strong><small>' + toTitleCase(physician.name) + '</small></strong');
+    postData = {
+        user: window.userID
+    }
 
-        // Especialidades
-        if (physician.specialty == undefined || physician.specialty === "") {
-            $('#physician-specialties-container').hide();
-        } else {
-            if (typeof physician.specialty === "string") {
-                $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty) + "</li>");
+    $.ajax({ url: domain + '/api/physician/' + id,
+        data: postData,
+        crossDomain: true,
+        type: 'POST',
+        success: function( physician ) {
+            $('.title').html('<strong><small>' + toTitleCase(physician.name) + '</small></strong');
+
+            // Especialidades
+            if (physician.specialty == undefined || physician.specialty === "") {
+                $('#physician-specialties-container').hide();
             } else {
-                for (i=0, size = physician.specialty.length; i < size; i++) {
-                    $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty[i]) + "</li>");
+                if (typeof physician.specialty === "string") {
+                    $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty) + "</li>");
+                } else {
+                    for (i=0, size = physician.specialty.length; i < size; i++) {
+                        $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty[i]) + "</li>");
+                    }
                 }
+
+                $('#physician-specialties-container').show();
             }
 
-            $('#physician-specialties-container').show();
-        }
+            // Registro
+            if (physician.register == undefined || physician.register === "") {
+                $('#physician-register-container').hide();
+            } else {
+                $('#physician-register').append("<li class='table-view-cell'>" + physician.register + "</li>");
+                $('#physician-register-container').show();
+            }
 
-        // Registro
-        if (physician.register == undefined || physician.register === "") {
-            $('#physician-register-container').hide();
-        } else {
-            $('#physician-register').append("<li class='table-view-cell'>" + physician.register + "</li>");
-            $('#physician-register-container').show();
-        }
+            // Email
+            if (physician.email == undefined || physician.email === "") {
+                $('#physician-email-container').hide();
+            } else {
+                link = $('#physician-email a');
+                link.attr('href', 'mailto:' + physician.email);
+                link.html(physician.email);
+                $('#physician-email-container').show();
+            }
 
-        // Email
-        if (physician.email == undefined || physician.email === "") {
-            $('#physician-email-container').hide();
-        } else {
-            link = $('#physician-email a');
-            link.attr('href', 'mailto:' + physician.email);
-            link.html(physician.email);
-            $('#physician-email-container').show();
-        }
+            // Addresses
+            if (physician.addresses == undefined) {
+                $('#physician-addresses-container').hide();
+            } else {
+                $('#physician-addresses-header').empty();
+                $('#physician-addresses').empty();
 
-        // Addresses
-        if (physician.addresses == undefined) {
-            $('#physician-addresses-container').hide();
-        } else {
-            $('#physician-addresses-header').empty();
-            $('#physician-addresses').empty();
+                controlParent = $('#physician-addresses-header-container').children().last();
 
-            controlParent = $('#physician-addresses-header-container').children().last();
+                window.map = plugin.google.maps.Map.getMap(document.getElementById('physician-map'), {
+                    'controls': { 'myLocationButton': true }
+                });
 
-            window.map = plugin.google.maps.Map.getMap(document.getElementById('physician-map'), {
-                'controls': { 'myLocationButton': true }
-            });
+                for (i = 0, size = physician.addresses.length; i < size; i++) {
+                    ad = physician.addresses[i];
+                    link =  '<a class="control-item' + ((i == 0) ? " active" : "") + '" href="#address' + i + '">' +
+                                ad.neighborhood + ' / ' + toTitleCase(ad.city) +
+                            '</a>';
 
-            for (i = 0, size = physician.addresses.length; i < size; i++) {
-                ad = physician.addresses[i];
-                link =  '<a class="control-item' + ((i == 0) ? " active" : "") + '" href="#address' + i + '">' +
-                            ad.neighborhood + ' / ' + toTitleCase(ad.city) +
-                        '</a>';
+                    controlParent.append(link);
 
-                controlParent.append(link);
-
-                if ((i + 1) % 2 == 0 && (i + 1) != size) {
-                    $('#physician-addresses-header-container').append('<div class="segmented-control"></div>');
-                    controlParent = $('#physician-addresses-header-container').children().last();
-                }
-
-                address = toTitleCase(ad.street) + '<br />' + ad.neighborhood + '<br />' + toTitleCase(ad.city);
-
-                try {
-                    if (ad.geocode.status == "OK" && ad.geocode.results.length > 0) {
-                        lat = ad.geocode.results[0].geometry.location.lat;
-                        lng = ad.geocode.results[0].geometry.location.lng;
-
-                        var latlng = new plugin.google.maps.LatLng(lat, lng);
-                        window.map.addMarker({'position': latlng,
-                            'title': toTitleCase(ad.street)
-                        }, function( marker ) {
-
-                            marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
-                            });
-                        });
-
-                        address = '<a class="geo-link push-right" href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-lat="' + lat + '" data-lng="' + lng + '" data-ignore="push">' + address + '</a>';
-
+                    if ((i + 1) % 2 == 0 && (i + 1) != size) {
+                        $('#physician-addresses-header-container').append('<div class="segmented-control"></div>');
+                        controlParent = $('#physician-addresses-header-container').children().last();
                     }
-                } catch (err) {
-                    console.error(err);
-                }
 
-                phones = '';
+                    address = toTitleCase(ad.street) + '<br />' + ad.neighborhood + '<br />' + toTitleCase(ad.city);
 
-                if (ad.phones != undefined && ad.phones.length > 0) {
-                    phones = '<li class="table-view-cell table-view-divider">Telefone</li>';
+                    try {
+                        if (ad.geocode.status == "OK" && ad.geocode.results.length > 0) {
+                            lat = ad.geocode.results[0].geometry.location.lat;
+                            lng = ad.geocode.results[0].geometry.location.lng;
 
-                    if (typeof ad.phones === "string") {
-                        phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones + '" data-ignore="push">' + ad.phones + '</a></li>';
-                    } else {
-                        for (p=0, size=ad.phones.length; p < size; p++) {
-                            phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones[p] + '" data-ignore="push">' + ad.phones[p] + '</a></li>';
+                            var latlng = new plugin.google.maps.LatLng(lat, lng);
+                            window.map.addMarker({'position': latlng,
+                                'title': toTitleCase(ad.street)
+                            }, function( marker ) {
+
+                                marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
+                                });
+                            });
+
+                            address = '<a class="geo-link push-right" href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-lat="' + lat + '" data-lng="' + lng + '" data-ignore="push">' + address + '</a>';
+
+                        }
+                    } catch (err) {
+                        console.error(err);
+                    }
+
+                    phones = '';
+
+                    if (ad.phones != undefined && ad.phones.length > 0) {
+                        phones = '<li class="table-view-cell table-view-divider">Telefone</li>';
+
+                        if (typeof ad.phones === "string") {
+                            phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones + '" data-ignore="push">' + ad.phones + '</a></li>';
+                        } else {
+                            for (p=0, size=ad.phones.length; p < size; p++) {
+                                phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones[p] + '" data-ignore="push">' + ad.phones[p] + '</a></li>';
+                            }
                         }
                     }
+
+                    info =  '<div id="address' + i + '" class="control-content' + ((i == 0) ? " active" : "") + '">' +
+                                '<ul class="table-view" id="physician-specialties">' +
+                                    phones +
+                                    '<li class="table-view-cell table-view-divider">Endere&ccedil;o</li>' +
+                                    '<li class="table-view-cell">' + address + '</li>' +
+                                '</ul>' +
+                            '</div>';
+
+                    $('#physician-addresses').append(info);
                 }
 
-                info =  '<div id="address' + i + '" class="control-content' + ((i == 0) ? " active" : "") + '">' +
-                            '<ul class="table-view" id="physician-specialties">' +
-                                phones +
-                                '<li class="table-view-cell table-view-divider">Endere&ccedil;o</li>' +
-                                '<li class="table-view-cell">' + address + '</li>' +
-                            '</ul>' +
-                        '</div>';
+                $('#physician-addresses-container').show();
 
-                $('#physician-addresses').append(info);
+                window.map.setZoom(16);
             }
 
-            $('#physician-addresses-container').show();
+            $('#physician-addresses-header-container').off('touchend', '**');
+            $('#physician-addresses-header-container').on('touchend', 'a', function() {
+                target = $(this).attr('href');
+                link = $(target).find('a.geo-link');
+                if (link != undefined) {
+                    var latlng = new plugin.google.maps.LatLng(parseFloat(link.attr('data-lat')), parseFloat(link.attr('data-lng')));
+                    window.map.setCenter(latlng);
+                }
+            });
 
-            window.map.setZoom(16);
+            $('#physician-addresses-header-container').find('a').first().trigger('touchend');
         }
-
-        $('#physician-addresses-header-container').off('touchend', '**');
-        $('#physician-addresses-header-container').on('touchend', 'a', function() {
-            target = $(this).attr('href');
-            link = $(target).find('a.geo-link');
-            if (link != undefined) {
-                var latlng = new plugin.google.maps.LatLng(parseFloat(link.attr('data-lat')), parseFloat(link.attr('data-lng')));
-                window.map.setCenter(latlng);
-            }
-        });
-
-        $('#physician-addresses-header-container').find('a').first().trigger('touchend');
     });
 };
 
@@ -525,6 +528,7 @@ var loginFacebookAndRetrieveFavorites = function() {
                 window.userID = data.authResponse.userID;
                 retrieveFavoritePhysicians();
             } else if ( data.authResponse.status === "not_authorized" )  {
+                alert('Deve-se conectar ao Facebook.');
                 facebookConnectPlugin.login(['public_profile'], function (response) {
                     window.userID = response.authResponse.userID;
                     retrieveFavoritePhysicians();
@@ -532,7 +536,12 @@ var loginFacebookAndRetrieveFavorites = function() {
                     alert('Erro. Tente novamente.');
                 });
             } else {
-                alert('Deve-se conectar ao Facebook.');
+                facebookConnectPlugin.login(['public_profile'], function (response) {
+                    window.userID = response.authResponse.userID;
+                    retrieveFavoritePhysicians();
+                }, function (error) {
+                    alert('Erro. Tente novamente.');
+                });
             }
         }, function (error) {
             alert('Erro. Tente novamente.');
@@ -606,6 +615,15 @@ document.addEventListener("deviceready", function() {
     }, function (error) {
         console.info(error);
     });
+
+    // Sets current user, if already registered
+    if (window.userID == undefined) {
+        facebookConnectPlugin.getLoginStatus(function(data) {
+            if ( data.authResponse.status === "connected" ) {
+                window.userID = data.authResponse.userID;
+            }
+        });
+    }
 });
 
 window.addEventListener('push', pageChanged);

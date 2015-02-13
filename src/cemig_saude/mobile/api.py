@@ -25,7 +25,15 @@ def list_specialties(request):
 @render_to_json
 def get_physician(request, *args, **kwargs):
     hash = kwargs.get('physician', '')
-    return get_one_physician(filter_by={'hash': hash})
+    user = request.POST.get('user', '')
+
+    physician = get_one_physician(filter_by={'hash': hash})
+
+    # @TODO: Enhance this
+    if user and hash in get_favorites(filter_by={'_id': user}):
+        physician.favorite = True
+
+    return physician
 
 @render_to_json
 def get_favorite_physicians(request, *args, **kwargs):
