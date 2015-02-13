@@ -185,7 +185,7 @@ var favoritePhysicianRequest = function(physician, user, like) {
 
 var favoritePhysician = function(e) {
 	e.preventDefault();
-	
+
     id = getParameterByName(window.location.href, 'hash');
 
     if (id == undefined || id === "") {
@@ -273,7 +273,7 @@ var showPhysician = function(e) {
 
                     for (i = 0, size = physician.addresses.length; i < size; i++) {
                         ad = physician.addresses[i];
-                        
+
                         link =  '<a class="control-item' + ((i == 0) ? " active" : "") + '" href="#address' + i + '">' +
                                     ad.neighborhood + ' / ' + toTitleCase(ad.city) +
                                 '</a>';
@@ -294,7 +294,8 @@ var showPhysician = function(e) {
 
                                 var latlng = new plugin.google.maps.LatLng(lat, lng);
                                 window.map.addMarker({'position': latlng,
-                                    'title': toTitleCase(ad.street)
+                                    'title':  toTitleCase(physician.name),
+                                    'snippet': toTitleCase(ad.street)
                                 }, function( marker ) {
 
                                     marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
@@ -344,7 +345,7 @@ var showPhysician = function(e) {
 
             $('#physician-addresses-container').show();
 
-            window.map.setZoom(16);            
+            window.map.setZoom(16);
 
             $('#physician-addresses-header-container').off('touchend', '**');
             $('#physician-addresses-header-container').on('touchend', 'a', function() {
