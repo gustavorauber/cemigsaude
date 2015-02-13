@@ -31,7 +31,7 @@ def get_physician(request, *args, **kwargs):
 
     # @TODO: Enhance this
     if user and hash in get_favorites(filter_by={'_id': user}):
-        physician.favorite = True
+        physician['favorite'] = True
 
     return physician
 
