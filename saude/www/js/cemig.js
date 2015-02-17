@@ -7,7 +7,7 @@ var toTitleCase = function (str) {
 };
 
 var getParameterByName = function(uri, name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(uri);
+    var match = RegExp('[?&]' + name + '=([^&#]*)').exec(uri);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
@@ -215,7 +215,8 @@ var showPhysician = function(e) {
 
                         var latlng = new plugin.google.maps.LatLng(lat, lng);
                         window.map.addMarker({'position': latlng,
-                            'title': toTitleCase(ad.street)
+                        	'title':  toTitleCase(physician.name),
+                        	'snippet': toTitleCase(ad.street)
                         }, function( marker ) {
 
                             marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
@@ -237,7 +238,7 @@ var showPhysician = function(e) {
                     if (typeof ad.phones === "string") {
                         phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones + '" data-ignore="push">' + ad.phones + '</a></li>';
                     } else {
-                        for (p=0, size=ad.phones.length; p < size; p++) {
+                        for (p=0, p_size=ad.phones.length; p < p_size; p++) {
                             phones += '<li class="table-view-cell"><a class="push-right" href="tel:' + ad.phones[p] + '" data-ignore="push">' + ad.phones[p] + '</a></li>';
                         }
                     }
@@ -271,6 +272,8 @@ var showPhysician = function(e) {
 
         $('#physician-addresses-header-container').find('a').first().trigger('touchend');
     });
+    
+    return false;
 };
 
 /****************************************
@@ -397,7 +400,7 @@ var performSearch = function(e) {
                     }
                 }
             } catch (err) {
-                alert(err);
+            	console.error(err);
             }
         });
 
