@@ -297,7 +297,6 @@ var showPhysician = function(e) {
                                     'title':  toTitleCase(physician.name),
                                     'snippet': toTitleCase(ad.street)
                                 }, function( marker ) {
-
                                     marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
                                     });
                                 });

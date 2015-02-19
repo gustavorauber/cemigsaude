@@ -70,7 +70,7 @@ def remove_favorite(user_id, physician_hash):
     col = db['favorites']
 
     col.update({'_id': user_id},
-                {'$pullAll': {'favorites': physician_hash}}, upsert=True)
+                {'$pullAll': {'favorites': [physician_hash]}}, upsert=True)
 
 def get_specialties():
     db = __get_db()
@@ -165,7 +165,7 @@ def sync_cities():
                                                       "uf": uf}},
                                  upsert=True)
 
-        print db['physicians'].update({'addresses.city': c},
+        db['physicians'].update({'addresses.city': c},
                                 {'$set': {'city_hash': hash}},
                                 multi=True)
 
