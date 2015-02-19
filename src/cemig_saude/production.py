@@ -29,7 +29,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        },  
+        },
         'console': {
             'level':'INFO',
             'class':'logging.StreamHandler'
@@ -53,6 +53,11 @@ LOGGING = {
             'propagate': True
         },
         'django.db.backends': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True
+        },
+        'elasticsearch': {
             'handlers': ['file'],
             'level': 'WARNING',
             'propagate': True

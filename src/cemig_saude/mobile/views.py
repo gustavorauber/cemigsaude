@@ -50,6 +50,13 @@ def adm_sync_specialties(request):
     sync_specialties()
     return True
 
+@render_to_json
+def adm_missing_hash(request):
+    """
+    Admin function
+    """
+    return update_physicians_missing_hash()
+
 def view_physician(request, *args, **kwargs):
     ctx = {}
     hash = kwargs.get('physician', '')

@@ -129,6 +129,7 @@ def update_physicians_missing_hash():
     for p in physicians:
         collection.update({"_id": ObjectId(p['id'])},
                           {'$set': {'hash': str(p['id'])}})
+    return len(physicians)
 
 def update_physicians_phones():
     db = __get_db()
