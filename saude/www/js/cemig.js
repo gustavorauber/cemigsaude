@@ -29,6 +29,7 @@ var createSpecialty = function( sp ) {
 };
 
 var loadSpecialties = function() {
+    $('#floatingCirclesG').show();
     $.ajax({
         url: domain + "/api/list/",
         crossDomain: true,
@@ -40,26 +41,12 @@ var loadSpecialties = function() {
                 li = createSpecialty(val);
                 parent.append(li);
             });
-
-            //$('#specialties a').attr('href', function (e) {
-                //return updateURLParams($(this));
-            //});
-
-            /*
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (pos) {
-                    window.latitude = pos.coords.latitude;
-                    window.longitude = pos.coords.longitude;
-
-                    //$('#specialties a').attr('href', function (e) {
-                	    //return updateURLParams($(this));
-                    //});
-                });
-            }
-            */
         },
         error: function(req, status, error) {
             alert('error: ' + error);
+        },
+        complete: function(jqXHR, textStatus) {
+            $('#floatingCirclesG').hide();
         }
     });
 };
@@ -136,6 +123,7 @@ var retrievePhysicians = function(e) {
             from_record: from_record
     };
 
+    $('#floatingCirclesG').show();
     $.ajax({ url: domain + "/get/distance/",
              data: postData, crossDomain: true,
              type: 'POST',
@@ -151,6 +139,9 @@ var retrievePhysicians = function(e) {
                 } else {
                     $('#distance-btn-more-container').show();
                 }
+             },
+             complete: function(jqXHR, textStatus) {
+                $('#floatingCirclesG').hide();
              }
     });
 };
@@ -169,6 +160,7 @@ var favoritePhysicianRequest = function(physician, user, like) {
         like: like
     };
 
+    $('#floatingCirclesG').show();
     $.ajax({ url: domain + "/api/set/favorite/",
          data: postData, crossDomain: true,
          type: 'POST',
@@ -179,6 +171,9 @@ var favoritePhysicianRequest = function(physician, user, like) {
                 $('#btn-physician-favorite').toggleClass('icon-star');
                 $('#btn-physician-favorite').toggleClass('icon-star-filled');
             }
+         },
+         complete: function(jqXHR, textStatus) {
+            $('#floatingCirclesG').hide();
          }
     });
 };
@@ -216,6 +211,8 @@ var showPhysician = function(e) {
     postData = {
         user: window.userID
     }
+
+    $('#floatingCirclesG').show();
 
     $.ajax({ url: domain + '/api/physician/' + id,
         data: postData,
@@ -357,6 +354,9 @@ var showPhysician = function(e) {
             });
 
             $('#physician-addresses-header-container').find('a').first().trigger('touchend');
+        },
+        complete: function(jqXHR, textStatus) {
+            $('#floatingCirclesG').hide();
         }
     });
 
@@ -452,6 +452,7 @@ var performSearch = function(e) {
     $('#search-map').focus();
     window.map.clear();
 
+    $('#floatingCirclesG').show();
     $.post( domain + "/search", postData, function( data ) {
         var points = [];
 
@@ -492,6 +493,8 @@ var performSearch = function(e) {
             }
         });
 
+        $('#floatingCirclesG').hide();
+
         if (points.length > 0) {
             var latLngBounds = new plugin.google.maps.LatLngBounds(points);
         	window.map.animateCamera({'target': latLngBounds}, function() {
@@ -502,6 +505,8 @@ var performSearch = function(e) {
         } else {
             alert('Nenhum resultado encontrado');
         }
+    }).always(function() {
+        $('#floatingCirclesG').hide();
     });
 };
 
@@ -529,6 +534,7 @@ var retrieveFavoritePhysicians = function(e) {
         lon: window.longitude
     };
 
+    $('#floatingCirclesG').show();
     $.ajax({ url: domain + "/api/get/favorites/",
          data: postData, crossDomain: true,
          type: 'POST',
@@ -538,6 +544,9 @@ var retrieveFavoritePhysicians = function(e) {
             	li = createPhysician(val);
                 parent.append(li);
             });
+         },
+         complete: function(jqXHR, textStatus) {
+            $('#floatingCirclesG').hide();
          }
     });
 };
