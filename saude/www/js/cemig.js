@@ -475,6 +475,7 @@ var performSearch = function(e) {
                                    'snippet': toTitleCase(address.street),
                                    'hash': val.hash
                                 }, function( marker ) {
+                                    window.lastMarker = marker;
                                     marker.addEventListener(plugin.google.maps.event.INFO_CLICK, function() {
                                         window.PUSH({
                                             url        : 'view_physician.html?hash=' + marker.get('hash'),
@@ -493,7 +494,11 @@ var performSearch = function(e) {
 
         if (points.length > 0) {
             var latLngBounds = new plugin.google.maps.LatLngBounds(points);
-        	window.map.animateCamera({'target': latLngBounds});
+        	window.map.animateCamera({'target': latLngBounds}, function() {
+                if (points.length == 1 && window.lastMarker != undefined) {
+                    window.lastMarker.showInfoWindow();
+                }
+            });
         } else {
             alert('Nenhum resultado encontrado');
         }
