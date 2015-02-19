@@ -14,7 +14,11 @@ from cemig_saude.model.mongo import get_specialties, get_one_physician, \
     add_favorite, remove_favorite, get_favorites, get_physicians
 from cemig_saude.model.physician import Physician
 
+from distutils.util import strtobool
+
 from logging import getLogger
+
+import json
 
 log = getLogger(__name__)
 
@@ -57,7 +61,7 @@ def get_favorite_physicians(request, *args, **kwargs):
 def set_favorite_physician(request, *args, **kwargs):
     user = request.POST.get('user', '')
     hash = request.POST.get('physician', '').rstrip('#')
-    like = request.POST.get('like', '')
+    like = strtobool(request.POST.get('like', '1'))
 
     try:
         if like:
