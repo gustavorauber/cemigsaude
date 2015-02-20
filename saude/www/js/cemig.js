@@ -76,6 +76,20 @@ var getPhysicianLocation = function ( p ) {
 };
 
 var createPhysician = function ( p ) {
+    distance = p.distance.toFixed(2) + ' km';
+	if (p.distance > 10000) {
+		distance = '&infin;';
+	}
+
+    return  '<li class="table-view-cell">' +
+                '<a href="view_physician.html?hash=' + p.id + '" data-transition="slide-in">' +
+                    '<small>' + toTitleCase(p.name) + '</small>' +
+                    '<span class="badge">' + distance + '</span>' +
+                '</a>' +
+            '</li>';
+};
+
+var createFavoritePhysician = function ( p ) {
     if (p.distance == undefined) {
         if (window.latitude != undefined) {
            l = getPhysicianLocation(p);
@@ -95,9 +109,19 @@ var createPhysician = function ( p ) {
 		distance = '&infin;';
 	}
 
+    specialty = "";
+    if (p.specialty != undefined && p.specialty !== "") {
+        if (typeof p.specialty === "string") {
+            specialty = toTitleCase(p.specialty);
+        } else {
+            specialty = toTitleCase(p.specialty[0]) + ', ...';
+        }
+    }
+
     return  '<li class="table-view-cell">' +
                 '<a href="view_physician.html?hash=' + p.id + '" data-transition="slide-in">' +
                     '<small>' + toTitleCase(p.name) + '</small>' +
+                    '<p>' + specialty + '</p>' +
                     '<span class="badge">' + distance + '</span>' +
                 '</a>' +
             '</li>';
@@ -348,8 +372,8 @@ var showPhysician = function(e) {
                 target = $(this).attr('href');
                 link = $(target).find('a.geo-link');
                 if (link != undefined) {
-                    var latlng = new plugin.google.maps.LatLng(parseFloat(link.attr('data-lat')), parseFloat(link.attr('data-lng')));
-                    window.map.setCenter(latlng);
+                    position = new plugin.google.maps.LatLng(parseFloat(link.attr('data-lat')), parseFloat(link.attr('data-lng')));
+                    window.map.setCenter(position);
                 }
             });
 
@@ -405,7 +429,7 @@ var initMap = function () {
         'controls': { 'myLocationButton': true }
     });
 
-    window.map.on(plugin.google.maps.event.MAP_READY, onMapInit);
+    window.map.one(plugin.google.maps.event.MAP_READY, onMapInit);
 };
 
 var getDistanceFromLatLonInKm = function(lat1,lon1,lat2,lon2) {
@@ -460,6 +484,15 @@ var performSearch = function(e) {
 
         $.each(data, function ( index, val ) {
             try {
+                specialty = "";
+                if (val.specialty != undefined && val.specialty !== "") {
+                    if (typeof val.specialty === "string") {
+                        specialty = toTitleCase(val.specialty);
+                    } else {
+                        specialty = toTitleCase(val.specialty[0]) + ', ...';
+                    }
+                }
+
                 for (i=0; i < val.addresses.length; i++) {
                     address = val.addresses[i];
                     if ( address.geocode != undefined ) {
@@ -473,7 +506,7 @@ var performSearch = function(e) {
                                 points.push(position);
                                 window.map.addMarker({'position': position,
                                    'title':  toTitleCase(val.name),
-                                   'snippet': toTitleCase(address.street),
+                                   'snippet': specialty + '\n' + toTitleCase(address.street),
                                    'hash': val.hash
                                 }, function( marker ) {
                                     window.lastMarker = marker;
@@ -541,7 +574,7 @@ var retrieveFavoritePhysicians = function(e) {
          success: function( data ) {
             parent = $('#favorites');
             $.each(data, function ( index, val ) {
-            	li = createPhysician(val);
+            	li = createFavoritePhysician(val);
                 parent.append(li);
             });
          },
@@ -591,6 +624,7 @@ var loginFacebookAndRetrieveFavorites = function() {
 var pageChanged = function( data ) {
     if (document.getElementById('page-map-search')) {
         initMap();
+
         $('#btn-search').on({click: performSearch, touchend: performSearch});
         $('#form-search').on({submit: performSearch});
         $('#in-search').keypress(function(e) {
