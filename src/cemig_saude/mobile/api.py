@@ -53,7 +53,7 @@ def get_favorite_physicians(request, *args, **kwargs):
 
             return physicians
     except Exception, e:
-        log.exception('get_favorite_physicians [%s]'.format(user), e)
+        log.exception('get_favorite_physicians [%s] %s', user, e)
 
     return []
 
@@ -71,7 +71,7 @@ def set_favorite_physician(request, *args, **kwargs):
 
         return True
     except Exception, e:
-        log.exception('set_favorite_physician [{0} {1} {2}]'.format(user, hash,
-                                                                like), e)
+        log.exception('set_favorite_physician [%s %s %s] %s', user, hash, like,
+                                                                            e)
 
     return False

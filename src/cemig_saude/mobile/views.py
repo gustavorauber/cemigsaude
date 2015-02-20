@@ -166,13 +166,18 @@ def search(request, *args, **kwargs):
     if not query:
         return []
 
-    results, total = search_physicians(query=query, n=150, distance=distance,
-                                lat=lat, lon=lon)
-    physician_ids = list(x['_id'] for x in results)
+    try:
+        results, total = search_physicians(query=query, n=150, distance=distance,
+                                    lat=lat, lon=lon)
+        physician_ids = list(x['_id'] for x in results)
 
-    filter_by = {}
-    filter_by['hash'] = {'$in': physician_ids}
-    physicians = get_physicians(filter_by=filter_by)
-    physicians_objs = list(Physician(p).to_json() for p in physicians)
+        filter_by = {}
+        filter_by['hash'] = {'$in': physician_ids}
+        physicians = get_physicians(filter_by=filter_by)
+        physicians_objs = list(Physician(p).to_json() for p in physicians)
 
-    return physicians_objs
+        return physicians_objs
+    except Exception, e:
+        log.exception("search exception %s", e)
+        return []
+
