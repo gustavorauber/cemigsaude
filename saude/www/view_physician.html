@@ -7,9 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <!--link rel="stylesheet" href="css/saude.min.css" /-->
     <link rel="stylesheet" href="css/ratchet.min.css" />
-    <link rel="stylesheet" href="css/ratchet-theme-ios.min.css" />
     <link rel="stylesheet" href="css/saude-custom.css" />
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
@@ -18,15 +16,31 @@
 <body>
     <header class="bar bar-nav">
         <a class="icon icon-left-nav pull-left" href="javascript:history.back();" data-transition="slide-out"></a>
-        <a class="icon icon-star pull-right" href="#" data-ignore="push" id="btn-physician-favorite"></a>
         <h1 class="title"><strong><small>Conveniado</small></strong></h1>
     </header>
 
     <div class="bar bar-standard bar-footer">
-        <div class="tab-item" style="text-align: center;"><img src="img/logo_cemig_saude.png" /></div>
+        <div class="bar-logo"><img src="img/logo_cemig_saude.png" /></div>
     </div>
 
     <div class="content" id="page-physician">
+        <div class="card">
+            <div class="bar segmented-control custom">
+                <a class="control-item tab-item" href="#" data-ignore="push" id="btn-physician-share">
+                    <span class="icon icon-share"></span>
+                    <span class="tab-label">Compartilhar</span>
+                </a>
+                <a class="control-item tab-item" href="#" data-ignore="push" id="btn-physician-favorite">
+                    <span class="icon icon-star"></span>
+                    <span class="tab-label">Favoritar</span>
+                </a>
+                <a class="control-item tab-item" href="#" data-ignore="push" id="btn-physician-route">
+                    <span class="icon icon-play"></span>
+                    <span class="tab-label">Traçar Rota</span>
+                </a>
+            </div>
+        </div>
+
         <div class="card" id="physician-specialties-container">
             <ul class="table-view" id="physician-specialties">
                 <li class="table-view-cell table-view-divider">Especialidade(s)</li>
@@ -54,7 +68,7 @@
             <div class="card" id="physician-addresses"></div>
 
             <div class="card" id="physician-map" style="height:400px;"></div>
-            <div class="card" id="directions"></div>
+            <!--div class="card" id="directions"></div-->
         </div>
 
         <div id="floatingCirclesG" style="display: none;">
