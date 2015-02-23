@@ -18,8 +18,6 @@ from distutils.util import strtobool
 
 from logging import getLogger
 
-import json
-
 log = getLogger(__name__)
 
 @render_to_json

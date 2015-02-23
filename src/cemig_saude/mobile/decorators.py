@@ -12,8 +12,10 @@ from django.http import Http404
 
 from functools import wraps
 
-# import ujson as json
-import json
+try:
+    import ujson as json
+except Exception, e:
+    import json
 
 def render_to_json(f):
     """

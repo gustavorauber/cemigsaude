@@ -164,19 +164,19 @@ LOGGING = {
             'class': 'django.utils.log.AdminEmailHandler'
         },
         'console': {
-            'level':'INFO',
+            'level':'DEBUG',
             'class':'logging.StreamHandler'
         }
     },
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': 'WARNING',
+            'level': 'DEBUG',
             'propagate': True
         },
         'django.request': {
             'handlers': ['console'],
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'propagate': True
         },
         'django.db.backends': {
