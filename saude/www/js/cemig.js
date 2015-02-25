@@ -226,6 +226,7 @@ var favoritePhysician = function(e) {
     if (window.userID == undefined) {
         facebookConnectPlugin.login(['email'], function(data) {
             window.userID = data.authResponse.userID;
+            window.localStorage.setItem("user", data.authResponse.userID);
             favoritePhysicianRequest(id, window.userID, like);
         });
     } else {
@@ -384,8 +385,10 @@ var showPhysician = function(e) {
                                     'title':  toTitleCase(physician.name),
                                     'snippet': toTitleCase(ad.street)
                                 }, function( marker ) {
-                                    marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
-                                    });
+
+                                    if (size == 1) {
+                                        marker.showInfoWindow();
+                                    }
                                 });
 
                                 address = '<a class="geo-link push-right" href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-lat="' + lat + '" data-lng="' + lng + '" data-ignore="push">' + address + '</a>';
@@ -595,7 +598,7 @@ var performSearch = function(e) {
                 }
             });
         } else {
-            alert('Nenhum resultado encontrado');
+            navigator.notification.alert('Nenhum resultado encontrado');
         }
     }).always(function() {
         $('#floatingCirclesG').hide();
@@ -611,7 +614,7 @@ var performSearch = function(e) {
 *****************************************/
 var retrieveFavoritePhysicians = function(e) {
     if (window.userID == undefined) {
-        alert('Deve-se estar conectado ao Facebook');
+        navigator.notification.alert('Deve-se estar conectado ao Facebook');
         return false;
     }
 
@@ -645,28 +648,13 @@ var retrieveFavoritePhysicians = function(e) {
 
 var loginFacebookAndRetrieveFavorites = function() {
     if (window.userID == undefined) {
-        facebookConnectPlugin.getLoginStatus(function(data) {
-            if ( data.authResponse.status === "connected" ) {
-                window.userID = data.authResponse.userID;
-                retrieveFavoritePhysicians();
-            } else if ( data.authResponse.status === "not_authorized" )  {
-                alert('Deve-se conectar ao Facebook.');
-                facebookConnectPlugin.login(['public_profile'], function (response) {
-                    window.userID = response.authResponse.userID;
-                    retrieveFavoritePhysicians();
-                }, function (error) {
-                    alert('Erro. Tente novamente.');
-                });
-            } else {
-                facebookConnectPlugin.login(['public_profile'], function (response) {
-                    window.userID = response.authResponse.userID;
-                    retrieveFavoritePhysicians();
-                }, function (error) {
-                    alert('Erro. Tente novamente.');
-                });
-            }
+        facebookConnectPlugin.login(['public_profile'], function (response) {
+            window.userID = response.authResponse.userID;
+            window.localStorage.setItem("user", response.authResponse.userID);
+            retrieveFavoritePhysicians();
+            return false;
         }, function (error) {
-            alert('Erro. Tente novamente.');
+            navigator.notification.alert('Erro. Tente novamente.');
         });
     } else {
         retrieveFavoritePhysicians();
@@ -742,13 +730,22 @@ document.addEventListener("deviceready", function() {
     });
 
     // Sets current user, if already registered
+    user = window.localStorage.getItem('user');
+    if (user != null && user != undefined) {
+        // @TODO: check if FB access is still valid
+        window.userID = user;
+    }
+
     if (window.userID == undefined) {
         facebookConnectPlugin.getLoginStatus(function(data) {
             if ( data.authResponse.status === "connected" ) {
                 window.userID = data.authResponse.userID;
+                window.localStorage.setItem('user', data.authResponse.userID);
             }
         });
     }
+
+    window.alert = navigator.notification.alert;
 });
 
 window.addEventListener('push', pageChanged);
