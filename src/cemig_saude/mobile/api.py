@@ -40,6 +40,9 @@ def get_physician(request, *args, **kwargs):
 @render_to_json
 def get_favorite_physicians(request, *args, **kwargs):
     user = request.POST.get('user', '')
+
+    log.info('Get Favorites request - User [%s]', user)
+
     favorites = get_favorites(filter_by={'_id': user})
 
     try:
