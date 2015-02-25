@@ -532,7 +532,7 @@ var performSearch = function(e) {
     };
 
     if (postData.q === "") {
-        alert("Consulta vazia!");
+        navigator.notification.alert('Consulta vazia!', null, 'Alerta', 'OK');
         return false;
     }
 
