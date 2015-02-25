@@ -268,6 +268,59 @@ var sharePhysician = function(e) {
     return false;
 };
 
+var addPhysicianContact = function (e) {
+    e.preventDefault();
+
+    try {
+        physician = window.physician;
+        var options = new ContactFindOptions();
+        options.filter = toTitleCase(physician.name);
+        var fields = ['displayName', 'nickname'];
+
+        navigator.contacts.find(fields, function(results) {
+            if (results.length > 0) {
+                navigator.notification.alert('O contato existe na agenda', null, 'Alerta', 'OK');
+                return false;
+            }
+
+            var contact = navigator.contacts.create();
+            contact.displayName = toTitleCase(physician.name);
+            contact.nickname = contact.displayName;
+            contact.note = 'Cemig Saude';
+
+            var phoneNumbers = [];
+            activeAddress = $('.control-content.active');
+            if (activeAddress.length == 0) {
+                activeAddress = $('.control-content').first();
+            }
+            if (activeAddress.length > 0) {
+                phoneNumbers[0] = new ContactField('work', activeAddress.find('.phone-link').html(), true);
+            }
+            contact.phoneNumbers = phoneNumbers;
+
+            var emails = [];
+            if (physician.email != undefined && physician.email !== "") {
+                emails[0] = new ContactField('work', physician.email, true);
+            }
+            contact.emails = emails;
+
+            contact.save(function() {
+                navigator.notification.alert('Contato gravado com sucesso!', null, 'Sucesso', 'OK');
+            }, function (err) {
+                navigator.notification.alert('Erro ao gravar contato', null, 'Erro', 'OK');
+            });
+
+        }, function (err) {
+            navigator.notification.alert('Erro ao pesquisar contatos existentes', null, 'Erro', 'OK');
+        }, options);
+
+    } catch (err) {
+        console.error(err);
+    }
+
+    return false;
+};
+
 var routeToPhysician = function(e) {
     e.preventDefault();
     try {
@@ -285,6 +338,7 @@ var routeToPhysician = function(e) {
         }
     } catch (err) {
         console.error(err);
+        alert(err);
     }
 
     return false;
@@ -703,6 +757,7 @@ var pageChanged = function( data ) {
 
             $('#btn-physician-favorite').on('touchend', favoritePhysician);
             $('#btn-physician-share').on('touchend', sharePhysician);
+            $('#btn-physician-contact').on('touchend', addPhysicianContact);
             $('#btn-physician-route').on('touchend', routeToPhysician);
         } else {
             window.map = plugin.google.maps.Map.getMap(document.getElementById('physician-map'),
