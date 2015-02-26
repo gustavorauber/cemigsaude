@@ -288,15 +288,40 @@ var addPhysicianContact = function (e) {
             contact.nickname = contact.displayName;
             contact.note = 'Cemig Saude';
 
-            var phoneNumbers = [];
             activeAddress = $('.control-content.active');
             if (activeAddress.length == 0) {
                 activeAddress = $('.control-content').first();
             }
             if (activeAddress.length > 0) {
+                var phoneNumbers = [];
+                var addresses = [];
+
+                // Phone
                 phoneNumbers[0] = new ContactField('work', activeAddress.find('.phone-link').html(), true);
+                contact.phoneNumbers = phoneNumbers;
+
+                // Address
+                address = activeAddress.find('.geo-link').html();
+                parts = address.split("<br>");
+                cityState = parts[2].split('-');
+                addresses[0] = new ContactAddress();
+                addresses[0].country = 'Brasil';
+                addresses[0].type = 'work';
+
+                if (parts.length >= 1) {
+                    addresses[0].streetAddress = parts[0];
+                }
+
+                if (cityState.length >= 2) {
+                    addresses[0].locality = cityState[0];
+                    addresses[0].region = cityState[1];
+                }
+
+                addresses[0].formatted = address.replace(/<br\s*[\/]?>/gi, "\n");
+                addresses[0].pref = false;
+
+                contact.addresses = addresses;
             }
-            contact.phoneNumbers = phoneNumbers;
 
             var emails = [];
             if (physician.email != undefined && physician.email !== "") {
