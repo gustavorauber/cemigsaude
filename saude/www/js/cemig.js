@@ -15,9 +15,9 @@ var getPhysicianSpecialty = function (val) {
     specialty = "";
     if (val.specialty != undefined && val.specialty !== "") {
         if (typeof val.specialty === "string") {
-            specialty = toTitleCase(val.specialty);
+            specialty = val.specialty;
         } else {
-            specialty = toTitleCase(val.specialty[0]) + ', ...';
+            specialty = val.specialty[0] + ', ...';
         }
     }
     return specialty;
@@ -43,7 +43,7 @@ var handleAjaxError = function (req, status, error) {
 var createSpecialty = function( sp ) {
     return '<li class="table-view-cell">' +
                 '<a href="list_physicians_by_distance.html?hash=' + sp.hash + '" data-transition="slide-in">' +
-                    '<small>' + ((sp.specialty === "") ? "M&uacute;ltiplas Especialidades" : toTitleCase(sp.specialty)) + '</small>' +
+                    '<small>' + ((sp.specialty === "") ? "M&uacute;ltiplas Especialidades" : sp.specialty) + '</small>' +
                     '<span class="badge">' + sp.count + '</span>' +
                 '</a>' +
             '</li>';
@@ -102,7 +102,7 @@ var createPhysician = function ( p ) {
 
     return  '<li class="table-view-cell">' +
                 '<a href="view_physician.html?hash=' + p.id + '" data-transition="slide-in">' +
-                    '<small>' + toTitleCase(p.name) + '</small>' +
+                    '<small>' + p.name + '</small>' +
                     '<span class="badge">' + distance + '</span>' +
                 '</a>' +
             '</li>';
@@ -132,7 +132,7 @@ var createFavoritePhysician = function ( p ) {
 
     return  '<li class="table-view-cell">' +
                 '<a href="view_physician.html?hash=' + p.id + '" data-transition="slide-in">' +
-                    '<small>' + toTitleCase(p.name) + '</small>' +
+                    '<small>' + p.name + '</small>' +
                     '<p>' + specialty + '</p>' +
                     '<span class="badge">' + distance + '</span>' +
                 '</a>' +
@@ -264,10 +264,10 @@ var sharePhysician = function(e) {
             link = 'https://maps.google.com/maps?q=' + geoLink.attr('data-lat') + ',' + geoLink.attr('data-lng');
         }
 
-        msg = toTitleCase(window.physician.name) + '\n'+
+        msg = window.physician.name + '\n'+
             getPhysicianSpecialty(window.physician) + '\n' +
             phone + address;
-        subject = '[Cemig Saude] - ' + toTitleCase(window.physician.name);
+        subject = '[Cemig Saude] - ' + window.physician.name;
 
         window.plugins.socialsharing.share(msg, subject, null, link);
     } catch (err) {
@@ -283,7 +283,7 @@ var addPhysicianContact = function (e) {
     try {
         physician = window.physician;
         var options = new ContactFindOptions();
-        options.filter = toTitleCase(physician.name);
+        options.filter = physician.name;
         var fields = ['displayName', 'nickname'];
 
         navigator.contacts.find(fields, function(results) {
@@ -293,7 +293,7 @@ var addPhysicianContact = function (e) {
             }
 
             var contact = navigator.contacts.create();
-            contact.displayName = toTitleCase(physician.name);
+            contact.displayName = physician.name;
             contact.nickname = contact.displayName;
             contact.note = 'Cemig Sa\xFAde';
 
@@ -398,17 +398,17 @@ var showPhysician = function(e) {
         success: function( physician ) {
             window.physician = physician;
 
-            $('.title').html('<strong><small>' + toTitleCase(physician.name) + '</small></strong');
+            $('.title').html('<strong><small>' + physician.name + '</small></strong');
 
             // Especialidades
             if (physician.specialty == undefined || physician.specialty === "") {
                 $('#physician-specialties-container').hide();
             } else {
                 if (typeof physician.specialty === "string") {
-                    $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty) + "</li>");
+                    $('#physician-specialties').append("<li class='table-view-cell'>" + physician.specialty + "</li>");
                 } else {
                     for (i=0, size = physician.specialty.length; i < size; i++) {
-                        $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty[i]) + "</li>");
+                        $('#physician-specialties').append("<li class='table-view-cell'>" + physician.specialty[i] + "</li>");
                     }
                 }
 
@@ -470,7 +470,7 @@ var showPhysician = function(e) {
 
                                 var latlng = new plugin.google.maps.LatLng(lat, lng);
                                 window.map.addMarker({'position': latlng,
-                                    'title':  toTitleCase(physician.name),
+                                    'title':  physician.name,
                                     'snippet': toTitleCase(ad.street)
                                 }, function( marker ) {
 
@@ -656,7 +656,7 @@ var performSearch = function(e) {
                                 position = new plugin.google.maps.LatLng(l.lat, l.lng);
                                 points.push(position);
                                 window.map.addMarker({'position': position,
-                                   'title':  toTitleCase(val.name),
+                                   'title':  val.name,
                                    'snippet': specialty + '\n' + toTitleCase(address.street),
                                    'hash': val.hash
                                 }, function( marker ) {

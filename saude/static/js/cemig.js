@@ -15,12 +15,21 @@ var getPhysicianSpecialty = function (val) {
     specialty = "";
     if (val.specialty != undefined && val.specialty !== "") {
         if (typeof val.specialty === "string") {
-            specialty = toTitleCase(val.specialty);
+            specialty = val.specialty;
         } else {
-            specialty = toTitleCase(val.specialty[0]) + ', ...';
+            specialty = val.specialty[0] + ', ...';
         }
     }
     return specialty;
+};
+
+var handleAjaxError = function (req, status, error) {
+    var state = navigator.connection.type;
+    if (state === Connection.UNKNOWN || state === Connection.NONE) {
+        navigator.notification.alert('Sem conex\xE3o de dados', null, 'Alerta', 'OK');
+    } else {
+        alert('Erro ao fazer a requisi\xE7\xE3o');
+    }
 };
 
 /****************************************
@@ -34,7 +43,7 @@ var getPhysicianSpecialty = function (val) {
 var createSpecialty = function( sp ) {
     return '<li class="table-view-cell">' +
                 '<a href="list_physicians_by_distance.html?hash=' + sp.hash + '" data-transition="slide-in">' +
-                    '<small>' + ((sp.specialty === "") ? "M&uacute;ltiplas Especialidades" : toTitleCase(sp.specialty)) + '</small>' +
+                    '<small>' + ((sp.specialty === "") ? "M&uacute;ltiplas Especialidades" : sp.specialty) + '</small>' +
                     '<span class="badge">' + sp.count + '</span>' +
                 '</a>' +
             '</li>';
@@ -54,9 +63,7 @@ var loadSpecialties = function() {
                 parent.append(li);
             });
         },
-        error: function(req, status, error) {
-            alert('error: ' + error);
-        },
+        error: handleAjaxError,
         complete: function(jqXHR, textStatus) {
             $('#floatingCirclesG').hide();
         }
@@ -95,7 +102,7 @@ var createPhysician = function ( p ) {
 
     return  '<li class="table-view-cell">' +
                 '<a href="view_physician.html?hash=' + p.id + '" data-transition="slide-in">' +
-                    '<small>' + toTitleCase(p.name) + '</small>' +
+                    '<small>' + p.name + '</small>' +
                     '<span class="badge">' + distance + '</span>' +
                 '</a>' +
             '</li>';
@@ -121,18 +128,11 @@ var createFavoritePhysician = function ( p ) {
 		distance = '&infin;';
 	}
 
-    specialty = "";
-    if (p.specialty != undefined && p.specialty !== "") {
-        if (typeof p.specialty === "string") {
-            specialty = toTitleCase(p.specialty);
-        } else {
-            specialty = toTitleCase(p.specialty[0]) + ', ...';
-        }
-    }
+    specialty = getPhysicianSpecialty(p);
 
     return  '<li class="table-view-cell">' +
                 '<a href="view_physician.html?hash=' + p.id + '" data-transition="slide-in">' +
-                    '<small>' + toTitleCase(p.name) + '</small>' +
+                    '<small>' + p.name + '</small>' +
                     '<p>' + specialty + '</p>' +
                     '<span class="badge">' + distance + '</span>' +
                 '</a>' +
@@ -153,10 +153,10 @@ var retrievePhysicians = function(e) {
     }
 
     postData = {
-            lat: window.latitude,
-            lon: window.longitude,
-            specialty: specialty,
-            from_record: from_record
+        lat: window.latitude,
+        lon: window.longitude,
+        specialty: specialty,
+        from_record: from_record
     };
 
     $('#floatingCirclesG').show();
@@ -176,6 +176,7 @@ var retrievePhysicians = function(e) {
                     $('#distance-btn-more-container').show();
                 }
              },
+             error: handleAjaxError,
              complete: function(jqXHR, textStatus) {
                 $('#floatingCirclesG').hide();
              }
@@ -204,10 +205,16 @@ var favoritePhysicianRequest = function(physician, user, like) {
             id = getParameterByName(window.location.href, 'hash');
 
             if (physician === id) { // user might have navigated away
-                $('#btn-physician-favorite').toggleClass('icon-star');
-                $('#btn-physician-favorite').toggleClass('icon-star-filled');
+                if (like) {
+                    $('#btn-physician-favorite').find('.icon').removeClass('icon-star');
+                    $('#btn-physician-favorite').find('.icon').addClass('icon-star-filled');
+                } else {
+                    $('#btn-physician-favorite').find('.icon').removeClass('icon-star-filled');
+                    $('#btn-physician-favorite').find('.icon').addClass('icon-star');
+                }
             }
          },
+         error: handleAjaxError,
          complete: function(jqXHR, textStatus) {
             $('#floatingCirclesG').hide();
          }
@@ -223,11 +230,12 @@ var favoritePhysician = function(e) {
         return;
     }
 
-    like = $('#btn-physician-favorite').hasClass('icon-star');
+    like = $('#btn-physician-favorite').find('.icon').hasClass('icon-star');
 
     if (window.userID == undefined) {
         facebookConnectPlugin.login(['email'], function(data) {
             window.userID = data.authResponse.userID;
+            window.localStorage.setItem("user", data.authResponse.userID);
             favoritePhysicianRequest(id, window.userID, like);
         });
     } else {
@@ -239,24 +247,134 @@ var favoritePhysician = function(e) {
 
 var sharePhysician = function(e) {
     e.preventDefault();
-    activeAddress = $('.control-content .active');
-    phone = '';
-    address = '';
-    link = '';
+    try {
+        activeAddress = $('.control-content.active');
+        if (activeAddress.length == 0) {
+            activeAddress = $('.control-content').first();
+        }
 
-    if (activeAddress.length > 0) {
-        geoLink = activeAddress.find('.geo-link');
-        address = geoLink.html();
-        phone = activeAddress.find('.phone-link').first().html();
-        link = 'https://maps.google.com/maps?q=' + geoLink.attr('data-lat') + ',' + geoLink.attr('data-lng');
+        phone = '';
+        address = '';
+        link = '';
+
+        if (activeAddress.length > 0) {
+            geoLink = activeAddress.find('.geo-link');
+            address = geoLink.html().replace(/<br\s*[\/]?>/gi, "\n") + '\n';
+            phone = activeAddress.find('.phone-link').first().html() + '\n';
+            link = 'https://maps.google.com/maps?q=' + geoLink.attr('data-lat') + ',' + geoLink.attr('data-lng');
+        }
+
+        msg = window.physician.name + '\n'+
+            getPhysicianSpecialty(window.physician) + '\n' +
+            phone + address;
+        subject = '[Cemig Saude] - ' + window.physician.name;
+
+        window.plugins.socialsharing.share(msg, subject, null, link);
+    } catch (err) {
+        console.error(err);
     }
 
-    msg = toTitleCase(window.physician.name) + '\n'+
-        getPhysicianSpecialty(window.physician) + '\n' +
-        phone + address;
-    subject = '[Cemig Saúde] - ' + toTitleCase(window.physician.name);
+    return false;
+};
 
-    window.plugins.socialsharing.share(msg, subject, null, link);
+var addPhysicianContact = function (e) {
+    e.preventDefault();
+
+    try {
+        physician = window.physician;
+        var options = new ContactFindOptions();
+        options.filter = physician.name;
+        var fields = ['displayName', 'nickname'];
+
+        navigator.contacts.find(fields, function(results) {
+            if (results.length > 0) {
+                navigator.notification.alert('O contato j\xE1 existe na agenda', null, 'Alerta', 'OK');
+                return false;
+            }
+
+            var contact = navigator.contacts.create();
+            contact.displayName = physician.name;
+            contact.nickname = contact.displayName;
+            contact.note = 'Cemig Sa\xFAde';
+
+            activeAddress = $('.control-content.active');
+            if (activeAddress.length == 0) {
+                activeAddress = $('.control-content').first();
+            }
+            if (activeAddress.length > 0) {
+                var phoneNumbers = [];
+                var addresses = [];
+
+                // Phone
+                phoneNumbers[0] = new ContactField('work', activeAddress.find('.phone-link').html(), true);
+                contact.phoneNumbers = phoneNumbers;
+
+                // Address
+                address = activeAddress.find('.geo-link').html();
+                parts = address.split("<br>");
+                cityState = parts[2].split('-');
+                addresses[0] = new ContactAddress();
+                addresses[0].country = 'Brasil';
+                addresses[0].type = 'work';
+
+                if (parts.length >= 1) {
+                    addresses[0].streetAddress = parts[0];
+                }
+
+                if (cityState.length >= 2) {
+                    addresses[0].locality = cityState[0];
+                    addresses[0].region = cityState[1];
+                }
+
+                addresses[0].formatted = address.replace(/<br\s*[\/]?>/gi, "\n");
+                addresses[0].pref = false;
+
+                contact.addresses = addresses;
+            }
+
+            var emails = [];
+            if (physician.email != undefined && physician.email !== "") {
+                emails[0] = new ContactField('work', physician.email, true);
+            }
+            contact.emails = emails;
+
+            contact.save(function() {
+                navigator.notification.alert('Contato gravado com sucesso!', null, 'Sucesso', 'OK');
+            }, function (err) {
+                navigator.notification.alert('Erro ao gravar contato', null, 'Erro', 'OK');
+            });
+
+        }, function (err) {
+            navigator.notification.alert('Erro ao pesquisar contatos existentes', null, 'Erro', 'OK');
+        }, options);
+
+    } catch (err) {
+        console.error(err);
+    }
+
+    return false;
+};
+
+var routeToPhysician = function(e) {
+    e.preventDefault();
+    try {
+        activeAddress = $('.control-content.active');
+        if (activeAddress.length == 0) {
+            activeAddress = $('.control-content').first();
+        }
+
+        if (activeAddress.length > 0) {
+            geoLink = activeAddress.find('.geo-link');
+            plugin.google.maps.external.launchNavigation({
+                from: window.latitude + ',' + window.longitude,
+                to: geoLink.attr('data-lat') + ',' + geoLink.attr('data-lng')
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        alert(err);
+    }
+
     return false;
 };
 
@@ -280,17 +398,17 @@ var showPhysician = function(e) {
         success: function( physician ) {
             window.physician = physician;
 
-            $('.title').html('<strong><small>' + toTitleCase(physician.name) + '</small></strong');
+            $('.title').html('<strong><small>' + physician.name + '</small></strong');
 
             // Especialidades
             if (physician.specialty == undefined || physician.specialty === "") {
                 $('#physician-specialties-container').hide();
             } else {
                 if (typeof physician.specialty === "string") {
-                    $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty) + "</li>");
+                    $('#physician-specialties').append("<li class='table-view-cell'>" + physician.specialty + "</li>");
                 } else {
                     for (i=0, size = physician.specialty.length; i < size; i++) {
-                        $('#physician-specialties').append("<li class='table-view-cell'>" + toTitleCase(physician.specialty[i]) + "</li>");
+                        $('#physician-specialties').append("<li class='table-view-cell'>" + physician.specialty[i] + "</li>");
                     }
                 }
 
@@ -352,11 +470,13 @@ var showPhysician = function(e) {
 
                                 var latlng = new plugin.google.maps.LatLng(lat, lng);
                                 window.map.addMarker({'position': latlng,
-                                    'title':  toTitleCase(physician.name),
+                                    'title':  physician.name,
                                     'snippet': toTitleCase(ad.street)
                                 }, function( marker ) {
-                                    marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function() {
-                                    });
+
+                                    if (size == 1) {
+                                        marker.showInfoWindow();
+                                    }
                                 });
 
                                 address = '<a class="geo-link push-right" href="geo:' + lat + ',' + lng + ';u=35;q=' + lat + ',' + lng + '" data-lat="' + lat + '" data-lng="' + lng + '" data-ignore="push">' + address + '</a>';
@@ -396,8 +516,8 @@ var showPhysician = function(e) {
             }
 
             if (physician.favorite != undefined && physician.favorite) {
-                $('#btn-physician-favorite').removeClass('icon-star');
-                $('#btn-physician-favorite').addClass('icon-star-filled');
+                $('#btn-physician-favorite').find('.icon').removeClass('icon-star');
+                $('#btn-physician-favorite').find('.icon').addClass('icon-star-filled');
             }
 
             $('#physician-addresses-container').show();
@@ -416,6 +536,7 @@ var showPhysician = function(e) {
 
             $('#physician-addresses-header-container').find('a').first().trigger('touchend');
         },
+        error: handleAjaxError,
         complete: function(jqXHR, textStatus) {
             $('#floatingCirclesG').hide();
         }
@@ -503,7 +624,7 @@ var performSearch = function(e) {
     };
 
     if (postData.q === "") {
-        alert("Consulta vazia!");
+        navigator.notification.alert('Consulta vazia!', null, 'Alerta', 'OK');
         return false;
     }
 
@@ -521,14 +642,7 @@ var performSearch = function(e) {
 
         $.each(data, function ( index, val ) {
             try {
-                specialty = "";
-                if (val.specialty != undefined && val.specialty !== "") {
-                    if (typeof val.specialty === "string") {
-                        specialty = toTitleCase(val.specialty);
-                    } else {
-                        specialty = toTitleCase(val.specialty[0]) + ', ...';
-                    }
-                }
+                specialty = getPhysicianSpecialty(val);
 
                 for (i=0; i < val.addresses.length; i++) {
                     address = val.addresses[i];
@@ -542,7 +656,7 @@ var performSearch = function(e) {
                                 position = new plugin.google.maps.LatLng(l.lat, l.lng);
                                 points.push(position);
                                 window.map.addMarker({'position': position,
-                                   'title':  toTitleCase(val.name),
+                                   'title':  val.name,
                                    'snippet': specialty + '\n' + toTitleCase(address.street),
                                    'hash': val.hash
                                 }, function( marker ) {
@@ -573,11 +687,11 @@ var performSearch = function(e) {
                 }
             });
         } else {
-            alert('Nenhum resultado encontrado');
+            navigator.notification.alert('Nenhum resultado encontrado');
         }
     }).always(function() {
         $('#floatingCirclesG').hide();
-    });
+    }).fail(handleAjaxError);
 };
 
 /****************************************
@@ -589,7 +703,7 @@ var performSearch = function(e) {
 *****************************************/
 var retrieveFavoritePhysicians = function(e) {
     if (window.userID == undefined) {
-        alert('Deve-se estar conectado ao Facebook');
+        navigator.notification.alert('Deve-se estar conectado ao Facebook');
         return false;
     }
 
@@ -615,6 +729,7 @@ var retrieveFavoritePhysicians = function(e) {
                 parent.append(li);
             });
          },
+         error: handleAjaxError,
          complete: function(jqXHR, textStatus) {
             $('#floatingCirclesG').hide();
          }
@@ -623,28 +738,13 @@ var retrieveFavoritePhysicians = function(e) {
 
 var loginFacebookAndRetrieveFavorites = function() {
     if (window.userID == undefined) {
-        facebookConnectPlugin.getLoginStatus(function(data) {
-            if ( data.authResponse.status === "connected" ) {
-                window.userID = data.authResponse.userID;
-                retrieveFavoritePhysicians();
-            } else if ( data.authResponse.status === "not_authorized" )  {
-                alert('Deve-se conectar ao Facebook.');
-                facebookConnectPlugin.login(['public_profile'], function (response) {
-                    window.userID = response.authResponse.userID;
-                    retrieveFavoritePhysicians();
-                }, function (error) {
-                    alert('Erro. Tente novamente.');
-                });
-            } else {
-                facebookConnectPlugin.login(['public_profile'], function (response) {
-                    window.userID = response.authResponse.userID;
-                    retrieveFavoritePhysicians();
-                }, function (error) {
-                    alert('Erro. Tente novamente.');
-                });
-            }
+        facebookConnectPlugin.login(['public_profile'], function (response) {
+            window.userID = response.authResponse.userID;
+            window.localStorage.setItem("user", response.authResponse.userID);
+            retrieveFavoritePhysicians();
+            return false;
         }, function (error) {
-            alert('Erro. Tente novamente.');
+            navigator.notification.alert('Erro. Tente novamente.');
         });
     } else {
         retrieveFavoritePhysicians();
@@ -693,6 +793,8 @@ var pageChanged = function( data ) {
 
             $('#btn-physician-favorite').on('touchend', favoritePhysician);
             $('#btn-physician-share').on('touchend', sharePhysician);
+            $('#btn-physician-contact').on('touchend', addPhysicianContact);
+            $('#btn-physician-route').on('touchend', routeToPhysician);
         } else {
             window.map = plugin.google.maps.Map.getMap(document.getElementById('physician-map'),
             {
@@ -719,13 +821,22 @@ document.addEventListener("deviceready", function() {
     });
 
     // Sets current user, if already registered
+    user = window.localStorage.getItem('user');
+    if (user != null && user != undefined) {
+        // @TODO: check if FB access is still valid
+        window.userID = user;
+    }
+
     if (window.userID == undefined) {
         facebookConnectPlugin.getLoginStatus(function(data) {
             if ( data.authResponse.status === "connected" ) {
                 window.userID = data.authResponse.userID;
+                window.localStorage.setItem('user', data.authResponse.userID);
             }
         });
     }
+
+    window.alert = navigator.notification.alert;
 });
 
 window.addEventListener('push', pageChanged);
