@@ -23,6 +23,15 @@ var getPhysicianSpecialty = function (val) {
     return specialty;
 };
 
+var handleAjaxError = function (req, status, error) {
+    var state = navigator.connection.type;
+    if (state === Connection.UNKNOWN || state === Connection.NONE) {
+        navigator.notification.alert('Sem conex\xE3o de dados', null, 'Alerta', 'OK');
+    } else {
+        alert('Erro ao fazer a requisi\xE7\xE3o');
+    }
+};
+
 /****************************************
 *
 *
@@ -54,9 +63,7 @@ var loadSpecialties = function() {
                 parent.append(li);
             });
         },
-        error: function(req, status, error) {
-            alert('error: ' + error);
-        },
+        error: handleAjaxError,
         complete: function(jqXHR, textStatus) {
             $('#floatingCirclesG').hide();
         }
@@ -169,6 +176,7 @@ var retrievePhysicians = function(e) {
                     $('#distance-btn-more-container').show();
                 }
              },
+             error: handleAjaxError,
              complete: function(jqXHR, textStatus) {
                 $('#floatingCirclesG').hide();
              }
@@ -206,6 +214,7 @@ var favoritePhysicianRequest = function(physician, user, like) {
                 }
             }
          },
+         error: handleAjaxError,
          complete: function(jqXHR, textStatus) {
             $('#floatingCirclesG').hide();
          }
@@ -279,14 +288,14 @@ var addPhysicianContact = function (e) {
 
         navigator.contacts.find(fields, function(results) {
             if (results.length > 0) {
-                navigator.notification.alert('O contato existe na agenda', null, 'Alerta', 'OK');
+                navigator.notification.alert('O contato j\xE1 existe na agenda', null, 'Alerta', 'OK');
                 return false;
             }
 
             var contact = navigator.contacts.create();
             contact.displayName = toTitleCase(physician.name);
             contact.nickname = contact.displayName;
-            contact.note = 'Cemig Saude';
+            contact.note = 'Cemig Sa\xFAde';
 
             activeAddress = $('.control-content.active');
             if (activeAddress.length == 0) {
@@ -527,6 +536,7 @@ var showPhysician = function(e) {
 
             $('#physician-addresses-header-container').find('a').first().trigger('touchend');
         },
+        error: handleAjaxError,
         complete: function(jqXHR, textStatus) {
             $('#floatingCirclesG').hide();
         }
@@ -681,7 +691,7 @@ var performSearch = function(e) {
         }
     }).always(function() {
         $('#floatingCirclesG').hide();
-    });
+    }).fail(handleAjaxError);
 };
 
 /****************************************
@@ -719,6 +729,7 @@ var retrieveFavoritePhysicians = function(e) {
                 parent.append(li);
             });
          },
+         error: handleAjaxError,
          complete: function(jqXHR, textStatus) {
             $('#floatingCirclesG').hide();
          }
