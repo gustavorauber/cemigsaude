@@ -774,6 +774,11 @@ var pageChanged = function( data ) {
             	performSearch(e);
             }
         });
+
+        // Adjust map height
+        h = $(window).height() - $('#form-search-container').height() - 88 - 35;
+        $('#map-canvas-container').height(h);
+        console.info(h);
     } else if (document.getElementById('page-specialties')) {
         count = $('#specialties > li').size();
         if (count == 0) { // check if it is already loaded

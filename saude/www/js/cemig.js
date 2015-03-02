@@ -760,6 +760,10 @@ var loginFacebookAndRetrieveFavorites = function() {
 *****************************************/
 var pageChanged = function( data ) {
     if (document.getElementById('page-map-search')) {
+        // Adjust map height
+        h = $(window).height() - $('#form-search-container').height() - 88 - 35;
+        $('#map-canvas-container').height(h);
+
         initMap();
 
         $('#btn-search').on({click: performSearch, touchend: performSearch});
