@@ -160,8 +160,8 @@ def map_search(request, *args, **kwargs):
 def search(request, *args, **kwargs):
     query = request.POST.get('q', '')
     distance = request.POST.get('d', '5')
-    lat = request.POST.get('lat', '5')
-    lon = request.POST.get('lon', '5')
+    lat = request.POST.get('lat', '-19.932696')
+    lon = request.POST.get('lon', '-43.944035')
 
     if not query:
         return []
