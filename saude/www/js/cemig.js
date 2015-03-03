@@ -580,9 +580,9 @@ var positionError = function (msg) {
 };
 
 var onMapInit = function(map) {
-    //map.getMyLocation({timeout: 10000}, positionSuccess, positionError);
-    navigator.geolocation.getCurrentPosition(positionSuccess, positionError,
-    {timeout: 5000});
+    map.getMyLocation({timeout: 10000}, positionSuccess, positionError);
+    //navigator.geolocation.getCurrentPosition(positionSuccess, positionError,
+    //{timeout: 5000});
 };
 
 var initMap = function () {
@@ -830,7 +830,7 @@ document.addEventListener("deviceready", function() {
             window.longitude = -43.944035;
         }
         console.info(error);
-    }, {timeout: 10000});
+    }, {timeout: 7000});
 
     // Sets current user, if already registered
     user = window.localStorage.getItem('user');
