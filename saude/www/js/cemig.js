@@ -372,7 +372,7 @@ var routeToPhysician = function(e) {
         }
     } catch (err) {
         console.error(err);
-        alert(err);
+        //alert(err);
     }
 
     return false;
@@ -820,10 +820,12 @@ var pageChanged = function( data ) {
 };
 
 document.addEventListener("deviceready", function() {
+    StatusBar.hide();
+
     navigator.geolocation.getCurrentPosition(function(position) {
         window.latitude = position.coords.latitude;
         window.longitude = position.coords.longitude;
-        alert('[deviceready]' + window.latitude + ' ' + window.longitude);
+        //alert('[deviceready]' + window.latitude + ' ' + window.longitude);
     }, function (error) {
         if (window.latitude == undefined) {
             window.latitude = -19.932696;
