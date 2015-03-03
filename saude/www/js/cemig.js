@@ -566,10 +566,12 @@ var positionSuccess = function (location) {
 };
 
 var positionError = function (msg) {
-    window.latitude = -19.932696;
-    window.longitude = -43.944035;
+    if (window.latitude == undefined) {
+        window.latitude = -19.932696;
+        window.longitude = -43.944035;
+    }
 
-    //alert('[error]' + window.latitude + ' ' + window.longitude);
+    //alert('[error]' + window.latitude + ' ' + window.longitude + '\n' + msg);
 
     var latlng = new plugin.google.maps.LatLng(window.latitude,
                                                     window.longitude);
@@ -578,7 +580,9 @@ var positionError = function (msg) {
 };
 
 var onMapInit = function(map) {
-    map.getMyLocation(positionSuccess, positionError);
+    //map.getMyLocation({timeout: 10000}, positionSuccess, positionError);
+    navigator.geolocation.getCurrentPosition(positionSuccess, positionError,
+    {timeout: 5000});
 };
 
 var initMap = function () {
@@ -819,10 +823,14 @@ document.addEventListener("deviceready", function() {
     navigator.geolocation.getCurrentPosition(function(position) {
         window.latitude = position.coords.latitude;
         window.longitude = position.coords.longitude;
-        //alert('[deviceready]' + window.latitude + ' ' + window.longitude);
+        alert('[deviceready]' + window.latitude + ' ' + window.longitude);
     }, function (error) {
+        if (window.latitude == undefined) {
+            window.latitude = -19.932696;
+            window.longitude = -43.944035;
+        }
         console.info(error);
-    });
+    }, {timeout: 10000});
 
     // Sets current user, if already registered
     user = window.localStorage.getItem('user');
