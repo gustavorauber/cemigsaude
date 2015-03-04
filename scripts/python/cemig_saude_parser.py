@@ -119,7 +119,7 @@ def geocode_address(address):
     request_url = url + urllib.urlencode(params)
 
     # Proxy Handling
-    proxy = urllib2.ProxyHandler({'http': 'http://c057384:!G4l0doido!2@proxycemig.cemig.ad.corp:8080'})
+    proxy = urllib2.ProxyHandler({'http': 'http://proxycemig.cemig.ad.corp:8080'})
     auth = urllib2.HTTPBasicAuthHandler()
     opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
     urllib2.install_opener(opener)
