@@ -1,4 +1,4 @@
-Cemig Saúde (app + desktop)
+Cemig Saúde
 ------------------
 
 **Diretórios**
