@@ -1,0 +1,3468 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head>
+		<title>ConveniosDisponiveis</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
+		<meta content="C#" name="CODE_LANGUAGE">
+		<meta content="JavaScript" name="vs_defaultClientScript">
+		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+		<link href="../../estilos.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="../../jquery/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript">
+			
+			$(document).ready(function() {				
+				$(".visibleFalse").hide();
+			});
+
+         function showhide(text)
+         {          
+          var frm = document.getElementById('MapFrame');
+          frm.src = 'LocalConvenio.htm?' + text;
+          var mapDiv = document.getElementById('MAP');
+          mapDiv.style.display='block';
+          mapDiv.style.top = '5%';
+          //var h = document.body.clientHeight;
+          //var w = document.body.clientWidth;          
+          //mapDiv.style.width = (.9 * w).toString() + "px";
+          //mapDiv.style.height = (.9 * h).toString() + "px";         
+          //mapDiv.style.left = '5%';
+         }
+         
+         function hide()
+         {
+          document.getElementById('MAP').style.display='none';
+         }
+			
+		</script>
+		<script>
+			function GoSomewhere()
+			{
+				history.back();
+			}
+		</script>
+	</head>
+	<body text="#000000" vlink="#996699" alink="#006699" link="#006699" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<form name="Form1" method="post" action="ResultadoConsultaConveniado.aspx" id="Form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAwLb8uLIBgKn7q72BQK3x5ytA02jExAzgLN3akjERjyu5YBNEXM6">
+</div>
+			<span id="mm"></span>
+			<div id="MAP" style="POSITION: absolute; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #cccccc; PADDING-LEFT: 2px; WIDTH: 700px; PADDING-RIGHT: 2px; DISPLAY: none; HEIGHT: 550px; PADDING-TOP: 2px; TOP: 100%; LEFT: 10%">
+				<div style="POSITION: relative; BACKGROUND-COLOR: #d0d0d0; WIDTH: 100%; HEIGHT: 5%">
+					<p style="TEXT-ALIGN: right; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 5px"><a onclick="hide()" href="#">X</a></p>
+				</div>
+				<div style="POSITION: relative; WIDTH: 100%; HEIGHT: 95%">
+					
+					<iframe style="WIDTH: 100%; HEIGHT: 100%" id="MapFrame"></iframe>
+				</div>
+			</div>
+			<div><span id="panSpan"></span></div>
+			<div id="panPrincipal" class="panelPrincipal" style="text-align:center;">
+	<font size="1">
+					<br>
+					<table id="tbTitulo">
+						<tbody><tr>
+							<td>
+								<span id="lblTitulo">RESULTADO DA PESQUISA DE CONVÊNIOS</span></td>
+						</tr>
+					</tbody></table>
+					<br>
+				</font><font size="1">
+					<div id="panTotal">
+		
+						<div id="panLabel" class="panelBotaoConsulta" style="text-align:left;">
+			
+							<p class="arial12">
+								<input type="submit" name="btnVoltar" value="Voltar" id="btnVoltar" class="botao">
+								<!-- <input type="submit" name="btnVoltarMenu" value="Voltar" id="btnVoltarMenu" class="botao" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+								<a id="hplImprime" style="display:inline-block;height:2px;width:9px;"><img src="../../imagens/bot_opcoes_print.gif" alt="HyperLink" style="border-width:0px;"></a>
+								<a id="hplImprime2" onclick="window.print()" style="cursor:hand;">Imprimir resultado da consulta</a>&nbsp;
+							</p>
+						
+		</div>
+						<br>
+						
+						<div id="panDados" style="width:98%;text-align:center;">
+			
+							
+								
+									<a name="11614"></a>
+									<div id="repeaterListaDeEnderecos_ctl01_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblNomeRept" class="arial12" style="font-weight:bold;">CLIMEPESANTA LUZIA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl01_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl01_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=11614&amp;amp;nome=ClimepeSanta Luzia">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl01_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl01_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl01_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">794       </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl01_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Brasília, 530</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3637-2099 / 31-3637-1140</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">31-3637-1705   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Brasília, 530 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="7991"></a>
+									<div id="repeaterListaDeEnderecos_ctl03_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblNomeRept" class="arial12" style="font-weight:bold;">CLÍNICA BARONESA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl03_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl03_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=7991&amp;amp;nome=Clínica Baronesa">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl03_lblEmailRept" class="arial12" style="font-weight:bold;">clinicabaronesa@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl03_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl03_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">2108      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl03_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA da Baronesa, 81</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-2447 / 31-3641-1414</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA da Baronesa, 81 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+															<table class="tabela60" align="center">
+																<tbody><tr>
+																	<td class="divisor">
+																	</td>
+																</tr>
+															</tbody></table>
+														
+															<div id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl03_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl03_lblLogradouroRept" style="font-weight:bold;">RUA Itamarati, 777</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl03_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl03_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl03_lblTelefoneRept" style="font-weight:bold;">31-3637-1299 / 31-3635-1366</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl03_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl03_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl03_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Itamarati, 777 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="25637"></a>
+									<div id="repeaterListaDeEnderecos_ctl05_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblNomeRept" class="arial12" style="font-weight:bold;">CLÍNICA DE ESPECIALIDADES BEM VIVER</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl05_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl05_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=25637&amp;amp;nome=Clínica de Especialidades Bem Viver">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl05_lblEmailRept" class="arial12" style="font-weight:bold;">clinicabemviver1@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl05_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl05_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">0432444   </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl05_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Brasília, 1336 - Salas 10 e 11</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3033-2200</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Brasília, 1336 - Salas 10 e 11 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="17349"></a>
+									<div id="repeaterListaDeEnderecos_ctl07_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblNomeRept" class="arial12" style="font-weight:bold;">CLÍNICA PSICOL. LUIZA CELESTE SARMENTO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl07_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PSICOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl07_lblEmailRept" class="arial12" style="font-weight:bold;">luizaesmo@ig.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl07_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl07_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">04PJ00922 </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl07_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Baronesa de Santa Luzia, 81 - sala 02</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-2447 / 31-3641-2429</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Baronesa de Santa Luzia, 81 - sala 02 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="7313"></a>
+									<div id="repeaterListaDeEnderecos_ctl09_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblNomeRept" class="arial12" style="font-weight:bold;">CRISTIANE COUTINHO DE PÁDUA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl09_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">DENTISTA ORTODONTISTA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl09_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl09_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl09_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">19546     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl09_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Direita, 573</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-2102</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Direita, 573 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="21942"></a>
+									<div id="repeaterListaDeEnderecos_ctl11_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblNomeRept" class="arial12" style="font-weight:bold;">CRISTIANE GOULART BICHUETTE</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl11_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PSICOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl11_lblEmailRept" class="arial12" style="font-weight:bold;">cristiane.bichuette@yahoo.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl11_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl11_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">015186    </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl11_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Eldorado, 2891</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3338-3580 / 34-3312-1242</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3322-7570   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Eldorado, 2891  SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="2475"></a>
+									<div id="repeaterListaDeEnderecos_ctl13_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl13_lblNomeRept" class="arial12" style="font-weight:bold;">DANIELA TEREZA PINTO DA CUNHA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl13_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">DENTISTA CLÍNICO GERAL</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl13_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl13_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl13_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">16944     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl13_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl13_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Nossa Senhora do Carmo, 587 - Sala 103</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Parque Boa Esperança</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-641-4602</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Nossa Senhora do Carmo, 587 - Sala 103 Parque Boa Esperança SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="12172"></a>
+									<div id="repeaterListaDeEnderecos_ctl15_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl15_lblNomeRept" class="arial12" style="font-weight:bold;">DROGARIA ARAÚJO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl15_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl15_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=12172&amp;amp;nome=Drogaria Araújo">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl15_lblEmailRept" class="arial12" style="font-weight:bold;">christiano.moreira@araujo.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl15_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl15_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl15_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl15_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Nossa Senhora do  Carmo, 467</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3649-6074 / 31-3649-6042</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Nossa Senhora do  Carmo, 467 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="23546"></a>
+									<div id="repeaterListaDeEnderecos_ctl17_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl17_lblNomeRept" class="arial12" style="font-weight:bold;">FISIO SPORT SOLUTION</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl17_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl17_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=23546&amp;amp;nome=Fisio Sport Solution">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl17_lblEmailRept" class="arial12" style="font-weight:bold;">pauloribeirofss@yahoo.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl17_lblSite" class="arial12" style="font-weight:bold;">www.fisiosportsolution.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl17_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">3619      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl17_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl17_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Direita, 386</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-1925</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Direita, 386 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="9160"></a>
+									<div id="repeaterListaDeEnderecos_ctl19_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl19_lblNomeRept" class="arial12" style="font-weight:bold;">FISIOCLINIC  SANTA LUZIA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl19_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl19_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=9160&amp;amp;nome=Fisioclinic  Santa Luzia">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl19_lblEmailRept" class="arial12" style="font-weight:bold;">fisioterapia_martins@yahoo.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl19_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl19_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">6877      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl19_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl19_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Presidente Campos Sales, 105</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Boa Esperança</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-2236 / 31-3641-1214</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">31-3641-1214   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Presidente Campos Sales, 105 Boa Esperança SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="20201"></a>
+									<div id="repeaterListaDeEnderecos_ctl21_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl21_lblNomeRept" class="arial12" style="font-weight:bold;">FISIODINÂMICA  SANTA LUZIA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl21_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl21_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=20201&amp;amp;nome=Fisiodinâmica  Santa Luzia">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl21_lblEmailRept" class="arial12" style="font-weight:bold;">fisiodinamica1@yahoo.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl21_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl21_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">RE1611    </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl21_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl21_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA do Serro, 403</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-3082</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA do Serro, 403 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="7821"></a>
+									<div id="repeaterListaDeEnderecos_ctl23_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl23_lblNomeRept" class="arial12" style="font-weight:bold;">FLÔR NELLY RODRIGUEZ VALLEJOS</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl23_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">OFTALMOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl23_lblEmailRept" class="arial12" style="font-weight:bold;">fvallejo@uai.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl23_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl23_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">25249     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl23_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl23_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Nossa Senhora do Carmo, 564</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Boa Esperança</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-2310</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Nossa Senhora do Carmo, 564 Boa Esperança SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="20079"></a>
+									<div id="repeaterListaDeEnderecos_ctl25_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl25_lblNomeRept" class="arial12" style="font-weight:bold;">HÁLIDA LARISSA BATISTA DA S. DO VALLE</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl25_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FONOAUDIOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl25_lblEmailRept" class="arial12" style="font-weight:bold;">halidavalle@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl25_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl25_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">6466      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl25_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl25_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA PRIMAVERA, 271</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3637-2377</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">31-3637-2377   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA PRIMAVERA, 271 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="9863"></a>
+									<div id="repeaterListaDeEnderecos_ctl27_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl27_lblNomeRept" class="arial12" style="font-weight:bold;">LABORATÓRIO LUPA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl27_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl27_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=9863&amp;amp;nome=Laboratório Lupa">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl27_lblEmailRept" class="arial12" style="font-weight:bold;">lupalabor@yahoo.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl27_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl27_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">1023      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl27_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl27_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Floriano Peixoto, 144 - A</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-2878</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Floriano Peixoto, 144 - A Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="6004"></a>
+									<div id="repeaterListaDeEnderecos_ctl29_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl29_lblNomeRept" class="arial12" style="font-weight:bold;">LABORATÓRIO ROJAN</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl29_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl29_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=6004&amp;amp;nome=Laboratório Rojan">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl29_lblEmailRept" class="arial12" style="font-weight:bold;">robertostarling@laboratoriorojan.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl29_lblSite" class="arial12" style="font-weight:bold;">www.laboratoriorojan.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl29_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl29_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl29_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Brasília, 530</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3637-1705</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Brasília, 530 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+															<table class="tabela60" align="center">
+																<tbody><tr>
+																	<td class="divisor">
+																	</td>
+																</tr>
+															</tbody></table>
+														
+															<div id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl03_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl03_lblLogradouroRept" style="font-weight:bold;">RUA Floriano Peixoto, 333</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl03_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl03_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl03_lblTelefoneRept" style="font-weight:bold;">31-3207-2037</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl03_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl03_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl03_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Floriano Peixoto, 333 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+															<table class="tabela60" align="center">
+																<tbody><tr>
+																	<td class="divisor">
+																	</td>
+																</tr>
+															</tbody></table>
+														
+															<div id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl05_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl05_lblLogradouroRept" style="font-weight:bold;">AVENIDA Brasília, 1446</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl05_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl05_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl05_lblTelefoneRept" style="font-weight:bold;">31-3207-2037</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl05_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl05_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl05_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Brasília, 1446 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="25704"></a>
+									<div id="repeaterListaDeEnderecos_ctl31_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl31_lblNomeRept" class="arial12" style="font-weight:bold;">LUZICLÍNICA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl31_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl31_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=25704&amp;amp;nome=Luziclínica">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl31_lblEmailRept" class="arial12" style="font-weight:bold;">luziclinica@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl31_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl31_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">21MG11002 </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl31_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl31_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA José Miranda de Almeida, 85 - Casa</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-1554</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">31-3641-3919   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA José Miranda de Almeida, 85 - Casa Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="7314"></a>
+									<div id="repeaterListaDeEnderecos_ctl33_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl33_lblNomeRept" class="arial12" style="font-weight:bold;">MARIA ELIZA DE ALMEIDA GABRICH PÁDUA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl33_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">DENTISTA ODONTOPEDIATRIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl33_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl33_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl33_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">21931     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl33_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl33_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Direita, 573</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-2102</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Direita, 573 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="8186"></a>
+									<div id="repeaterListaDeEnderecos_ctl35_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl35_lblNomeRept" class="arial12" style="font-weight:bold;">NÚCLEO DE FISIOTERAPIA PAMPULHA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl35_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl35_lblEmailRept" class="arial12" style="font-weight:bold;">fisiopamp@bol.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl35_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl35_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl35_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl35_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Primavera, 271</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3637-2377 / 31-3641-3803</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Primavera, 271 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="6005"></a>
+									<div id="repeaterListaDeEnderecos_ctl37_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl37_lblNomeRept" class="arial12" style="font-weight:bold;">PATOLOGIA CLÍNICA SÃO MARCOS</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl37_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl37_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=6005&amp;amp;nome=Patologia Clínica São Marcos">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl37_lblEmailRept" class="arial12" style="font-weight:bold;">saomarcos@lbsmarcos.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl37_lblSite" class="arial12" style="font-weight:bold;">www.saomarcoslaboratorio.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl37_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">389       </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl37_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl37_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl37_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl37_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA José Miranda de Almeida, 85</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl37_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl37_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl37_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3641-1656</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl37_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl37_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl37_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA José Miranda de Almeida, 85 Centro SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="20634"></a>
+									<div id="repeaterListaDeEnderecos_ctl39_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl39_lblNomeRept" class="arial12" style="font-weight:bold;">SHEILLA DA SILVA LIMA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl39_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FONOAUDIOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl39_lblEmailRept" class="arial12" style="font-weight:bold;">maissaude.fono@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl39_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl39_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">6463      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl39_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl39_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl39_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl39_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Primavera, 271</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl39_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl39_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl39_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3637-2377</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl39_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl39_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl39_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Primavera, 271 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="2555"></a>
+									<div id="repeaterListaDeEnderecos_ctl41_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl41_lblNomeRept" class="arial12" style="font-weight:bold;">SILVANA SILVA DE MAGALHÃES MEIRA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl41_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">DENTISTA CLÍNICO GERAL</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl41_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl41_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl41_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">11271     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl41_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl41_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl41_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl41_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Brasilia, 1185 - Sala 204</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl41_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl41_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl41_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-3637-3183</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl41_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl41_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl41_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Brasilia, 1185 - Sala 204 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="2472"></a>
+									<div id="repeaterListaDeEnderecos_ctl43_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl43_lblNomeRept" class="arial12" style="font-weight:bold;">VICTOR LÚCIO MARTINS PINTO (CLIDENTE)</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl43_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">DENTISTA CLÍNICO GERAL</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl43_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl43_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl43_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">17888     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl43_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl43_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl43_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl43_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Brasília, 1727 - Cj. 101</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl43_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">São Benedito</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl43_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTA LUZIA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl43_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">31-637-2943</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl43_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl43_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl43_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Brasília, 1727 - Cj. 101 São Benedito SANTA LUZIA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+						
+		</div>
+                        <img id="imgLegenda" src="../../imagens/LegendaEsp.png" style="border-width:0px;">
+					
+	</div></font>&nbsp; 
+</div>&nbsp;
+			</form>
+	
+
+</body></html>

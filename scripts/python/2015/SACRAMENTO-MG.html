@@ -1,0 +1,2705 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head>
+		<title>ConveniosDisponiveis</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
+		<meta content="C#" name="CODE_LANGUAGE">
+		<meta content="JavaScript" name="vs_defaultClientScript">
+		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+		<link href="../../estilos.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="../../jquery/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript">
+			
+			$(document).ready(function() {				
+				$(".visibleFalse").hide();
+			});
+
+         function showhide(text)
+         {          
+          var frm = document.getElementById('MapFrame');
+          frm.src = 'LocalConvenio.htm?' + text;
+          var mapDiv = document.getElementById('MAP');
+          mapDiv.style.display='block';
+          mapDiv.style.top = '5%';
+          //var h = document.body.clientHeight;
+          //var w = document.body.clientWidth;          
+          //mapDiv.style.width = (.9 * w).toString() + "px";
+          //mapDiv.style.height = (.9 * h).toString() + "px";         
+          //mapDiv.style.left = '5%';
+         }
+         
+         function hide()
+         {
+          document.getElementById('MAP').style.display='none';
+         }
+			
+		</script>
+		<script>
+			function GoSomewhere()
+			{
+				history.back();
+			}
+		</script>
+	</head>
+	<body text="#000000" vlink="#996699" alink="#006699" link="#006699" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<form name="Form1" method="post" action="ResultadoConsultaConveniado.aspx" id="Form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAwLm3NWyDAKn7q72BQK3x5ytA+qwSJi59fcK7nM94RugFisus5hl">
+</div>
+			<span id="mm"></span>
+			<div id="MAP" style="POSITION: absolute; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #cccccc; PADDING-LEFT: 2px; WIDTH: 700px; PADDING-RIGHT: 2px; DISPLAY: none; HEIGHT: 550px; PADDING-TOP: 2px; TOP: 100%; LEFT: 10%">
+				<div style="POSITION: relative; BACKGROUND-COLOR: #d0d0d0; WIDTH: 100%; HEIGHT: 5%">
+					<p style="TEXT-ALIGN: right; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 5px"><a onclick="hide()" href="#">X</a></p>
+				</div>
+				<div style="POSITION: relative; WIDTH: 100%; HEIGHT: 95%">
+					
+					<iframe style="WIDTH: 100%; HEIGHT: 100%" id="MapFrame"></iframe>
+				</div>
+			</div>
+			<div><span id="panSpan"></span></div>
+			<div id="panPrincipal" class="panelPrincipal" style="text-align:center;">
+	<font size="1">
+					<br>
+					<table id="tbTitulo">
+						<tbody><tr>
+							<td>
+								<span id="lblTitulo">RESULTADO DA PESQUISA DE CONVÊNIOS</span></td>
+						</tr>
+					</tbody></table>
+					<br>
+				</font><font size="1">
+					<div id="panTotal">
+		
+						<div id="panLabel" class="panelBotaoConsulta" style="text-align:left;">
+			
+							<p class="arial12">
+								<input type="submit" name="btnVoltar" value="Voltar" id="btnVoltar" class="botao">
+								<!-- <input type="submit" name="btnVoltarMenu" value="Voltar" id="btnVoltarMenu" class="botao" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+								<a id="hplImprime" style="display:inline-block;height:2px;width:9px;"><img src="../../imagens/bot_opcoes_print.gif" alt="HyperLink" style="border-width:0px;"></a>
+								<a id="hplImprime2" onclick="window.print()" style="cursor:hand;">Imprimir resultado da consulta</a>&nbsp;
+							</p>
+						
+		</div>
+						<br>
+						
+						<div id="panDados" style="width:98%;text-align:center;">
+			
+							
+								
+									<a name="13114"></a>
+									<div id="repeaterListaDeEnderecos_ctl01_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblNomeRept" class="arial12" style="font-weight:bold;">ADRIANA OLIVEIRA VALENTINO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl01_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl01_lblEmailRept" class="arial12" style="font-weight:bold;">adrianaoliveiravalentino@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl01_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl01_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">92649F    </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl01_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA  Benedito Valadares, 391</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-8858-5632</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-3291   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA  Benedito Valadares, 391 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22253"></a>
+									<div id="repeaterListaDeEnderecos_ctl03_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblNomeRept" class="arial12" style="font-weight:bold;">ALUISIO AUGUSTO MARQUES</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl03_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CARDIOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl03_lblEmailRept" class="arial12" style="font-weight:bold;">clin.medic@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl03_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl03_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">35280     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl03_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Joaquim Murtinho, 174</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-3671</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-3671   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Joaquim Murtinho, 174 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="17647"></a>
+									<div id="repeaterListaDeEnderecos_ctl05_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblNomeRept" class="arial12" style="font-weight:bold;">CERMO  CENTRO DE REAB. DO MOVIMENTO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl05_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl05_lblEmailRept" class="arial12" style="font-weight:bold;">myriam@sacranet.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl05_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl05_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">41189E    </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl05_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Vigário Paixão, 53 - A</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1185</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Vigário Paixão, 53 - A Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22163"></a>
+									<div id="repeaterListaDeEnderecos_ctl07_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblNomeRept" class="arial12" style="font-weight:bold;">CLÍNICA DE FISIOTERAPIA SHANTI</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl07_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl07_lblEmailRept" class="arial12" style="font-weight:bold;">rodrisalom@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl07_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl07_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">RE3231MG  </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl07_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Professor Rabelo, 446 - Casa</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-4866 / 34-8832-3642 / 34-3351-3268</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Professor Rabelo, 446 - Casa Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="21966"></a>
+									<div id="repeaterListaDeEnderecos_ctl09_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblNomeRept" class="arial12" style="font-weight:bold;">DAIANY COSTA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl09_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">NUTRICIONISTA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl09_lblEmailRept" class="arial12" style="font-weight:bold;">nutricao@sacramento.mg.uol.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl09_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl09_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">10038P    </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl09_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Jacomo Pavanelli, 129 - A</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Jardim Alvorada</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-2345</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Jacomo Pavanelli, 129 - A Jardim Alvorada SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22201"></a>
+									<div id="repeaterListaDeEnderecos_ctl11_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblNomeRept" class="arial12" style="font-weight:bold;">FERNANDO FERNANDES RODRIGUES</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl11_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CIRURGIA GERAL</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl11_lblEmailRept" class="arial12" style="font-weight:bold;">drfernandofernandes@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl11_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl11_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">11690     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl11_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Joaquim Murtinho, 174</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-2085</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Joaquim Murtinho, 174 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="23062"></a>
+									<div id="repeaterListaDeEnderecos_ctl13_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl13_lblNomeRept" class="arial12" style="font-weight:bold;">FRANCISCO OLIVEIRA BERETA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl13_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PEDIATRIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl13_lblEmailRept" class="arial12" style="font-weight:bold;">consultorio-ana@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl13_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl13_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">22868     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl13_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl13_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Silva Jardim, 39</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1273</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Silva Jardim, 39 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="23051"></a>
+									<div id="repeaterListaDeEnderecos_ctl15_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl15_lblNomeRept" class="arial12" style="font-weight:bold;">GUILHERME TAKEO DE ALMEIDA KONISI</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl15_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">GINECOLOGIA E OBSTETRÍCIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl15_lblEmailRept" class="arial12" style="font-weight:bold;">clin.medic@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl15_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl15_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">85771     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl15_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl15_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Joaquim Murtinho, 174</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-3671</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-3671   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Joaquim Murtinho, 174 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="10009"></a>
+									<div id="repeaterListaDeEnderecos_ctl17_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl17_lblNomeRept" class="arial12" style="font-weight:bold;">IAPC</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl17_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl17_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=10009&amp;amp;nome=IAPC">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl17_lblEmailRept" class="arial12" style="font-weight:bold;">iapc@onda.net.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl17_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl17_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl17_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl17_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA  Vigário Paixão, 214</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1639</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-3018   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA  Vigário Paixão, 214 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22047"></a>
+									<div id="repeaterListaDeEnderecos_ctl19_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl19_lblNomeRept" class="arial12" style="font-weight:bold;">IVOMIR CUNHA JÚNIOR</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl19_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl19_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=22047&amp;amp;nome=Ivomir Cunha Júnior">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl19_lblEmailRept" class="arial12" style="font-weight:bold;">lucia.clinica@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl19_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl19_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">21511     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl19_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl19_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Capitão Ferreira, 34</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1005</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-1005   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Capitão Ferreira, 34 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22046"></a>
+									<div id="repeaterListaDeEnderecos_ctl21_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl21_lblNomeRept" class="arial12" style="font-weight:bold;">JOSÉ CARLOS SIVIERI</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl21_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl21_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=22046&amp;amp;nome=José Carlos Sivieri">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl21_lblEmailRept" class="arial12" style="font-weight:bold;">jcsivieri@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl21_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl21_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">13450     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl21_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl21_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Capitão Ferreira, 34</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1005</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-1005   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Capitão Ferreira, 34 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="9970"></a>
+									<div id="repeaterListaDeEnderecos_ctl23_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl23_lblNomeRept" class="arial12" style="font-weight:bold;">LABORATÓRIO LABIENO SOARES</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl23_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl23_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=9970&amp;amp;nome=Laboratório Labieno Soares">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl23_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl23_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl23_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">1025      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl23_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl23_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">PRACA Getúlio Vargas, 27 - Sala 05</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1738</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-1738   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;PRACA Getúlio Vargas, 27 - Sala 05 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22599"></a>
+									<div id="repeaterListaDeEnderecos_ctl25_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl25_lblNomeRept" class="arial12" style="font-weight:bold;">LEANDRO SCALON</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl25_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CLÍNICA MÉDICA/GERAL</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl25_lblEmailRept" class="arial12" style="font-weight:bold;">consultorio-ana@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl25_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl25_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">10574     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl25_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl25_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Silva Jardim, 39</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1273</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Silva Jardim, 39 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="16135"></a>
+									<div id="repeaterListaDeEnderecos_ctl27_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl27_lblNomeRept" class="arial12" style="font-weight:bold;">MAYRA DO CARMO BATISTA LOBATO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl27_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl27_lblEmailRept" class="arial12" style="font-weight:bold;">mayra.lobato@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl27_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl27_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">56751     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl27_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl27_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Silva Jardim, 40</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1332 / 34-9957-3650</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Silva Jardim, 40 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22479"></a>
+									<div id="repeaterListaDeEnderecos_ctl29_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl29_lblNomeRept" class="arial12" style="font-weight:bold;">PEDRO TEODORO RODRIGUES  DE RESENDE</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl29_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CLÍNICA MÉDICA/GERAL</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl29_lblEmailRept" class="arial12" style="font-weight:bold;">drpedroteo@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl29_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl29_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">14107     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl29_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl29_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Joaquim Vaz de Melo, 113</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Jardim América</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1667</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-1667   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Joaquim Vaz de Melo, 113 Jardim América SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22498"></a>
+									<div id="repeaterListaDeEnderecos_ctl31_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl31_lblNomeRept" class="arial12" style="font-weight:bold;">PONTO MED</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl31_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl31_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=22498&amp;amp;nome=Ponto Med">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl31_lblEmailRept" class="arial12" style="font-weight:bold;">pontomedpontomed@gmail.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl31_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl31_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">8437      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl31_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl31_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">PRACA Doutor Valadares, 49</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Rosário</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-2065 / 34-9917-4633</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-2065   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;PRACA Doutor Valadares, 49 Rosário SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22100"></a>
+									<div id="repeaterListaDeEnderecos_ctl33_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl33_lblNomeRept" class="arial12" style="font-weight:bold;">SANTA CASA DE MISERICORDIA DE SACRAMENTO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl33_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl33_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=22100&amp;amp;nome=Santa Casa de Misericordia de Sacramento">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl33_lblEmailRept" class="arial12" style="font-weight:bold;">faturamento@santacasasacramento.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl33_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl33_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">87        </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl33_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl33_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">PRACA Conego Hermógenes, 02</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1216</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3351-1216   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;PRACA Conego Hermógenes, 02 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="16284"></a>
+									<div id="repeaterListaDeEnderecos_ctl35_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl35_lblNomeRept" class="arial12" style="font-weight:bold;">WÉLIDA EDUVIRGES DE ALMEIDA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl35_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">NUTRICIONISTA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl35_lblEmailRept" class="arial12" style="font-weight:bold;">almeida.welida@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl35_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl35_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">07100960  </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl35_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl35_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Silva Jardim, 39</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SACRAMENTO - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3351-1273</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Silva Jardim, 39 Centro SACRAMENTO - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+						
+		</div>
+                        <img id="imgLegenda" src="../../imagens/LegendaEsp.png" style="border-width:0px;">
+					
+	</div></font>&nbsp; 
+</div>&nbsp;
+			</form>
+	
+
+</body></html>

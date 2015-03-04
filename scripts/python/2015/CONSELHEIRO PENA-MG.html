@@ -1,0 +1,965 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head>
+		<title>ConveniosDisponiveis</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
+		<meta content="C#" name="CODE_LANGUAGE">
+		<meta content="JavaScript" name="vs_defaultClientScript">
+		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+		<link href="../../estilos.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="../../jquery/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript">
+			
+			$(document).ready(function() {				
+				$(".visibleFalse").hide();
+			});
+
+         function showhide(text)
+         {          
+          var frm = document.getElementById('MapFrame');
+          frm.src = 'LocalConvenio.htm?' + text;
+          var mapDiv = document.getElementById('MAP');
+          mapDiv.style.display='block';
+          mapDiv.style.top = '5%';
+          //var h = document.body.clientHeight;
+          //var w = document.body.clientWidth;          
+          //mapDiv.style.width = (.9 * w).toString() + "px";
+          //mapDiv.style.height = (.9 * h).toString() + "px";         
+          //mapDiv.style.left = '5%';
+         }
+         
+         function hide()
+         {
+          document.getElementById('MAP').style.display='none';
+         }
+			
+		</script>
+		<script>
+			function GoSomewhere()
+			{
+				history.back();
+			}
+		</script>
+	</head>
+	<body text="#000000" vlink="#996699" alink="#006699" link="#006699" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<form name="Form1" method="post" action="ResultadoConsultaConveniado.aspx" id="Form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAwKA/oaIAwKn7q72BQK3x5ytAw2T8/dzOOrZVRvnyFVPJC5KrNuG">
+</div>
+			<span id="mm"></span>
+			<div id="MAP" style="POSITION: absolute; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #cccccc; PADDING-LEFT: 2px; WIDTH: 700px; PADDING-RIGHT: 2px; DISPLAY: none; HEIGHT: 550px; PADDING-TOP: 2px; TOP: 100%; LEFT: 10%">
+				<div style="POSITION: relative; BACKGROUND-COLOR: #d0d0d0; WIDTH: 100%; HEIGHT: 5%">
+					<p style="TEXT-ALIGN: right; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 5px"><a onclick="hide()" href="#">X</a></p>
+				</div>
+				<div style="POSITION: relative; WIDTH: 100%; HEIGHT: 95%">
+					
+					<iframe style="WIDTH: 100%; HEIGHT: 100%" id="MapFrame"></iframe>
+				</div>
+			</div>
+			<div><span id="panSpan"></span></div>
+			<div id="panPrincipal" class="panelPrincipal" style="text-align:center;">
+	<font size="1">
+					<br>
+					<table id="tbTitulo">
+						<tbody><tr>
+							<td>
+								<span id="lblTitulo">RESULTADO DA PESQUISA DE CONVÊNIOS</span></td>
+						</tr>
+					</tbody></table>
+					<br>
+				</font><font size="1">
+					<div id="panTotal">
+		
+						<div id="panLabel" class="panelBotaoConsulta" style="text-align:left;">
+			
+							<p class="arial12">
+								<input type="submit" name="btnVoltar" value="Voltar" id="btnVoltar" class="botao">
+								<!-- <input type="submit" name="btnVoltarMenu" value="Voltar" id="btnVoltarMenu" class="botao" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+								<a id="hplImprime" style="display:inline-block;height:2px;width:9px;"><img src="../../imagens/bot_opcoes_print.gif" alt="HyperLink" style="border-width:0px;"></a>
+								<a id="hplImprime2" onclick="window.print()" style="cursor:hand;">Imprimir resultado da consulta</a>&nbsp;
+							</p>
+						
+		</div>
+						<br>
+						
+						<div id="panDados" style="width:98%;text-align:center;">
+			
+							
+								
+									<a name="25709"></a>
+									<div id="repeaterListaDeEnderecos_ctl01_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblNomeRept" class="arial12" style="font-weight:bold;">CLÍNICA RAFAEL RIBEIRO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl01_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl01_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=25709&amp;amp;nome=Clínica Rafael Ribeiro">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl01_lblEmailRept" class="arial12" style="font-weight:bold;">rafaelribeiro_ultracenter@yahoo.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl01_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl01_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">201917    </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl01_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Feliciano Ferraz, 272</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONSELHEIRO PENA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">33-3261-2196</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Feliciano Ferraz, 272 Centro CONSELHEIRO PENA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="24517"></a>
+									<div id="repeaterListaDeEnderecos_ctl03_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblNomeRept" class="arial12" style="font-weight:bold;">FISIOCENTER RAGGI</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl03_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl03_lblEmailRept" class="arial12" style="font-weight:bold;">michelleraggi12@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl03_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl03_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">2179E     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl03_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA José Maurício de Vasconcelos, 1614</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONSELHEIRO PENA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">33-3261-3616</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">33-3261-3616   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA José Maurício de Vasconcelos, 1614 Centro CONSELHEIRO PENA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="20388"></a>
+									<div id="repeaterListaDeEnderecos_ctl05_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblNomeRept" class="arial12" style="font-weight:bold;">HOSPITAL HELCIO VALENTIM</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl05_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl05_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=20388&amp;amp;nome=Hospital Helcio Valentim">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl05_lblEmailRept" class="arial12" style="font-weight:bold;">hospitalhva@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl05_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl05_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">6160      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl05_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Lajão, 93</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONSELHEIRO PENA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">33-3261-3115</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">33-3261-4617   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Lajão, 93 Centro CONSELHEIRO PENA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="20748"></a>
+									<div id="repeaterListaDeEnderecos_ctl07_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblNomeRept" class="arial12" style="font-weight:bold;">JOSIANE ARAÚJO RAGGI</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl07_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl07_lblEmailRept" class="arial12" style="font-weight:bold;">josi.raggi@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl07_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl07_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">52516     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl07_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA José Maurício de Vasconcellos, 1614 - Casa</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONSELHEIRO PENA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">33-3261-3616</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA José Maurício de Vasconcellos, 1614 - Casa Centro CONSELHEIRO PENA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="13219"></a>
+									<div id="repeaterListaDeEnderecos_ctl09_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblNomeRept" class="arial12" style="font-weight:bold;">LAB. SÃO JOSÉ  CONSELHEIRO PENA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl09_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PATOLOGIA CLÍNICA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl09_lblEmailRept" class="arial12" style="font-weight:bold;">lsjlaboratorio@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl09_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl09_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl09_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA José Mauricio de Vasconcelos, 1510</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONSELHEIRO PENA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">33-3261-1586</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA José Mauricio de Vasconcelos, 1510 Centro CONSELHEIRO PENA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="25622"></a>
+									<div id="repeaterListaDeEnderecos_ctl11_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblNomeRept" class="arial12" style="font-weight:bold;">MARIANA BRETZ TÔSO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl11_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FONOAUDIOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl11_lblEmailRept" class="arial12" style="font-weight:bold;">mari_bretz@yahoo.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl11_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl11_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">7420      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl11_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA José Maurício de Vasconcelos, 1614</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONSELHEIRO PENA - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">33-3261-2116 / 33-8422-9111 / 33-8894-4445</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA José Maurício de Vasconcelos, 1614 Centro CONSELHEIRO PENA - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+						
+		</div>
+                        <img id="imgLegenda" src="../../imagens/LegendaEsp.png" style="border-width:0px;">
+					
+	</div></font>&nbsp; 
+</div>&nbsp;
+			</form>
+	
+
+</body></html>

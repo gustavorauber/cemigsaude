@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta charset="utf-8" />
+    <title> </title>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="{{ site_prefix }}/static/ratchet/css/ratchet.min.css" />
+    <link rel="stylesheet" href="{{ site_prefix }}/static/ratchet/css/ratchet-theme-ios.min.css" />
+    <link rel="stylesheet" href="{{ site_prefix }}/static/ratchet/css/saude-custom.css" />
+    <script type="text/javascript" src="{{ site_prefix }}/static/ratchet/cordova.js"></script>
+    <script type="text/javascript" src="{{ site_prefix }}/static/ratchet/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="{{ site_prefix }}/static/ratchet/js/ratchet.min.js"></script>
+</head>
+<body>
+    <header class="bar bar-nav">
+        <a class="icon icon-left-nav pull-left" href="javascript:history.back();" data-transition="slide-out"> </a>
+        <h1 class="title"><strong><small>{% block title %} {% endblock %}</small></strong></h1>
+    </header>
+
+    <div class="bar bar-standard bar-footer">
+        <div class="tab-item" style="text-align: center;"><img src="{{ site_prefix }}/static/ratchet/img/logo_cemig_saude.gif" /></div>
+    </div>
+
+    {% block content %}
+    <div class="content"> </div>
+    {% endblock %}
+
+    <script type="text/javascript">
+    var positionSuccess = function (location) {
+        window.latitude = location.latlng.lat;
+        window.longitude = location.latlng.lng;
+
+        var latlng = new plugin.google.maps.LatLng(window.latitude,
+                                                        window.longitude);
+        map.setCenter(latlng);
+        map.setZoom(15);
+    };
+
+    var positionError = function (msg) {
+        window.latitude = -19.932696;
+        window.longitude = -43.944035;
+
+        var latlng = new plugin.google.maps.LatLng(window.latitude,
+                                                        window.longitude);
+        map.setCenter(latlng);
+        map.setZoom(15);
+    };
+
+    var onMapInit = function(map) {
+        map.getMyLocation(positionSuccess, positionError);
+    };
+
+    var initMap = function () {
+        alert('init map called');
+        window.map = plugin.google.maps.Map.getMap(document.getElementById('search-map'));
+        map.on(plugin.google.maps.event.MAP_READY, onMapInit);
+    };
+
+    var pageChanged = function( data ) {
+        console.info(data);
+        if (document.getElementById('page-map-search')) {
+            console.info('page-map-search');
+            initMap();
+        } else if (document.getElementById('page-specialties')) {
+            console.info('page-specialties');
+        } else if (document.getElementById('page-physicians')) {
+            console.info('page-physicians');
+        } else if (document.getElementById('page-physician')) {
+            console.info('page-physician');
+        }
+        alert('pageChanged');
+    };
+
+    document.addEventListener("deviceready", function() {
+        initMap();
+    });
+
+    window.addEventListener('push', pageChanged);
+    </script>
+</body>
+</html>

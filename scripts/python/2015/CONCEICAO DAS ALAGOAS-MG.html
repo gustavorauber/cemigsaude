@@ -1,0 +1,1255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head>
+		<title>ConveniosDisponiveis</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
+		<meta content="C#" name="CODE_LANGUAGE">
+		<meta content="JavaScript" name="vs_defaultClientScript">
+		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+		<link href="../../estilos.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="../../jquery/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript">
+			
+			$(document).ready(function() {				
+				$(".visibleFalse").hide();
+			});
+
+         function showhide(text)
+         {          
+          var frm = document.getElementById('MapFrame');
+          frm.src = 'LocalConvenio.htm?' + text;
+          var mapDiv = document.getElementById('MAP');
+          mapDiv.style.display='block';
+          mapDiv.style.top = '5%';
+          //var h = document.body.clientHeight;
+          //var w = document.body.clientWidth;          
+          //mapDiv.style.width = (.9 * w).toString() + "px";
+          //mapDiv.style.height = (.9 * h).toString() + "px";         
+          //mapDiv.style.left = '5%';
+         }
+         
+         function hide()
+         {
+          document.getElementById('MAP').style.display='none';
+         }
+			
+		</script>
+		<script>
+			function GoSomewhere()
+			{
+				history.back();
+			}
+		</script>
+	</head>
+	<body text="#000000" vlink="#996699" alink="#006699" link="#006699" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<form name="Form1" method="post" action="ResultadoConsultaConveniado.aspx" id="Form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAwKRz7q8CwKn7q72BQK3x5ytA9TL7E8ckQn7H6845AdYxWs9TY9w">
+</div>
+			<span id="mm"></span>
+			<div id="MAP" style="POSITION: absolute; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #cccccc; PADDING-LEFT: 2px; WIDTH: 700px; PADDING-RIGHT: 2px; DISPLAY: none; HEIGHT: 550px; PADDING-TOP: 2px; TOP: 100%; LEFT: 10%">
+				<div style="POSITION: relative; BACKGROUND-COLOR: #d0d0d0; WIDTH: 100%; HEIGHT: 5%">
+					<p style="TEXT-ALIGN: right; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 5px"><a onclick="hide()" href="#">X</a></p>
+				</div>
+				<div style="POSITION: relative; WIDTH: 100%; HEIGHT: 95%">
+					
+					<iframe style="WIDTH: 100%; HEIGHT: 100%" id="MapFrame"></iframe>
+				</div>
+			</div>
+			<div><span id="panSpan"></span></div>
+			<div id="panPrincipal" class="panelPrincipal" style="text-align:center;">
+	<font size="1">
+					<br>
+					<table id="tbTitulo">
+						<tbody><tr>
+							<td>
+								<span id="lblTitulo">RESULTADO DA PESQUISA DE CONVÊNIOS</span></td>
+						</tr>
+					</tbody></table>
+					<br>
+				</font><font size="1">
+					<div id="panTotal">
+		
+						<div id="panLabel" class="panelBotaoConsulta" style="text-align:left;">
+			
+							<p class="arial12">
+								<input type="submit" name="btnVoltar" value="Voltar" id="btnVoltar" class="botao">
+								<!-- <input type="submit" name="btnVoltarMenu" value="Voltar" id="btnVoltarMenu" class="botao" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+								<a id="hplImprime" style="display:inline-block;height:2px;width:9px;"><img src="../../imagens/bot_opcoes_print.gif" alt="HyperLink" style="border-width:0px;"></a>
+								<a id="hplImprime2" onclick="window.print()" style="cursor:hand;">Imprimir resultado da consulta</a>&nbsp;
+							</p>
+						
+		</div>
+						<br>
+						
+						<div id="panDados" style="width:98%;text-align:center;">
+			
+							
+								
+									<a name="22722"></a>
+									<div id="repeaterListaDeEnderecos_ctl01_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblNomeRept" class="arial12" style="font-weight:bold;">CARLOS RENATO ALVARENGA MACHADO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl01_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl01_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=22722&amp;amp;nome=Carlos Renato Alvarenga Machado">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl01_lblEmailRept" class="arial12" style="font-weight:bold;">cram@netsite.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl01_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl01_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">40149     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl01_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Benedito Lima, 340</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONCEIÇÃO DAS ALAGOAS - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3321-0387</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Benedito Lima, 340 Centro CONCEIÇÃO DAS ALAGOAS - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22760"></a>
+									<div id="repeaterListaDeEnderecos_ctl03_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblNomeRept" class="arial12" style="font-weight:bold;">CLÍNICA CEMI</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl03_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PATOLOGIA CLÍNICA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl03_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl03_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl03_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl03_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Uberaba, 213</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONCEIÇÃO DAS ALAGOAS - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3321-3664</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Uberaba, 213 Centro CONCEIÇÃO DAS ALAGOAS - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="21399"></a>
+									<div id="repeaterListaDeEnderecos_ctl05_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblNomeRept" class="arial12" style="font-weight:bold;">CORPOREO FISIO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl05_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl05_lblEmailRept" class="arial12" style="font-weight:bold;">corporeofisio@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl05_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl05_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">1596E     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl05_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Pedro Lima Chagas, 351</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONCEIÇÃO DAS ALAGOAS - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3321-1486</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Pedro Lima Chagas, 351 Centro CONCEIÇÃO DAS ALAGOAS - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="23928"></a>
+									<div id="repeaterListaDeEnderecos_ctl07_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblNomeRept" class="arial12" style="font-weight:bold;">FUNDAÇÃO HOSPITALAR MUN. JOÃO HENRIQUE</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl07_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl07_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=23928&amp;amp;nome=Fundação Hospitalar Mun. João Henrique">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl07_lblEmailRept" class="arial12" style="font-weight:bold;">fhmjh.pmca@conceicaodasalagoas.mg.gov.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl07_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl07_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">7793      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl07_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Pedro Lima Chagas, 320</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONCEIÇÃO DAS ALAGOAS - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3321-3262 / 34-3327-9900</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Pedro Lima Chagas, 320 Centro CONCEIÇÃO DAS ALAGOAS - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22756"></a>
+									<div id="repeaterListaDeEnderecos_ctl09_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblNomeRept" class="arial12" style="font-weight:bold;">LUCIANO SABINO DE FREITAS</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl09_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl09_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=22756&amp;amp;nome=Luciano Sabino de Freitas">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl09_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl09_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl09_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">5612      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl09_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Uberaba, 213</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONCEIÇÃO DAS ALAGOAS - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3321-3664</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3321-3664   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Uberaba, 213 Centro CONCEIÇÃO DAS ALAGOAS - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="3023"></a>
+									<div id="repeaterListaDeEnderecos_ctl11_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblNomeRept" class="arial12" style="font-weight:bold;">MARIZE DE SOUZA M.PACHECO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl11_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">DENTISTA CLÍNICO GERAL</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl11_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl11_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl11_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">6819      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl11_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Floriano Peixoto, 1022</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONCEIÇÃO DAS ALAGOAS - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-321-1907</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Floriano Peixoto, 1022 Centro CONCEIÇÃO DAS ALAGOAS - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="18238"></a>
+									<div id="repeaterListaDeEnderecos_ctl13_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl13_lblNomeRept" class="arial12" style="font-weight:bold;">PROEXAME LABORATÓRIOS</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl13_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl13_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=18238&amp;amp;nome=Proexame Laboratórios">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl13_lblEmailRept" class="arial12" style="font-weight:bold;">leobiomed2010@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl13_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl13_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl13_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl13_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Verissimo, 435</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONCEIÇÃO DAS ALAGOAS - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3321-0419</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Verissimo, 435 Centro CONCEIÇÃO DAS ALAGOAS - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="25663"></a>
+									<div id="repeaterListaDeEnderecos_ctl15_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl15_lblNomeRept" class="arial12" style="font-weight:bold;">THIAGO RODOLPHO DE SOUSA OLIVEIRA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl15_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PSICOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl15_lblEmailRept" class="arial12" style="font-weight:bold;">thiago_rodolpho@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl15_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl15_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">38188     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl15_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl15_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Uberaba, 213</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">CONCEIÇÃO DAS ALAGOAS - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">34-3321-3664</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">34-3321-3664   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Uberaba, 213 Centro CONCEIÇÃO DAS ALAGOAS - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+						
+		</div>
+                        <img id="imgLegenda" src="../../imagens/LegendaEsp.png" style="border-width:0px;">
+					
+	</div></font>&nbsp; 
+</div>&nbsp;
+			</form>
+	
+
+</body></html>

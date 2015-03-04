@@ -1,0 +1,2705 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head>
+		<title>ConveniosDisponiveis</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
+		<meta content="C#" name="CODE_LANGUAGE">
+		<meta content="JavaScript" name="vs_defaultClientScript">
+		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+		<link href="../../estilos.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="../../jquery/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript">
+			
+			$(document).ready(function() {				
+				$(".visibleFalse").hide();
+			});
+
+         function showhide(text)
+         {          
+          var frm = document.getElementById('MapFrame');
+          frm.src = 'LocalConvenio.htm?' + text;
+          var mapDiv = document.getElementById('MAP');
+          mapDiv.style.display='block';
+          mapDiv.style.top = '5%';
+          //var h = document.body.clientHeight;
+          //var w = document.body.clientWidth;          
+          //mapDiv.style.width = (.9 * w).toString() + "px";
+          //mapDiv.style.height = (.9 * h).toString() + "px";         
+          //mapDiv.style.left = '5%';
+         }
+         
+         function hide()
+         {
+          document.getElementById('MAP').style.display='none';
+         }
+			
+		</script>
+		<script>
+			function GoSomewhere()
+			{
+				history.back();
+			}
+		</script>
+	</head>
+	<body text="#000000" vlink="#996699" alink="#006699" link="#006699" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<form name="Form1" method="post" action="ResultadoConsultaConveniado.aspx" id="Form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTk4OTY3MjQyMg9kFgICAQ9kFgICBQ9kFgICAw9kFgQCAQ9kFgICBw8PZBYEHgdPbkNsaWNrBQ53aW5kb3cucHJpbnQoKR4FU3R5bGUFDGN1cnNvcjpoYW5kO2QCBQ9kFgICAQ8WAh4LXyFJdGVtQ291bnQCEhYkAgEPZBYEZg8VAQQ3OTc2ZAIBD2QWDgIDDw8WAh4EVGV4dAUdQU5HRUxBIE1BUklBIFNDSFJPREVSIEUgU09VWkFkZAIHDw8WAh8DBQlQRURJQVRSSUFkZAIJDw8WAh4LTmF2aWdhdGVVcmwFSkNvbnN1bHRhQ29udmVuaWFkby5hc3B4P2NvZGlnbz03OTc2JmFtcDtub21lPUFuZ2VsYSBNYXJpYSBTY2hyb2RlciBlIFNvdXphZGQCHw8PFgIfA2RkZAIhDw8WAh8DZWRkAiMPDxYCHwMFCjEzMDg1VCAgICBkZAIpDxYCHwICARYCAgEPZBYCAgEPZBYQAgEPZBYCZg8VARxBVkVOSURBIEdldMO6bGlvIFZhcmdhcywgMzE2ZAIDD2QWAmYPFQEGQ2VudHJvZAIFD2QWAmYPFQESU0FOVE9TIERVTU9OVCAtIE1HZAIHD2QWAmYPFQEMMzItMzI1MS0xNzcxZAIJD2QWAmYPFQEAZAIKDxUBFGNsYXNzPSd2aXNpYmxlRmFsc2UnZAILD2QWAmYPFQEAZAIND2QWAmYPFQE4IkFWRU5JREEgR2V0w7psaW8gVmFyZ2FzLCAzMTYgQ2VudHJvIFNBTlRPUyBEVU1PTlQgLSBNRyJkAgMPZBYEZg8VAQUxMTM2MWQCAQ9kFg4CAw8PFgIfAwUUQ0xBWVRPTiBBQlVEIEZPTlNFQ0FkZAIHDw8WAh8DBQxGSVNJT1RFUkFQSUFkZAIJDw8WAh8EBUJDb25zdWx0YUNvbnZlbmlhZG8uYXNweD9jb2RpZ289MTEzNjEmYW1wO25vbWU9Q2xheXRvbiBBYnVkIEZvbnNlY2FkZAIfDw8WAh8DBRdjbGF5dG9uYWJ1ZEBob3RtYWlsLmNvbWRkAiEPDxYCHwNlZGQCIw8PFgIfAwUKMjc0ODIgICAgIGRkAikPFgIfAgIBFgICAQ9kFgICAQ9kFhACAQ9kFgJmDxUBIVJVQSAgU8OpcmdpbyBOZXZlcywgMTE3IC0gU2FsYSAwMmQCAw9kFgJmDxUBBkNlbnRyb2QCBQ9kFgJmDxUBElNBTlRPUyBEVU1PTlQgLSBNR2QCBw9kFgJmDxUBDDMyLTk5NzItMjEwM2QCCQ9kFgJmDxUBAGQCCg8VARRjbGFzcz0ndmlzaWJsZUZhbHNlJ2QCCw9kFgJmDxUBAGQCDQ9kFgJmDxUBPSJSVUEgIFPDqXJnaW8gTmV2ZXMsIDExNyAtIFNhbGEgMDIgQ2VudHJvIFNBTlRPUyBEVU1PTlQgLSBNRyJkAgUPZBYEZg8VAQQ4NDIzZAIBD2QWDgIDDw8WAh8DBSBEQVZJRCBBTlTDlE5JTyBEQSBGT05TRUNBIFZJRUlSQWRkAgcPDxYCHwMFGkdJTkVDT0xPR0lBIEUgT0JTVEVUUsONQ0lBZGQCCQ8PFgIfBAVNQ29uc3VsdGFDb252ZW5pYWRvLmFzcHg/Y29kaWdvPTg0MjMmYW1wO25vbWU9RGF2aWQgQW50w7RuaW8gZGEgRm9uc2VjYSBWaWVpcmFkZAIfDw8WAh8DBRVlcmljYWZtZWxsb0BnbWFpbC5jb21kZAIhDw8WAh8DZWRkAiMPDxYCHwMFCjIzMjc1ICAgICBkZAIpDxYCHwICARYCAgEPZBYCAgEPZBYQAgEPZBYCZg8VATJBVkVOSURBIFByZXNpZGVudGUgR2V0w7psaW8gVmFyZ2FzLCAzMTYgLSBTYWxhIDIwNmQCAw9kFgJmDxUBBkNlbnRyb2QCBQ9kFgJmDxUBElNBTlRPUyBEVU1PTlQgLSBNR2QCBw9kFgJmDxUBDDMyLTMyNTEtMTM2OGQCCQ9kFgJmDxUBDzMyLTMyNTEtNjA2OSAgIGQCCg8VARRjbGFzcz0ndmlzaWJsZUZhbHNlJ2QCCw9kFgJmDxUBAGQCDQ9kFgJmDxUBTiJBVkVOSURBIFByZXNpZGVudGUgR2V0w7psaW8gVmFyZ2FzLCAzMTYgLSBTYWxhIDIwNiBDZW50cm8gU0FOVE9TIERVTU9OVCAtIE1HImQCBw9kFgRmDxUBBTEyMjQ1ZAIBD2QWDgIDDw8WAh8DBRdGw4FUSU1BIEZFUlJFSVJBIEJFTlRFU2RkAgcPDxYCHwNkZGQCCQ8PFgQfBAVFQ29uc3VsdGFDb252ZW5pYWRvLmFzcHg/Y29kaWdvPTEyMjQ1JmFtcDtub21lPUbDoXRpbWEgRmVycmVpcmEgQmVudGVzHgdWaXNpYmxlZ2RkAh8PDxYCHwMFG2RyYWZhdGltYWJlbnRlc0Bob3RtYWlsLmNvbWRkAiEPDxYCHwNlZGQCIw8PFgIfAwUKMjY0NzggICAgIGRkAikPFgIfAgIBFgICAQ9kFgICAQ9kFhACAQ9kFgJmDxUBEVJVQSBGYWd1bmRlcywgMTYwZAIDD2QWAmYPFQEGQ2VudHJvZAIFD2QWAmYPFQESU0FOVE9TIERVTU9OVCAtIE1HZAIHD2QWAmYPFQEMMzItMzI1MS0zODQzZAIJD2QWAmYPFQEPMzItMzI1MS0zODQzICAgZAIKDxUBFGNsYXNzPSd2aXNpYmxlRmFsc2UnZAILD2QWAmYPFQEAZAIND2QWAmYPFQEtIlJVQSBGYWd1bmRlcywgMTYwIENlbnRybyBTQU5UT1MgRFVNT05UIC0gTUciZAIJD2QWBGYPFQEFMTE2MTNkAgEPZBYOAgMPDxYCHwMFJ0hPU1BJVEFMIE1JU0VSSUPDk1JESUEgREUgU0FOVE9TIERVTU9OVGRkAgcPDxYCHwNkZGQCCQ8PFgQfBAVVQ29uc3VsdGFDb252ZW5pYWRvLmFzcHg/Y29kaWdvPTExNjEzJmFtcDtub21lPUhvc3BpdGFsIE1pc2VyaWPDs3JkaWEgZGUgU2FudG9zIER1bW9udB8FZ2RkAh8PDxYCHwMFGWZpbmFuY2Vpcm8uaG1zZEBnbWFpbC5jb21kZAIhDw8WAh8DZWRkAiMPDxYCHwMFCjM2MyAgICAgICBkZAIpDxYCHwICARYCAgEPZBYCAgEPZBYQAgEPZBYCZg8VARRSVUEgVmllaXJhIEJyYWdhLCAwMWQCAw9kFgJmDxUBBkNlbnRyb2QCBQ9kFgJmDxUBElNBTlRPUyBEVU1PTlQgLSBNR2QCBw9kFgJmDxUBGzMyLTMyNTItOTgwMCAvIDMyLTMyNTItOTgwNWQCCQ9kFgJmDxUBDzMyLTMyNTEtMzc1NSAgIGQCCg8VARRjbGFzcz0ndmlzaWJsZUZhbHNlJ2QCCw9kFgJmDxUBAGQCDQ9kFgJmDxUBMCJSVUEgVmllaXJhIEJyYWdhLCAwMSBDZW50cm8gU0FOVE9TIERVTU9OVCAtIE1HImQCCw9kFgRmDxUBBTEyMjI4ZAIBD2QWDgIDDw8WAh8DBRdKT1JHRSBGRVJSRUlSQSBERSBQQUlWQWRkAgcPDxYCHwMFCVBFRElBVFJJQWRkAgkPDxYCHwQFRUNvbnN1bHRhQ29udmVuaWFkby5hc3B4P2NvZGlnbz0xMjIyOCZhbXA7bm9tZT1Kb3JnZSBGZXJyZWlyYSBkZSBQYWl2YWRkAh8PDxYCHwMFF21hcmluaGEubG9wZXNAZ21haWwuY29tZGQCIQ8PFgIfA2VkZAIjDw8WAh8DBQoxNTExNyAgICAgZGQCKQ8WAh8CAgEWAgIBD2QWAgIBD2QWEAIBD2QWAmYPFQEeUlVBIFZpZ8OhcmlvIEpvc8OpIEF1Z3VzdG8sIDA3ZAIDD2QWAmYPFQEGQ2VudHJvZAIFD2QWAmYPFQESU0FOVE9TIERVTU9OVCAtIE1HZAIHD2QWAmYPFQEMMzItMzI1MS02NTY4ZAIJD2QWAmYPFQEAZAIKDxUBFGNsYXNzPSd2aXNpYmxlRmFsc2UnZAILD2QWAmYPFQEAZAIND2QWAmYPFQE6IlJVQSBWaWfDoXJpbyBKb3PDqSBBdWd1c3RvLCAwNyBDZW50cm8gU0FOVE9TIERVTU9OVCAtIE1HImQCDQ9kFgRmDxUBBDc5NzJkAgEPZBYOAgMPDxYCHwMFHUpPU8OJIExFT1BPTERPIERFIFNPVVpBIENPU1RBZGQCBw8PFgIfA2RkZAIJDw8WBB8EBUpDb25zdWx0YUNvbnZlbmlhZG8uYXNweD9jb2RpZ289Nzk3MiZhbXA7bm9tZT1Kb3PDqSBMZW9wb2xkbyBkZSBTb3V6YSBDb3N0YR8FZ2RkAh8PDxYCHwMFFWVyaWNhZm1lbGxvQGdtYWlsLmNvbWRkAiEPDxYCHwNlZGQCIw8PFgIfAwUKMTc1NTggICAgIGRkAikPFgIfAgIBFgICAQ9kFgICAQ9kFhACAQ9kFgJmDxUBM0FWRU5JREEgUHJlc2lkZW50ZSBHZXTDumxpbyBWYXJnYXMsIDMxNiAtIDLCuiBBbmRhcmQCAw9kFgJmDxUBBkNlbnRyb2QCBQ9kFgJmDxUBElNBTlRPUyBEVU1PTlQgLSBNR2QCBw9kFgJmDxUBDDMyLTMyNTEtMTM2OGQCCQ9kFgJmDxUBAGQCCg8VARRjbGFzcz0ndmlzaWJsZUZhbHNlJ2QCCw9kFgJmDxUBAGQCDQ9kFgJmDxUBTyJBVkVOSURBIFByZXNpZGVudGUgR2V0w7psaW8gVmFyZ2FzLCAzMTYgLSAywrogQW5kYXIgQ2VudHJvIFNBTlRPUyBEVU1PTlQgLSBNRyJkAg8PZBYEZg8VAQQ5MTQ5ZAIBD2QWDgIDDw8WAh8DBSNMQUJPUkFUw5NSSU8gSU5BQ0xJTiAgU0FOVE9TIERVTU9OVGRkAgcPDxYCHwNkZGQCCQ8PFgQfBAVQQ29uc3VsdGFDb252ZW5pYWRvLmFzcHg/Y29kaWdvPTkxNDkmYW1wO25vbWU9TGFib3JhdMOzcmlvIEluYWNsaW4gIFNhbnRvcyBEdW1vbnQfBWdkZAIfDw8WAh8DZGRkAiEPDxYCHwNlZGQCIw8PFgIfA2VkZAIpDxYCHwICARYCAgEPZBYCAgEPZBYQAgEPZBYCZg8VAR5SVUEgSm/Do28gR29tZXMsIDE3MCAtIFTDqXJyZW9kAgMPZBYCZg8VAQZDZW50cm9kAgUPZBYCZg8VARJTQU5UT1MgRFVNT05UIC0gTUdkAgcPZBYCZg8VAQwzMi0zMjUxLTQwNzJkAgkPZBYCZg8VAQ8zMi0zMjUxLTQwNzIgICBkAgoPFQEUY2xhc3M9J3Zpc2libGVGYWxzZSdkAgsPZBYCZg8VAQBkAg0PZBYCZg8VAToiUlVBIEpvw6NvIEdvbWVzLCAxNzAgLSBUw6lycmVvIENlbnRybyBTQU5UT1MgRFVNT05UIC0gTUciZAIRD2QWBGYPFQEFMjIzMTFkAgEPZBYOAgMPDxYCHwMFF01BR05FUyBBTkRSw4lJQSBGT05TRUNBZGQCBw8PFgIfAwUNTlVUUklDSU9OSVNUQWRkAgkPDxYCHwQFRUNvbnN1bHRhQ29udmVuaWFkby5hc3B4P2NvZGlnbz0yMjMxMSZhbXA7bm9tZT1NYWduZXMgQW5kcsOpaWEgRm9uc2VjYWRkAh8PDxYCHwMFGW1hZ25lc2ZvbnNlY2FAaG90bWFpbC5jb21kZAIhDw8WAh8DZWRkAiMPDxYCHwMFCjIzMTYgICAgICBkZAIpDxYCHwICARYCAgEPZBYCAgEPZBYQAgEPZBYCZg8VASdQUkFDQSBKb3PDqSBBbnRvbmlvIFBlZHJvLCAyOCAtIFNhbGEgMDZkAgMPZBYCZg8VAQZDZW50cm9kAgUPZBYCZg8VARJTQU5UT1MgRFVNT05UIC0gTUdkAgcPZBYCZg8VAQwzMi04ODIzLTI4NzVkAgkPZBYCZg8VAQBkAgoPFQEUY2xhc3M9J3Zpc2libGVGYWxzZSdkAgsPZBYCZg8VAQBkAg0PZBYCZg8VAUMiUFJBQ0EgSm9zw6kgQW50b25pbyBQZWRybywgMjggLSBTYWxhIDA2IENlbnRybyBTQU5UT1MgRFVNT05UIC0gTUciZAITD2QWBGYPFQEFMTI2MzVkAgEPZBYOAgMPDxYCHwMFGk3DgVJDSUEgQ1JJU1RJTkEgREUgQkFSUk9TZGQCBw8PFgIfAwUgREVSTUFUT0xPR0lBIENMw41OSUNPLUNJUsOaUkdJQ0FkZAIJDw8WAh8EBUhDb25zdWx0YUNvbnZlbmlhZG8uYXNweD9jb2RpZ289MTI2MzUmYW1wO25vbWU9TcOhcmNpYSBDcmlzdGluYSBkZSBCYXJyb3NkZAIfDw8WAh8DZGRkAiEPDxYCHwNlZGQCIw8PFgIfAwUKMTkwODggICAgIGRkAikPFgIfAgIBFgICAQ9kFgICAQ9kFhACAQ9kFgJmDxUBMkFWRU5JREEgUHJlc2lkZW50ZSBHZXR1bGlvIFZhcmdhcywgMzE2IC0gMcK6IEFuZGFyZAIDD2QWAmYPFQEGQ2VudHJvZAIFD2QWAmYPFQESU0FOVE9TIERVTU9OVCAtIE1HZAIHD2QWAmYPFQEMMzItMzI1MS0xODYyZAIJD2QWAmYPFQEAZAIKDxUBFGNsYXNzPSd2aXNpYmxlRmFsc2UnZAILD2QWAmYPFQEAZAIND2QWAmYPFQFOIkFWRU5JREEgUHJlc2lkZW50ZSBHZXR1bGlvIFZhcmdhcywgMzE2IC0gMcK6IEFuZGFyIENlbnRybyBTQU5UT1MgRFVNT05UIC0gTUciZAIVD2QWBGYPFQEFMTIyMzZkAgEPZBYOAgMPDxYCHwMFGE3DgVJDSU8gSk9Tw4kgTUVMTyBQRURST2RkAgcPDxYCHwMFCVBFRElBVFJJQWRkAgkPDxYCHwQFRkNvbnN1bHRhQ29udmVuaWFkby5hc3B4P2NvZGlnbz0xMjIzNiZhbXA7bm9tZT1Nw6FyY2lvIEpvc8OpIE1lbG8gUGVkcm9kZAIfDw8WAh8DZGRkAiEPDxYCHwNlZGQCIw8PFgIfAwUKMjI2ODkgICAgIGRkAikPFgIfAgIBFgICAQ9kFgICAQ9kFhACAQ9kFgJmDxUBIEFWRU5JREEgR2V0w7psaW8gVmFyZ2FzLCA0MzIgLSBBZAIDD2QWAmYPFQEGQ2VudHJvZAIFD2QWAmYPFQESU0FOVE9TIERVTU9OVCAtIE1HZAIHD2QWAmYPFQEMMzItMzI1MS0zOTkxZAIJD2QWAmYPFQEAZAIKDxUBFGNsYXNzPSd2aXNpYmxlRmFsc2UnZAILD2QWAmYPFQEAZAIND2QWAmYPFQE8IkFWRU5JREEgR2V0w7psaW8gVmFyZ2FzLCA0MzIgLSBBIENlbnRybyBTQU5UT1MgRFVNT05UIC0gTUciZAIXD2QWBGYPFQEEODUzNGQCAQ9kFg4CAw8PFgIfAwUKTUVEIElNQUdFTWRkAgcPDxYCHwNkZGQCCQ8PFgQfBAU3Q29uc3VsdGFDb252ZW5pYWRvLmFzcHg/Y29kaWdvPTg1MzQmYW1wO25vbWU9TWVkIEltYWdlbR8FZ2RkAh8PDxYCHwMFD2p2YXJAb2kuY29tLmJyIGRkAiEPDxYCHwNlZGQCIw8PFgIfAwUKNDY0NSAgICAgIGRkAikPFgIfAgIBFgICAQ9kFgICAQ9kFhACAQ9kFgJmDxUBHEFWRU5JREEgR2V0w7psaW8gVmFyZ2FzLCA2MzVkAgMPZBYCZg8VAQZDZW50cm9kAgUPZBYCZg8VARJTQU5UT1MgRFVNT05UIC0gTUdkAgcPZBYCZg8VARszMi0zMjUxLTEwMzMgLyAzMi0zMjUxLTYwNjlkAgkPZBYCZg8VAQ8zMi0zMjUxLTYwNjkgICBkAgoPFQEUY2xhc3M9J3Zpc2libGVGYWxzZSdkAgsPZBYCZg8VAQBkAg0PZBYCZg8VATgiQVZFTklEQSBHZXTDumxpbyBWYXJnYXMsIDYzNSBDZW50cm8gU0FOVE9TIERVTU9OVCAtIE1HImQCGQ9kFgRmDxUBBTExMzU2ZAIBD2QWDgIDDw8WAh8DBRVPU1ZBTkUgSE9NRU0gREUgRkFSSUFkZAIHDw8WAh8DBQtDQVJESU9MT0dJQWRkAgkPDxYCHwQFQ0NvbnN1bHRhQ29udmVuaWFkby5hc3B4P2NvZGlnbz0xMTM1NiZhbXA7bm9tZT1Pc3ZhbmUgSG9tZW0gZGUgRmFyaWFkZAIfDw8WAh8DBRNvc3ZhbmVAc2RuZXQuY29tLmJyZGQCIQ8PFgIfA2VkZAIjDw8WAh8DBQowODUyNyAgICAgZGQCKQ8WAh8CAgEWAgIBD2QWAgIBD2QWEAIBD2QWAmYPFQETUlVBIEphY29iIERpdHR6LCAzMGQCAw9kFgJmDxUBBkNlbnRyb2QCBQ9kFgJmDxUBElNBTlRPUyBEVU1PTlQgLSBNR2QCBw9kFgJmDxUBDDMyLTMyNTEtNDMzM2QCCQ9kFgJmDxUBDzMyLTMyNTEtNDMzMyAgIGQCCg8VARRjbGFzcz0ndmlzaWJsZUZhbHNlJ2QCCw9kFgJmDxUBAGQCDQ9kFgJmDxUBLyJSVUEgSmFjb2IgRGl0dHosIDMwIENlbnRybyBTQU5UT1MgRFVNT05UIC0gTUciZAIbD2QWBGYPFQEFMTIyMzhkAgEPZBYOAgMPDxYCHwMFGlBBQ0lGSUNPIEVTVElURVMgUk9EUklHVUVTZGQCBw8PFgIfAwUWQ0zDjU5JQ0EgTcOJRElDQS9HRVJBTGRkAgkPDxYCHwQFSENvbnN1bHRhQ29udmVuaWFkby5hc3B4P2NvZGlnbz0xMjIzOCZhbXA7bm9tZT1QYWNpZmljbyBFc3RpdGVzIFJvZHJpZ3Vlc2RkAh8PDxYCHwNkZGQCIQ8PFgIfA2VkZAIjDw8WAh8DBQo3NjE3ICAgICAgZGQCKQ8WAh8CAgEWAgIBD2QWAgIBD2QWEAIBD2QWAmYPFQEXUlVBIEZhZ3VuZGVzLCAxMjIgLSAxMDJkAgMPZBYCZg8VAQZDZW50cm9kAgUPZBYCZg8VARJTQU5UT1MgRFVNT05UIC0gTUdkAgcPZBYCZg8VAQwzMi0zMjUxLTQ0MzJkAgkPZBYCZg8VAQBkAgoPFQEUY2xhc3M9J3Zpc2libGVGYWxzZSdkAgsPZBYCZg8VAQBkAg0PZBYCZg8VATMiUlVBIEZhZ3VuZGVzLCAxMjIgLSAxMDIgQ2VudHJvIFNBTlRPUyBEVU1PTlQgLSBNRyJkAh0PZBYEZg8VAQUxMTA3MmQCAQ9kFg4CAw8PFgIfAwUYUEVEUk8gUEFVTE8gUlVGRk8gTk9WQUlTZGQCBw8PFgIfAwULQ0FSRElPTE9HSUFkZAIJDw8WAh8EBUZDb25zdWx0YUNvbnZlbmlhZG8uYXNweD9jb2RpZ289MTEwNzImYW1wO25vbWU9UGVkcm8gUGF1bG8gUnVmZm8gTm92YWlzZGQCHw8PFgIfA2RkZAIhDw8WAh8DZWRkAiMPDxYCHwMFCjIwNjY4ICAgICBkZAIpDxYCHwICARYCAgEPZBYCAgEPZBYQAgEPZBYCZg8VARRSVUEgSmFjb2IgRGl0dGl6LCAzMGQCAw9kFgJmDxUBBkNlbnRyb2QCBQ9kFgJmDxUBElNBTlRPUyBEVU1PTlQgLSBNR2QCBw9kFgJmDxUBDDMyLTMyNTEtNjM3OWQCCQ9kFgJmDxUBDzMyLTMyNTEtNDMzMyAgIGQCCg8VARRjbGFzcz0ndmlzaWJsZUZhbHNlJ2QCCw9kFgJmDxUBAGQCDQ9kFgJmDxUBMCJSVUEgSmFjb2IgRGl0dGl6LCAzMCBDZW50cm8gU0FOVE9TIERVTU9OVCAtIE1HImQCHw9kFgRmDxUBBTEyMjQyZAIBD2QWDgIDDw8WAh8DBRRTQUxPTcODTyBNSUNIRUwgQUJET2RkAgcPDxYCHwMFC0NBUkRJT0xPR0lBZGQCCQ8PFgIfBAVCQ29uc3VsdGFDb252ZW5pYWRvLmFzcHg/Y29kaWdvPTEyMjQyJmFtcDtub21lPVNhbG9tw6NvIE1pY2hlbCBBYmRvZGQCHw8PFgIfA2RkZAIhDw8WAh8DZWRkAiMPDxYCHwMFCjM2MDQ3ICAgICBkZAIpDxYCHwICARYCAgEPZBYCAgEPZBYQAgEPZBYCZg8VARRSVUEgU2lsdmEgRm9ydGVzLCA0MWQCAw9kFgJmDxUBBkNlbnRyb2QCBQ9kFgJmDxUBElNBTlRPUyBEVU1PTlQgLSBNR2QCBw9kFgJmDxUBDDMyLTMyNTEtMDA4NWQCCQ9kFgJmDxUBAGQCCg8VARRjbGFzcz0ndmlzaWJsZUZhbHNlJ2QCCw9kFgJmDxUBAGQCDQ9kFgJmDxUBMCJSVUEgU2lsdmEgRm9ydGVzLCA0MSBDZW50cm8gU0FOVE9TIERVTU9OVCAtIE1HImQCIQ9kFgRmDxUBBTEwMDAwZAIBD2QWDgIDDw8WAh8DBR9TQU5EU0NPUiBDTMONTklDQSBDQVJESU9Mw5NHSUNBZGQCBw8PFgIfAwULQ0FSRElPTE9HSUFkZAIJDw8WAh8EBU1Db25zdWx0YUNvbnZlbmlhZG8uYXNweD9jb2RpZ289MTAwMDAmYW1wO25vbWU9U2FuZHNjb3IgQ2zDrW5pY2EgQ2FyZGlvbMOzZ2ljYWRkAh8PDxYCHwNkZGQCIQ8PFgIfA2VkZAIjDw8WAh8DBQo0MDk3ICAgICAgZGQCKQ8WAh8CAgEWAgIBD2QWAgIBD2QWEAIBD2QWAmYPFQETUlVBIEphY29iIERpdHR6LCAzMGQCAw9kFgJmDxUBBkNlbnRyb2QCBQ9kFgJmDxUBElNBTlRPUyBEVU1PTlQgLSBNR2QCBw9kFgJmDxUBGzMyLTMyNTEtNjM3OSAvIDMyLTMyNTEtNDMzM2QCCQ9kFgJmDxUBDzMyLTMyNTEtNDMzMyAgIGQCCg8VARRjbGFzcz0ndmlzaWJsZUZhbHNlJ2QCCw9kFgJmDxUBAGQCDQ9kFgJmDxUBLyJSVUEgSmFjb2IgRGl0dHosIDMwIENlbnRybyBTQU5UT1MgRFVNT05UIC0gTUciZAIjD2QWBGYPFQEEODAxMmQCAQ9kFg4CAw8PFgIfAwUXVkFMVEVSIEdPTsOHQUxWRVMgU09VWkFkZAIHDw8WAh8DBRlPUlRPUEVESUEgRSBUUkFVTUFUT0xPR0lBZGQCCQ8PFgIfBAVEQ29uc3VsdGFDb252ZW5pYWRvLmFzcHg/Y29kaWdvPTgwMTImYW1wO25vbWU9VmFsdGVyIEdvbsOnYWx2ZXMgU291emFkZAIfDw8WAh8DZGRkAiEPDxYCHwNlZGQCIw8PFgIfAwUKMTMwODYgICAgIGRkAikPFgIfAgIBFgICAQ9kFgICAQ9kFhACAQ9kFgJmDxUBHEFWRU5JREEgR2V0w7psaW8gVmFyZ2FzLCAzMTZkAgMPZBYCZg8VAQZDZW50cm9kAgUPZBYCZg8VARJTQU5UT1MgRFVNT05UIC0gTUdkAgcPZBYCZg8VAQwzMi0zMjUxLTE3NzFkAgkPZBYCZg8VAQBkAgoPFQEUY2xhc3M9J3Zpc2libGVGYWxzZSdkAgsPZBYCZg8VAQBkAg0PZBYCZg8VATgiQVZFTklEQSBHZXTDumxpbyBWYXJnYXMsIDMxNiBDZW50cm8gU0FOVE9TIERVTU9OVCAtIE1HImRk9jjF0WyDHJMkM8y/VWeasp6b3dA=">
+</div>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAwLHof3dAgKn7q72BQK3x5ytAykYdGU4AKJ1U92evfuhg1fv8mlG">
+</div>
+			<span id="mm"></span>
+			<div id="MAP" style="POSITION: absolute; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #cccccc; PADDING-LEFT: 2px; WIDTH: 700px; PADDING-RIGHT: 2px; DISPLAY: none; HEIGHT: 550px; PADDING-TOP: 2px; TOP: 100%; LEFT: 10%">
+				<div style="POSITION: relative; BACKGROUND-COLOR: #d0d0d0; WIDTH: 100%; HEIGHT: 5%">
+					<p style="TEXT-ALIGN: right; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 5px"><a onclick="hide()" href="#">X</a></p>
+				</div>
+				<div style="POSITION: relative; WIDTH: 100%; HEIGHT: 95%">
+					
+					<iframe style="WIDTH: 100%; HEIGHT: 100%" id="MapFrame"></iframe>
+				</div>
+			</div>
+			<div><span id="panSpan"></span></div>
+			<div id="panPrincipal" class="panelPrincipal" style="text-align:center;">
+	<font size="1">
+					<br>
+					<table id="tbTitulo">
+						<tbody><tr>
+							<td>
+								<span id="lblTitulo">RESULTADO DA PESQUISA DE CONVÊNIOS</span></td>
+						</tr>
+					</tbody></table>
+					<br>
+				</font><font size="1">
+					<div id="panTotal">
+		
+						<div id="panLabel" class="panelBotaoConsulta" style="text-align:left;">
+			
+							<p class="arial12">
+								<input type="submit" name="btnVoltar" value="Voltar" id="btnVoltar" class="botao">
+								<!-- <input type="submit" name="btnVoltarMenu" value="Voltar" id="btnVoltarMenu" class="botao" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+								<a id="hplImprime" style="display:inline-block;height:2px;width:9px;"><img src="../../imagens/bot_opcoes_print.gif" alt="HyperLink" style="border-width:0px;"></a>
+								<a id="hplImprime2" onclick="window.print()" style="cursor:hand;">Imprimir resultado da consulta</a>&nbsp;
+							</p>
+						
+		</div>
+						<br>
+						
+						<div id="panDados" style="width:98%;text-align:center;">
+			
+							
+								
+									<a name="7976"></a>
+									<div id="repeaterListaDeEnderecos_ctl01_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblNomeRept" class="arial12" style="font-weight:bold;">ANGELA MARIA SCHRODER E SOUZA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl01_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PEDIATRIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl01_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl01_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl01_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">13085T    </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl01_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl01_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Getúlio Vargas, 316</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-1771</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl01_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Getúlio Vargas, 316 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="11361"></a>
+									<div id="repeaterListaDeEnderecos_ctl03_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblNomeRept" class="arial12" style="font-weight:bold;">CLAYTON ABUD FONSECA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl03_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">FISIOTERAPIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl03_lblEmailRept" class="arial12" style="font-weight:bold;">claytonabud@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl03_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl03_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">27482     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl03_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl03_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA  Sérgio Neves, 117 - Sala 02</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-9972-2103</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl03_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA  Sérgio Neves, 117 - Sala 02 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="8423"></a>
+									<div id="repeaterListaDeEnderecos_ctl05_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblNomeRept" class="arial12" style="font-weight:bold;">DAVID ANTÔNIO DA FONSECA VIEIRA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl05_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">GINECOLOGIA E OBSTETRÍCIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl05_lblEmailRept" class="arial12" style="font-weight:bold;">ericafmello@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl05_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl05_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">23275     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl05_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl05_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Presidente Getúlio Vargas, 316 - Sala 206</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-1368</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">32-3251-6069   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl05_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Presidente Getúlio Vargas, 316 - Sala 206 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="12245"></a>
+									<div id="repeaterListaDeEnderecos_ctl07_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblNomeRept" class="arial12" style="font-weight:bold;">FÁTIMA FERREIRA BENTES</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl07_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl07_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=12245&amp;amp;nome=Fátima Ferreira Bentes">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl07_lblEmailRept" class="arial12" style="font-weight:bold;">drafatimabentes@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl07_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl07_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">26478     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl07_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl07_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Fagundes, 160</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-3843</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">32-3251-3843   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl07_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Fagundes, 160 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="11613"></a>
+									<div id="repeaterListaDeEnderecos_ctl09_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblNomeRept" class="arial12" style="font-weight:bold;">HOSPITAL MISERICÓRDIA DE SANTOS DUMONT</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl09_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl09_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=11613&amp;amp;nome=Hospital Misericórdia de Santos Dumont">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl09_lblEmailRept" class="arial12" style="font-weight:bold;">financeiro.hmsd@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl09_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl09_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">363       </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl09_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl09_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Vieira Braga, 01</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3252-9800 / 32-3252-9805</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">32-3251-3755   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl09_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Vieira Braga, 01 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="12228"></a>
+									<div id="repeaterListaDeEnderecos_ctl11_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblNomeRept" class="arial12" style="font-weight:bold;">JORGE FERREIRA DE PAIVA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl11_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PEDIATRIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl11_lblEmailRept" class="arial12" style="font-weight:bold;">marinha.lopes@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl11_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl11_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">15117     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl11_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl11_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Vigário José Augusto, 07</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-6568</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl11_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Vigário José Augusto, 07 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="7972"></a>
+									<div id="repeaterListaDeEnderecos_ctl13_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl13_lblNomeRept" class="arial12" style="font-weight:bold;">JOSÉ LEOPOLDO DE SOUZA COSTA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl13_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl13_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=7972&amp;amp;nome=José Leopoldo de Souza Costa">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl13_lblEmailRept" class="arial12" style="font-weight:bold;">ericafmello@gmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl13_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl13_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">17558     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl13_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl13_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Presidente Getúlio Vargas, 316 - 2º Andar</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-1368</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl13_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Presidente Getúlio Vargas, 316 - 2º Andar Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="9149"></a>
+									<div id="repeaterListaDeEnderecos_ctl15_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl15_lblNomeRept" class="arial12" style="font-weight:bold;">LABORATÓRIO INACLIN  SANTOS DUMONT</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl15_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl15_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=9149&amp;amp;nome=Laboratório Inaclin  Santos Dumont">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl15_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl15_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl15_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl15_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl15_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA João Gomes, 170 - Térreo</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-4072</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">32-3251-4072   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl15_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA João Gomes, 170 - Térreo Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="22311"></a>
+									<div id="repeaterListaDeEnderecos_ctl17_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl17_lblNomeRept" class="arial12" style="font-weight:bold;">MAGNES ANDRÉIA FONSECA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl17_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">NUTRICIONISTA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl17_lblEmailRept" class="arial12" style="font-weight:bold;">magnesfonseca@hotmail.com</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl17_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl17_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">2316      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl17_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl17_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">PRACA José Antonio Pedro, 28 - Sala 06</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-8823-2875</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl17_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;PRACA José Antonio Pedro, 28 - Sala 06 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="12635"></a>
+									<div id="repeaterListaDeEnderecos_ctl19_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl19_lblNomeRept" class="arial12" style="font-weight:bold;">MÁRCIA CRISTINA DE BARROS</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl19_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">DERMATOLOGIA CLÍNICO-CIRÚRGICA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl19_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl19_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl19_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">19088     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl19_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl19_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Presidente Getulio Vargas, 316 - 1º Andar</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-1862</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl19_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Presidente Getulio Vargas, 316 - 1º Andar Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="12236"></a>
+									<div id="repeaterListaDeEnderecos_ctl21_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl21_lblNomeRept" class="arial12" style="font-weight:bold;">MÁRCIO JOSÉ MELO PEDRO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl21_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">PEDIATRIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl21_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl21_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl21_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">22689     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl21_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl21_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Getúlio Vargas, 432 - A</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-3991</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl21_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Getúlio Vargas, 432 - A Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="8534"></a>
+									<div id="repeaterListaDeEnderecos_ctl23_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl23_lblNomeRept" class="arial12" style="font-weight:bold;">MED IMAGEM</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl23_lblEspecialidadeRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+												<td class="coluna_right">
+													<a id="repeaterListaDeEnderecos_ctl23_hplEspecialidadeRept" href="ConsultaConveniado.aspx?codigo=8534&amp;amp;nome=Med Imagem">Ver Todas as Especialidades</a>
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl23_lblEmailRept" class="arial12" style="font-weight:bold;">jvar@oi.com.br </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl23_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl23_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">4645      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl23_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl23_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Getúlio Vargas, 635</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-1033 / 32-3251-6069</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">32-3251-6069   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl23_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Getúlio Vargas, 635 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="11356"></a>
+									<div id="repeaterListaDeEnderecos_ctl25_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl25_lblNomeRept" class="arial12" style="font-weight:bold;">OSVANE HOMEM DE FARIA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl25_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CARDIOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl25_lblEmailRept" class="arial12" style="font-weight:bold;">osvane@sdnet.com.br</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl25_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl25_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">08527     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl25_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl25_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Jacob Dittz, 30</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-4333</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">32-3251-4333   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl25_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Jacob Dittz, 30 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="12238"></a>
+									<div id="repeaterListaDeEnderecos_ctl27_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl27_lblNomeRept" class="arial12" style="font-weight:bold;">PACIFICO ESTITES RODRIGUES</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl27_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CLÍNICA MÉDICA/GERAL</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl27_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl27_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl27_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">7617      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl27_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl27_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Fagundes, 122 - 102</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-4432</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl27_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Fagundes, 122 - 102 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="11072"></a>
+									<div id="repeaterListaDeEnderecos_ctl29_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl29_lblNomeRept" class="arial12" style="font-weight:bold;">PEDRO PAULO RUFFO NOVAIS</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl29_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CARDIOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl29_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl29_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl29_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">20668     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl29_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl29_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Jacob Dittiz, 30</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-6379</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">32-3251-4333   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl29_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Jacob Dittiz, 30 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="12242"></a>
+									<div id="repeaterListaDeEnderecos_ctl31_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl31_lblNomeRept" class="arial12" style="font-weight:bold;">SALOMÃO MICHEL ABDO</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl31_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CARDIOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl31_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl31_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl31_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">36047     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl31_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl31_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Silva Fortes, 41</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-0085</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl31_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Silva Fortes, 41 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="10000"></a>
+									<div id="repeaterListaDeEnderecos_ctl33_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl33_lblNomeRept" class="arial12" style="font-weight:bold;">SANDSCOR CLÍNICA CARDIOLÓGICA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl33_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">CARDIOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl33_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl33_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl33_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">4097      </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl33_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl33_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">RUA Jacob Dittz, 30</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-6379 / 32-3251-4333</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;">32-3251-4333   </span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl33_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;RUA Jacob Dittz, 30 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+									<table align="center">
+										<tbody><tr>
+											<td height="1px">
+											</td>
+										</tr>
+									</tbody></table>
+								
+									<a name="8012"></a>
+									<div id="repeaterListaDeEnderecos_ctl35_Panel2" class="panelRepeaterEnd">
+				
+										<div class="divPrincipal">
+											<div class="left_column">
+											</div>
+											<div class="right_column">
+											</div>
+										</div>
+										<table class="tabelaConveniados2" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td align="left">
+													<span id="repeaterListaDeEnderecos_ctl35_lblNomeRept" class="arial12" style="font-weight:bold;">VALTER GONÇALVES SOUZA</span>
+    
+
+												</td>
+												<td align="right">
+													
+												</td>
+											</tr>
+										</tbody></table>
+										<table class="tabelaConveniados" cellspacing="0px">
+											<tbody><tr bgcolor="#d5e5e7">
+												<td class="coluna_left">Especialidade/Classe:</td>
+												<td class="coluna_meio">&nbsp;
+													<span id="repeaterListaDeEnderecos_ctl35_lblEspecialidadeRept" class="arial12" style="font-weight:bold;">ORTOPEDIA E TRAUMATOLOGIA</span>
+												</td>
+												<td class="coluna_right">
+													
+												</td>
+											</tr>
+                                            <tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+												</td>
+											</tr>
+                                             
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">E-mail:
+													<span id="repeaterListaDeEnderecos_ctl35_lblEmailRept" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Site:
+													<span id="repeaterListaDeEnderecos_ctl35_lblSite" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">Registro Conselho Profissional:
+													<span id="repeaterListaDeEnderecos_ctl35_lblRegistroConselhoProfissional" class="arial12" style="font-weight:bold;">13086     </span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="arial12" style="TEXT-ALIGN: left">
+													<span id="repeaterListaDeEnderecos_ctl35_lblTituloCNPJ" class="arial12"></span>
+													<span id="repeaterListaDeEnderecos_ctl35_lblCNPJ" class="arial12" style="font-weight:bold;"></span>
+												</td>
+											</tr>
+											<tr>
+												<td class="arial12" style="WIDTH: 100px; TEXT-ALIGN: left" colspan="3">
+													Endereços:</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													
+														
+															<div id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_Panel1" style="text-align:center;">
+					
+																<table id="tbEnderecos">
+																	<tbody><tr>
+																		<td class="coluna_left_end">Logradouro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblLogradouroRept" style="font-weight:bold;">AVENIDA Getúlio Vargas, 316</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Bairro:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblBairroRept" style="font-weight:bold;">Centro</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Cidade:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblCidadeRept" style="font-weight:bold;">SANTOS DUMONT - MG</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Telefone:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblTelefoneRept" style="font-weight:bold;">32-3251-1771</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end">Fax:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblFaxRept" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr class="visibleFalse" style="display: none; ">
+																		<td class="coluna_left_end">Atendimento:</td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_lblHorarioAtendimento" style="font-weight:bold;"></span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="coluna_left_end"></td>
+																		<td class="coluna_right_end">&nbsp;
+																			<span id="repeaterListaDeEnderecos_ctl35_repeaterEnderecosConveniado_ctl01_Label1" style="font-weight:bold;">
+																				
+																				<!--%>'></asp:LinkButton>
+																	                                      <br/>-->
+																				<a href="#" onclick="showhide(&quot;AVENIDA Getúlio Vargas, 316 Centro SANTOS DUMONT - MG&quot;)">Veja no mapa a localização</a>
+																			</span>
+																		</td>
+																	</tr>
+																</tbody></table>
+															
+				</div>
+														
+												</td>
+											</tr>
+											<tr class="br">
+												<td colspan="2"></td>
+											</tr>
+										</tbody></table>
+									
+			</div>
+								
+						
+		</div>
+                        <img id="imgLegenda" src="../../imagens/LegendaEsp.png" style="border-width:0px;">
+					
+	</div></font>&nbsp; 
+</div>&nbsp;
+			</form>
+	
+
+</body></html>

@@ -1,0 +1,30 @@
+{% extends "default_child.html" %}
+
+{% block title %}
+    {% if specialty_name %}
+        {{specialty_name|title}}
+    {% else %}
+        M&uacute;ltiplas Especialidades
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="content" id="page-physicians">
+    <ul class="table-view" id="physicians">
+        {% for p in physicians %}
+            <li class="table-view-cell">
+                <a href="{{ site_prefix }}/show/{{p.id}}/" data-transition="slide-in">
+                    <small>{{p.name|title}}</small>
+                    <span class="badge">{{p.distance|floatformat:"2"}} km</span>    
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if total > page_size %}
+    <div class="card" id="distance-btn-more-container">
+        <button id="distance-btn-more" class="btn btn-block btn-positive" style="margin-bottom: 0px;">Carregar mais...</button>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

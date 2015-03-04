@@ -31,6 +31,7 @@ DATABASES = {
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'cemig_saude.mobile.views.context_processor',
+    'django_mobile.context_processors.flavour',
 )
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -90,7 +91,7 @@ STATICFILES_DIRS = (
 
 # List of finder classes that know how to find static files in
 # various locations.
-STATICFILES_FINDERS = ( 
+STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
@@ -101,6 +102,7 @@ SECRET_KEY = '0wkle)1$xyu68+jiht@v4_8m#15z*0uf)%oplu$sc=9try46wa'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+    'django_mobile.loader.Loader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
@@ -112,8 +114,11 @@ MIDDLEWARE_CLASSES = (
 #     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'cemig_saude.crossdomain.XsSharing',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware'
 )
 
 ROOT_URLCONF = 'cemig_saude.urls'
@@ -124,7 +129,7 @@ WSGI_APPLICATION = 'cemig_saude.wsgi.application'
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.    
+    # Don't forget to use absolute paths, not relative paths.
 )
 
 INSTALLED_APPS = (
@@ -138,12 +143,10 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'cemig_saude.mobile'
+    'cemig_saude.mobile',
+    'django_mobile'
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
@@ -159,14 +162,38 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level':'DEBUG',
+            'class':'logging.StreamHandler'
         }
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True
         },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': True
+        },
+        'elasticsearch': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': True
+        },
+        'cemig_saude': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True
+        }
     }
 }
 
@@ -175,3 +202,5 @@ MONGO_HOST = "127.0.0.1"
 MONGO_PORT = 27017
 
 PAGE_SIZE = 20
+
+FLAVOURS = ('full', 'mobile')
