@@ -820,8 +820,6 @@ var pageChanged = function( data ) {
 };
 
 document.addEventListener("deviceready", function() {
-    StatusBar.hide();
-
     navigator.geolocation.getCurrentPosition(function(position) {
         window.latitude = position.coords.latitude;
         window.longitude = position.coords.longitude;
