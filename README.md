@@ -1,7 +1,7 @@
-Cemig Saúde
-------------------
+# Cemig Saúde
 
-**Diretórios**
+
+## Diretórios
 
 * conf
   * Configurações de serviços auxiliares
@@ -13,3 +13,4 @@ Cemig Saúde
   * Código-fonte para captura de dados do site institucional da Cemig Saúde
 * src
   * Código-fonte do back-end e da interface versão web
+
