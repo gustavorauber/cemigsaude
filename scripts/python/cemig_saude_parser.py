@@ -119,7 +119,7 @@ def geocode_address(address):
     request_url = url + urllib.urlencode(params)
 
     # Proxy Handling
-    proxy = urllib2.ProxyHandler({'http': 'http://proxycemig.cemig.ad.corp:8080'})
+    proxy = urllib2.ProxyHandler({'http': 'http://c057384:!G4l0doido!3@proxycemig.cemig.ad.corp:8080'})
     auth = urllib2.HTTPBasicAuthHandler()
     opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
     urllib2.install_opener(opener)
@@ -467,6 +467,8 @@ def fix_specialties():
     print "# Updated Specialties: ", count
 
     for p in db['physicians'].find():
+        if 'specialty_hash' not in p:
+            continue
         sp = p['specialty_hash']
         if isinstance(sp, list):
             p_sp = []
@@ -497,27 +499,27 @@ def fix_names():
 if __name__ == '__main__':
 
     # Fetch ALL - Step 1
-#    fetch_all_physicians()
-#    exit(-1)
+##    fetch_all_physicians()
+    #exit(-1)
 
     # Sync DB - Step 2
-    #sync_physicians(sys.argv[1])
+##    sync_physicians(sys.argv[1])
     #exit(-1)
 
     # Geocode - Step 3
-#    update_missing_geocode()
-#    exit(-1)
+##    update_missing_geocode()
+    #exit(-1)
 
-    #consolidate_cemig_saude_ids()
+##    consolidate_cemig_saude_ids()
 
 
     # Specialties - Step 4
-#    fetch_all_missings_specialties()
-#    update_missing_specialties()
+##    fetch_all_missings_specialties()
+##    update_missing_specialties()
 
 
-    #fix_specialties()
-    fix_names()
+##    fix_specialties()
+##    fix_names()
 
 # Just a test
 #     db = get_db()
